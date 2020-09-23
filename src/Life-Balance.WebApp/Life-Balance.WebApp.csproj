@@ -5,4 +5,9 @@
     <RootNamespace>Life_Balance.WebApp</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Life-Balance.BLL\Life-Balance.BLL.csproj" />
+    <ProjectReference Include="..\Life-Balance.Commin\Life-Balance.Common.csproj" />
+  </ItemGroup>
+
 </Project>

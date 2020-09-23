@@ -5,4 +5,8 @@
     <RootNamespace>Life_Balance.DAL</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Life-Balance.Commin\Life-Balance.Common.csproj" />
+  </ItemGroup>
+
 </Project>
