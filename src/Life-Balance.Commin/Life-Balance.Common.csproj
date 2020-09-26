@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>Life_Balance.Commin</RootNamespace>
+    <RootNamespace>Life_Balance.Common</RootNamespace>
   </PropertyGroup>
 
 </Project>
