@@ -6,6 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MailKit" Version="2.9.0" />
+    <PackageReference Include="MimeKit" Version="2.9.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Life-Balance.Commin\Life-Balance.Common.csproj" />
     <ProjectReference Include="..\Life-Balance.DAL\Life-Balance.DAL.csproj" />
   </ItemGroup>
