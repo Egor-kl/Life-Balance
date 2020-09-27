@@ -1,3 +1,5 @@
+using Life_Balance.BLL.Repository;
+using Life_Balance.Common.Interfaces;
 using Life_Balance.DAL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -17,11 +19,11 @@ namespace Life_Balance.WebApp
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<LifeBalanceDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlConnections")));
             services.AddControllersWithViews();
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -34,7 +36,6 @@ namespace Life_Balance.WebApp
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
