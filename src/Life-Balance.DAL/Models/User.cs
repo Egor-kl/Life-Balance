@@ -5,7 +5,7 @@ namespace Life_Balance.DAL.Models
     /// <summary>
     /// User db model.
     /// </summary>
-    class User : IdentityUser
+    public class User : IdentityUser
     {
     }
 }

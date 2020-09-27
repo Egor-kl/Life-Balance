@@ -2,7 +2,7 @@
 
 namespace Life_Balance.DAL.Models
 {
-    class Profile : IHasDbIdentity
+    public class Profile : IHasDbIdentity
     {
         /// <summary>
         /// Profile Id.

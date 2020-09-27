@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Life_Balance.DAL
 {
-    class LifeBalanceDbContext : IdentityDbContext<User>
+    public class LifeBalanceDbContext : IdentityDbContext<User>
     {
         public LifeBalanceDbContext(DbContextOptions<LifeBalanceDbContext> options) : base(options)
         {
