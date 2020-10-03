@@ -56,7 +56,6 @@ namespace Life_Balance.BLL.Services
 
             if (result.Succeeded)
             {
-                await _userManager.AddToRoleAsync(user, "User");
                 code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             }
 
