@@ -6,14 +6,12 @@ using Life_Balance.DAL.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Life_Balance.BLL.Services
 {
-    class IdentityService : IIdentityService
+    public class IdentityService : IIdentityService
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
