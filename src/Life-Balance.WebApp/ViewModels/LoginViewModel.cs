@@ -4,18 +4,27 @@ namespace Life_Balance.WebApp.Models
 {
     public class LoginViewModel
     {
+        /// <summary>
+        /// Username.
+        /// </summary>
         [Required]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
+        public string UserName { get; set; }
 
+        /// <summary>
+        /// Password.
+        /// </summary>
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember?")]
+        /// <summary>
+        /// Remember user.
+        /// </summary>
         public bool RememberMe { get; set; }
 
+        /// <summary>
+        /// Return url.
+        /// </summary>
         public string ReturnUrl { get; set; }
     }
 }
