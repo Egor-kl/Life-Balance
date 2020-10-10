@@ -1,5 +1,3 @@
-using System;
-
 namespace Life_Balance.WebApp.Models
 {
     public class ErrorViewModel
