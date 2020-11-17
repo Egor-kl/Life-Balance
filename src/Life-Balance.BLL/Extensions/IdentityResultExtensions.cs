@@ -21,11 +21,6 @@ namespace Life_Balance.BLL.Extencions
                 : Result.Failure(result.Errors.Select(e => e.Description));
         }
 
-        /// <summary>
-        /// Перевод для приложения (SignIn).
-        /// </summary>
-        /// <param name="result">Результат SignIn.</param>
-        /// <returns>Результат.</returns>
         public static Result ToApplicationResult(this SignInResult result)
         {
             result = result ?? throw new ArgumentNullException(nameof(result));
