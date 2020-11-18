@@ -60,7 +60,10 @@ namespace Life_Balance.WebApp.Controllers
 
                     return RedirectToAction("Index", "Home");
                 }
+
+                return View(model);
             }
+
             return View(model);
         }
 

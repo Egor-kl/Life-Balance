@@ -1,0 +1,28 @@
+﻿@model LoginViewModel
+
+@{
+    Layout = null;
+}
+<!doctype html>
+<html>
+<head>
+    <title>Registration</title>
+</head>
+<body>
+    <form method="post" asp-controller="Account" asp-action="Login">
+        <div>
+            <input asp-for="UserName" type="text" placeholder="Email">
+            <span asp-validation-for="UserName"></span>
+        </div>
+
+        <div>
+            <input asp-for="Password" type="password" placeholder="Password">
+            <span asp-validation-for="Password"></span>
+        </div>
+
+        <div>
+            <button type="submit">Sign Up</button>
+        </div>
+    </form>
+</body>
+</html>
