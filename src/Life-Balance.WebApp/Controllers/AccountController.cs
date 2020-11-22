@@ -1,9 +1,7 @@
 ﻿using Life_Balance.BLL.Interfaces;
 using Life_Balance.Common.Constants;
 using Life_Balance.Common.Interfaces;
-using Life_Balance.DAL.Models;
 using Life_Balance.WebApp.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -97,7 +95,7 @@ namespace Life_Balance.WebApp.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("", "");
+                        return RedirectToAction("", "");    
                     }
                 }
                 else
