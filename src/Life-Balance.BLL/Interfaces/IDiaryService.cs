@@ -30,7 +30,7 @@ namespace Life_Balance.BLL.Interfaces
         /// <param name="diary">Diary db</param>
         /// <param name="entryId">Id entry.</param>
         /// <returns></returns>
-        public Task DeleteEntry(Diary diary, string entryId);
+        public Task DeleteEntry(Diary diary, int entryId);
 
         /// <summary>
         /// Update entry.
