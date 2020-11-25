@@ -17,23 +17,23 @@ namespace Life_Balance.BLL.Services
             _diaryRepository = diaryRepository ?? throw new ArgumentNullException();
             _dbContext = lifeBalanceDbContext ?? throw new ArgumentNullException();
         }
-    
+
         public Task GetEntryByDate(Diary diary, DateTime dateTime)
         {
-            
+            throw new NotImplementedException();
         }
 
-        public Task CreateNewEntry(string title, string entries, DateTime dateTime)
+        public Task CreateNewEntry(Diary diary, string title, string entries, DateTime dateTime)
         {
             throw new NotImplementedException();
         }
 
-        public Task DeleteEntry(string entryId)
+        public Task DeleteEntry(Diary diary, string entryId)
         {
             throw new NotImplementedException();
         }
 
-        public Task UpdateEntry(string title, string entries)
+        public Task UpdateEntry(Diary diary, string title, string entries)
         {
             throw new NotImplementedException();
         }
