@@ -16,14 +16,12 @@ namespace Life_Balance.WebApp.Controllers
         private readonly IDiaryService _diaryService;
         private readonly IRepository<Diary> _diaryRepository;
         private readonly IMapper _mapper;
-        private readonly IEmailService _email;
 
         public DiaryController(IDiaryService diaryService,IRepository<Diary> diaryRepository, IMapper mapper, IEmailService email)
         {
             _diaryRepository = diaryRepository ?? throw new ArgumentNullException(nameof(diaryRepository));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _diaryService = diaryService ?? throw new ArgumentNullException(nameof(diaryService));
-            _email = email ?? throw new ArgumentNullException(nameof(email));
         }
         
         public IActionResult Index()
@@ -56,6 +54,15 @@ namespace Life_Balance.WebApp.Controllers
             }
 
             return View(model);
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var diaryDto = new DiaryDTO {Id = id};
+            var result = _mapper.Map<Diary>(diaryDto);
+            await _diaryService.DeleteEntry(result, id);
+
+            return View();
         }
     }
 }
