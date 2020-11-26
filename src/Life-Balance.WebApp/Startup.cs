@@ -1,4 +1,6 @@
+using AutoMapper;
 using Life_Balance.BLL.Interfaces;
+using Life_Balance.BLL.Mapping;
 using Life_Balance.BLL.Repository;
 using Life_Balance.BLL.Services;
 using Life_Balance.Common.Interfaces;
@@ -29,8 +31,17 @@ namespace Life_Balance.WebApp
             services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<LifeBalanceDbContext>().AddDefaultTokenProviders();
             services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<IIdentityService, IdentityService>();
+            services.AddScoped<IDiaryService, DiaryService>();
             services.AddControllersWithViews();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new DiaryProfile());
+            });
+
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

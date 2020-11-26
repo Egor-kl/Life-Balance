@@ -17,7 +17,7 @@ namespace Life_Balance.WebApp.Controllers
         private readonly IRepository<Diary> _diaryRepository;
         private readonly IMapper _mapper;
 
-        public DiaryController(IDiaryService diaryService,IRepository<Diary> diaryRepository, IMapper mapper, IEmailService email)
+        public DiaryController(IDiaryService diaryService,IRepository<Diary> diaryRepository, IMapper mapper)
         {
             _diaryRepository = diaryRepository ?? throw new ArgumentNullException(nameof(diaryRepository));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
