@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Life_Balance.BLL.Interfaces;
@@ -24,8 +25,7 @@ namespace Life_Balance.BLL.Services
         {
             var dataDiary = _mapper.Map<Diary>(diary);
             dataDiary.Date = dateTime;
-            await _diaryRepository.AddAsync(dataDiary);
-            await _diaryRepository.SaveChangesAsync();
+            var queryable = _diaryRepository.GetAll().Where(x => x.Date == dateTime);
         }
 
         /// <inheritdoc />

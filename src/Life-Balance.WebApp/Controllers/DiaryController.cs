@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Life_Balance.BLL.Interfaces;
@@ -56,6 +57,11 @@ namespace Life_Balance.WebApp.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Delete entry by id.
+        /// </summary>
+        /// <param name="id">entry id.</param>
+        /// <returns></returns>
         public async Task<IActionResult> Delete(int id)
         {
             var diaryDto = new DiaryDTO {Id = id};
@@ -63,6 +69,13 @@ namespace Life_Balance.WebApp.Controllers
             await _diaryService.DeleteEntry(result, id);
 
             return View();
+        }
+
+        public async Task<IActionResult> GetEntryByDate(Diary diary, DateTime dateTime)
+        {
+            var orderByDate = _diaryRepository.GetAll().Where(x => x.Date == dateTime).ToList();
+            
+            return View(orderByDate);
         }
     }
 }
