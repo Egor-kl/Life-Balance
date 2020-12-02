@@ -20,42 +20,14 @@ namespace Life_Balance.BLL.Services
             _mapper = mapper ?? throw new ArgumentNullException();
         }
 
-        /// <inheritdoc />
-        public async Task GetEntryByDate(Diary diary, DateTime dateTime)
+        public Task<Diary> GetEntryByDate(DateTime dateTime)
         {
-            var dataDiary = _mapper.Map<Diary>(diary);
-            dataDiary.Date = dateTime;
-            var queryable = _diaryRepository.GetAll().Where(x => x.Date == dateTime);
+            throw new NotImplementedException();
         }
 
-        /// <inheritdoc />
-        public async Task CreateNewEntry(Diary diary, string title, string entries, DateTime dateTime)
+        public Task CreateNewEntry(string title, string description, DateTime dateTime)
         {
-            var dataDiary = _mapper.Map<Diary>(diary);
-            dataDiary.Title = title;
-            dataDiary.Entries = entries;
-            dataDiary.Date = dateTime;
-            await _diaryRepository.AddAsync(dataDiary);
-            await _diaryRepository.SaveChangesAsync();
-        }
-
-        /// <inheritdoc />
-        public async Task DeleteEntry(Diary diary, int entryId)
-        {
-            var dataDiary = _mapper.Map<Diary>(diary);
-            dataDiary.Id = entryId;
-            _diaryRepository.Delete(dataDiary);
-            await _diaryRepository.SaveChangesAsync();
-        }
-
-        /// <inheritdoc />
-        public async Task UpdateEntry(Diary diary, string title, string entries)
-        {
-            var dataDiary = _mapper.Map<Diary>(diary);
-            dataDiary.Title = title;
-            dataDiary.Entries = entries;
-            await _diaryRepository.AddAsync(dataDiary);
-            await _diaryRepository.SaveChangesAsync();
+            throw new NotImplementedException();
         }
     }
 }
