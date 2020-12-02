@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using React.AspNet;
 
 namespace Life_Balance.WebApp
 {
@@ -33,6 +34,7 @@ namespace Life_Balance.WebApp
             services.AddScoped<IIdentityService, IdentityService>();
             services.AddScoped<IDiaryService, DiaryService>();
             services.AddControllersWithViews();
+            services.AddReact();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             
             var mapperConfig = new MapperConfiguration(mc =>
