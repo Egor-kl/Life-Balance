@@ -26,6 +26,11 @@ namespace Life_Balance.BLL.Services
             return _diaryRepository.GetEntityAsync(x => x.Date == dateTime);
         }
 
+        public Task<Diary> GetEntryById(int id)
+        {
+            return _diaryRepository.GetEntityAsync(x => x.Id == id);
+        }
+
         public async Task CreateNewEntry(string title, string description, DateTime dateTime)
         {
             var diaryDto = new DiaryDTO();

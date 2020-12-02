@@ -12,6 +12,13 @@ namespace Life_Balance.BLL.Interfaces
         /// <param name="dateTime">date</param>
         /// <returns></returns>
         public Task<Diary> GetEntryByDate(DateTime dateTime);
+        
+        /// <summary>
+        /// Get by id
+        /// </summary>
+        /// <param name="id">entry id</param>
+        /// <returns></returns>
+        public Task<Diary> GetEntryById(int id);
 
         /// <summary>
         /// Add new entry
