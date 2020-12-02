@@ -21,5 +21,12 @@ namespace Life_Balance.BLL.Interfaces
         /// <param name="dateTime">date</param>
         /// <returns></returns>
         public Task CreateNewEntry(string title, string description, DateTime dateTime);
+
+        /// <summary>
+        /// Delete entry by id;
+        /// </summary>
+        /// <param name="entryId">entry id</param>
+        /// <returns></returns>
+        public Task DeleteEntry(int entryId);
     }
 }
