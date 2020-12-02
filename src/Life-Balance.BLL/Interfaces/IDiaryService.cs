@@ -7,38 +7,26 @@ namespace Life_Balance.BLL.Interfaces
     public interface IDiaryService
     {
         /// <summary>
-        /// Get entry by date.
+        /// Get by date
         /// </summary>
-        /// <param name="diary">Db Diary</param>
-        /// <param name="dateTime">Date for search.</param>
+        /// <param name="dateTime">date</param>
         /// <returns></returns>
-        public Task GetEntryByDate(Diary diary, DateTime dateTime);
+        public Task<Diary> GetEntryByDate(DateTime dateTime);
 
         /// <summary>
-        /// Create new entry.
+        /// Add new entry
         /// </summary>
-        /// <param name="diary">Diary db</param>
-        /// <param name="title">Title entry.</param>
-        /// <param name="entries">Notes</param>
-        /// <param name="dateTime">Date</param>
+        /// <param name="title">title entry</param>
+        /// <param name="description">description entry</param>
+        /// <param name="dateTime">date</param>
         /// <returns></returns>
-        public Task CreateNewEntry(Diary diary, string title, string entries, DateTime dateTime);
+        public Task CreateNewEntry(string title, string description, DateTime dateTime);
 
         /// <summary>
-        /// Delete by id.
+        /// Delete entry by id;
         /// </summary>
-        /// <param name="diary">Diary db</param>
-        /// <param name="entryId">Id entry.</param>
+        /// <param name="entryId">entry id</param>
         /// <returns></returns>
-        public Task DeleteEntry(Diary diary, int entryId);
-
-        /// <summary>
-        /// Update entry.
-        /// </summary>
-        /// <param name="diary">Diary db</param>
-        /// <param name="title"></param>
-        /// <param name="entries"></param>
-        /// <returns></returns>
-        public Task UpdateEntry(Diary diary, string title, string entries);
+        public Task DeleteEntry(int entryId);
     }
 }

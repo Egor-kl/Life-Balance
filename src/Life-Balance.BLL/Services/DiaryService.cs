@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Life_Balance.BLL.Interfaces;
+using Life_Balance.BLL.ModelsDTO;
 using Life_Balance.Common.Interfaces;
 using Life_Balance.DAL;
 using Life_Balance.DAL.Models;
@@ -19,42 +21,23 @@ namespace Life_Balance.BLL.Services
             _mapper = mapper ?? throw new ArgumentNullException();
         }
 
-        /// <inheritdoc />
-        public async Task GetEntryByDate(Diary diary, DateTime dateTime)
+        public Task<Diary> GetEntryByDate(DateTime dateTime)
         {
-            var dataDiary = _mapper.Map<Diary>(diary);
-            dataDiary.Date = dateTime;
-            await _diaryRepository.AddAsync(dataDiary);
+            return _diaryRepository.GetEntityAsync(x => x.Date == dateTime);
+        }
+
+        public async Task CreateNewEntry(string title, string description, DateTime dateTime)
+        {
+            var diaryDto = new DiaryDTO();
+            var entry = _mapper.Map<Diary>(diaryDto);
+            await _diaryRepository.AddAsync(entry);
             await _diaryRepository.SaveChangesAsync();
         }
 
-        /// <inheritdoc />
-        public async Task CreateNewEntry(Diary diary, string title, string entries, DateTime dateTime)
+        public async Task DeleteEntry(int entryId)
         {
-            var dataDiary = _mapper.Map<Diary>(diary);
-            dataDiary.Title = title;
-            dataDiary.Entries = entries;
-            dataDiary.Date = dateTime;
-            await _diaryRepository.AddAsync(dataDiary);
-            await _diaryRepository.SaveChangesAsync();
-        }
-
-        /// <inheritdoc />
-        public async Task DeleteEntry(Diary diary, int entryId)
-        {
-            var dataDiary = _mapper.Map<Diary>(diary);
-            dataDiary.Id = entryId;
-            _diaryRepository.Delete(dataDiary);
-            await _diaryRepository.SaveChangesAsync();
-        }
-
-        /// <inheritdoc />
-        public async Task UpdateEntry(Diary diary, string title, string entries)
-        {
-            var dataDiary = _mapper.Map<Diary>(diary);
-            dataDiary.Title = title;
-            dataDiary.Entries = entries;
-            await _diaryRepository.AddAsync(dataDiary);
+            var entry = new Diary() {Id = entryId};
+            _diaryRepository.Delete(entry);
             await _diaryRepository.SaveChangesAsync();
         }
     }

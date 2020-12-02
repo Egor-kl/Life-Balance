@@ -362,3 +362,4 @@ src/Life-Balance.WebApp/appsettings.json
 *.xml
 *.config
 *.zip
+/.idea
