@@ -25,20 +25,35 @@ namespace Life_Balance.WebApp.Controllers.API
             _diaryService = diaryService ?? throw new ArgumentNullException(nameof(diaryService));
         }
         
+        /// <summary>
+        /// Add new entry
+        /// </summary>
+        /// <param name="model">Diary view model</param>
+        /// <returns></returns>
         [HttpPost]
         public async Task AddNewEntry(DiaryEntryViewModel model)
         {
             await _diaryService.CreateNewEntry(model.Title, model.Entry, model.Date);
         }
 
+        /// <summary>
+        /// Get diary by date
+        /// </summary>
+        /// <param name="dateTime">date of entry</param>
+        /// <returns>json result</returns>
         [HttpGet]
-        public async Task<IActionResult> GetByDate([FromBody] DateTime dateTime)
+        public async Task<IActionResult> GetByDate([FromQuery] DateTime dateTime)
         {
            var x = await _diaryService.GetEntryByDate(dateTime);
            return Ok(x);
 
         }
 
+        /// <summary>
+        /// Get diary by id
+        /// </summary>
+        /// <param name="id">diary id.</param>
+        /// <returns>json result</returns>
         [HttpGet]
         public async Task<IActionResult> GetById([FromQuery] int id)
         {
@@ -46,6 +61,10 @@ namespace Life_Balance.WebApp.Controllers.API
             return Ok(x);
         }
 
+        /// <summary>
+        /// Get all diary
+        /// </summary>
+        /// <returns>json result</returns>
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
