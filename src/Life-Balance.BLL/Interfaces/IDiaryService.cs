@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Life_Balance.BLL.ModelsDTO;
 using Life_Balance.DAL.Models;
 
 namespace Life_Balance.BLL.Interfaces
@@ -26,8 +27,9 @@ namespace Life_Balance.BLL.Interfaces
         /// <param name="title">title entry</param>
         /// <param name="description">description entry</param>
         /// <param name="dateTime">date</param>
+        /// <param name="userId">user id</param>
         /// <returns></returns>
-        public Task CreateNewEntry(string title, string description, DateTime dateTime);
+        public Task CreateNewEntry(string title, string description, DateTime dateTime, string userId);
 
         /// <summary>
         /// Delete entry by id;

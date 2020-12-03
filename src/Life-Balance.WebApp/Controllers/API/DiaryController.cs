@@ -1,7 +1,9 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Life_Balance.BLL.Interfaces;
+using Life_Balance.BLL.ModelsDTO;
 using Life_Balance.Common.Interfaces;
 using Life_Balance.DAL.Models;
 using Life_Balance.WebApp.ViewModels;
@@ -31,9 +33,10 @@ namespace Life_Balance.WebApp.Controllers.API
         /// <param name="model">Diary view model</param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult AddNewEntry([FromBody] DiaryEntryViewModel model)
+        public async Task AddNewEntry(DiaryEntryViewModel model)
         {
-            return Ok(_diaryService.CreateNewEntry(model.Title, model.Entry, model.Date));
+            var userId = User.Claims.FirstOrDefault(claim => claim.Type.Contains("nameidentifier")).Value;
+            await _diaryService.CreateNewEntry(model.Title, model.Entry, model.Date, userId);
         }
 
         /// <summary>
