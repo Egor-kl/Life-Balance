@@ -31,7 +31,7 @@ namespace Life_Balance.WebApp.Controllers.API
         /// <param name="model">Diary view model</param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult AddNewEntry(DiaryEntryViewModel model)
+        public IActionResult AddNewEntry([FromBody] DiaryEntryViewModel model)
         {
             return Ok(_diaryService.CreateNewEntry(model.Title, model.Entry, model.Date));
         }
@@ -92,7 +92,7 @@ namespace Life_Balance.WebApp.Controllers.API
         /// <param name="dateTime">date</param>
         /// <returns></returns>
         [HttpPut]
-        public async Task EditEntry(string title, string description, DateTime dateTime)
+        public async Task EditEntry([FromBody] string title, string description, DateTime dateTime)
         {
             await _diaryService.UpdateEntry(title, description, dateTime);
         }
