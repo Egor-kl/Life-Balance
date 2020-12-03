@@ -31,9 +31,9 @@ namespace Life_Balance.WebApp.Controllers.API
         /// <param name="model">Diary view model</param>
         /// <returns></returns>
         [HttpPost]
-        public async Task AddNewEntry(DiaryEntryViewModel model)
+        public IActionResult AddNewEntry(DiaryEntryViewModel model)
         {
-            await _diaryService.CreateNewEntry(model.Title, model.Entry, model.Date);
+            return Ok(_diaryService.CreateNewEntry(model.Title, model.Entry, model.Date));
         }
 
         /// <summary>
@@ -71,6 +71,30 @@ namespace Life_Balance.WebApp.Controllers.API
             var diaries = await _diaryRepository.GetAll().ToListAsync();
 
             return Ok(diaries);
+        }
+
+        /// <summary>
+        /// Delete by id
+        /// </summary>
+        /// <param name="id">entry id</param>
+        /// <returns></returns>
+        [HttpDelete]
+        public async Task DeleteEntry(int id)
+        {
+            await _diaryService.DeleteEntry(id);
+        }
+
+        /// <summary>
+        /// Edit entry
+        /// </summary>
+        /// <param name="title">title</param>
+        /// <param name="description">entries</param>
+        /// <param name="dateTime">date</param>
+        /// <returns></returns>
+        [HttpPut]
+        public async Task EditEntry(string title, string description, DateTime dateTime)
+        {
+            await _diaryService.UpdateEntry(title, description, dateTime);
         }
     }
 }

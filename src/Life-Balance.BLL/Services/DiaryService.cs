@@ -67,5 +67,19 @@ namespace Life_Balance.BLL.Services
             _diaryRepository.Delete(entry);
             await _diaryRepository.SaveChangesAsync();
         }
+
+        /// <summary>
+        /// Edit entry
+        /// </summary>
+        /// <param name="title">title entry</param>
+        /// <param name="description">description entry</param>
+        /// <param name="dateTime">date</param>
+        /// <returns></returns>
+        public async Task UpdateEntry(string title, string description, DateTime dateTime)
+        {
+            var entry = new Diary() {Title = title, Date = dateTime, Entries = description};
+            _diaryRepository.Update(entry);
+            await _diaryRepository.SaveChangesAsync();
+        }
     }
 }
