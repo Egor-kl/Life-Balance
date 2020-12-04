@@ -106,5 +106,47 @@ namespace Life_Balance.WebApp.Controllers
             }
             return View(model);
         }
+
+        /// <summary>
+        /// Delete entry by id
+        /// </summary>
+        /// <param name="id">id</param>
+        /// <returns></returns>
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                var userId = await _identityService.GetUserIdByNameAsync(User.Identity.Name);
+
+                await _diaryService.DeleteEntry(id);
+                _logger.LogInformation($"{User.Identity.Name} successfully deleted diary with id: {id}.");
+            }
+            catch (Exception e)
+            {
+                _logger.LogInformation($"{User.Identity.Name} can't delete diary with id: {id}.");
+            }
+            
+            return RedirectToAction("Index", "Profile");
+        }
+
+        /// <summary>
+        /// View for info about entry
+        /// </summary>
+        /// <param name="id">id</param>
+        /// <returns></returns>
+        public async Task<IActionResult> Info(int id)
+        {
+            try
+            {
+                var userId = await _identityService.GetUserIdByNameAsync(User.Identity.Name);
+
+                return View(await _diaryService.GetEntryById(id));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }
