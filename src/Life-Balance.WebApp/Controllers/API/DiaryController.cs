@@ -1,12 +1,8 @@
 using System;
-using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
 using Life_Balance.BLL.Interfaces;
-using Life_Balance.BLL.ModelsDTO;
 using Life_Balance.Common.Interfaces;
 using Life_Balance.DAL.Models;
-using Life_Balance.WebApp.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -14,7 +10,7 @@ using Microsoft.Extensions.Logging;
 namespace Life_Balance.WebApp.Controllers.API
 {
     [ApiController]
-    [Route("[controller]/[action]")]
+    [Route("api/[controller]")]
     public class DiaryController : Controller
     {
         private readonly IDiaryService _diaryService;
@@ -48,7 +44,7 @@ namespace Life_Balance.WebApp.Controllers.API
         /// </summary>
         /// <param name="id">diary id.</param>
         /// <returns>json result</returns>
-        [HttpGet]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetById([FromQuery] int id)
         {
             var diary = await _diaryService.GetEntryById(id);
