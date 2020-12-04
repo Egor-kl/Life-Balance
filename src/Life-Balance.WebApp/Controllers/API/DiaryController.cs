@@ -9,19 +9,22 @@ using Life_Balance.DAL.Models;
 using Life_Balance.WebApp.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace Life_Balance.WebApp.Controllers.API
 {
     [ApiController]
     [Route("[controller]/[action]")]
-    public class DiaryController : ControllerBase
+    public class DiaryController : Controller
     {
         private readonly IDiaryService _diaryService;
         private readonly IRepository<Diary> _diaryRepository;
+        private readonly ILogger _logger;
 
-        public DiaryController(IDiaryService diaryService,IRepository<Diary> diaryRepository)
+        public DiaryController(IDiaryService diaryService,IRepository<Diary> diaryRepository, ILogger logger)
         {
             _diaryRepository = diaryRepository ?? throw new ArgumentNullException(nameof(diaryRepository));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _diaryService = diaryService ?? throw new ArgumentNullException(nameof(diaryService));
         }
 
@@ -33,9 +36,11 @@ namespace Life_Balance.WebApp.Controllers.API
         [HttpGet]
         public async Task<IActionResult> GetByDate([FromQuery] DateTime dateTime)
         {
-           var x = await _diaryService.GetEntryByDate(dateTime);
-           return Ok(x);
-
+           var diary = await _diaryService.GetEntryByDate(dateTime);
+           
+           _logger.LogInformation($"Successfully sent diary with date: {diary.Date}.");
+           
+           return Json(diary);
         }
 
         /// <summary>
@@ -46,8 +51,11 @@ namespace Life_Balance.WebApp.Controllers.API
         [HttpGet]
         public async Task<IActionResult> GetById([FromQuery] int id)
         {
-            var x = await _diaryService.GetEntryById(id);
-            return Ok(x);
+            var diary = await _diaryService.GetEntryById(id);
+            
+            _logger.LogInformation($"Successfully sent diary with Id: {diary.Date}.");
+           
+            return Json(diary);
         }
 
         /// <summary>
@@ -59,7 +67,9 @@ namespace Life_Balance.WebApp.Controllers.API
         {
             var diaries = await _diaryRepository.GetAll().ToListAsync();
 
-            return Ok(diaries);
+            _logger.LogInformation($"Successfully sent diary all diary: {diaries.Count}.");
+           
+            return Json(diaries);
         }
     }
 }
