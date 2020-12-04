@@ -17,7 +17,10 @@ namespace Life_Balance.WebApp.Controllers
         private readonly ILogger _logger;
         private readonly IIdentityService _identityService;
 
-        public DiaryController(IDiaryService diaryService,IRepository<Diary> diaryRepository, ILogger logger, IIdentityService identityService)
+        public DiaryController(IDiaryService diaryService,
+                               IRepository<Diary> diaryRepository, 
+                               ILogger<DiaryController> logger, 
+                               IIdentityService identityService)
         {
             _diaryRepository = diaryRepository ?? throw new ArgumentNullException(nameof(diaryRepository));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
