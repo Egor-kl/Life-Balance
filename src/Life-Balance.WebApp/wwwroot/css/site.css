@@ -1,71 +1,87 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
+﻿body { 
+  display: grid;
+  grid-template-areas: 
+    "header"
+    "main"
+    "footer";
+  grid-template-rows: 60px 1fr 60px;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  color: #ffffff;
+}
 
-a.navbar-brand {
-  white-space: normal;
+a{
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 26px;
+}
+
+header, footer{
+  background: #000000;
+}
+
+main{
+  background-color: #ffffff;
+}
+
+.pageHeader {
+  grid-area: header;
+}
+
+.pageFooter {
+  grid-area: footer;
   text-align: center;
-  word-break: break-all;
 }
 
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
+.pageMain { 
+  grid-area: main;      
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.navigation{
+  text-align: center;
+  margin-top: 0.8rem;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.navigation a{
+  margin-right: 40px;
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0% 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 2px;
+  transition: background-size .3s;
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  font-size: 14px;
-}
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+.navigation a:hover{
+  background-size: 100% 1px;
 }
 
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+.pageFooter a{
+  font-size: 16px;
 }
 
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-}
-
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
-}
-
-/* Sticky footer styles
--------------------------------------------------- */
-html {
+.wrap {
   position: relative;
-  min-height: 100%;
+  text-align: -webkit-center;
 }
 
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
-}
-.footer {
-  position: absolute;
-  bottom: 0;
+.wrap img {
   width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+}
+
+.bc{
+  opacity: 0.2;
+ background: black;
+}
+
+.txt{
+  font-family: 'Do Hyeon', sans-serif;
+  color: black;
+  font-size: 24px;
+  position: absolute;
+  top: 40%;
+  left: 40%;
+  transform: translate(-50%, -50%);
+  width: 300px;
 }
