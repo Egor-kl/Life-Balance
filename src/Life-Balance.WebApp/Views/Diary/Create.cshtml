@@ -1,0 +1,11 @@
+﻿@model DiaryEntryViewModel
+
+@{
+    Layout = null;
+}
+
+<form method="post" asp-controller="Diary" asp-action="Create">
+    <input asp-for="Title" placeholder="Title">
+    <input asp-for="Entry" placeholder="Entry">
+    <button type="submit">Submit</button>
+</form>
