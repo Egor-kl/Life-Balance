@@ -36,4 +36,8 @@
     <Folder Include="wwwroot\img\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\Profile\Index.cshtml" />
+  </ItemGroup>
+
 </Project>

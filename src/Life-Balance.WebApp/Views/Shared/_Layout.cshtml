@@ -10,10 +10,21 @@
 <body>
 <header class="pageHeader" style="border-bottom: 1px solid gray;">
         <nav class="navigation">
-            <a asp-controller="Diary" asp-action="Create">Diary</a>
-            <a href="#">Balance</a>
-            <a href="#">Calendar</a>
-            <a asp-controller="Profile">Profile</a>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a asp-controller="Diary" asp-action="Create">Diary</a>
+                <a href="#">Balance</a>
+                <a href="#">Calendar</a>
+                <a asp-controller="Profile">Profile</a>
+                <form method="post" asp-controller="Account" asp-action="Logout">
+                    <input type="submit" value="logout"/>
+                </form>
+            }
+            else
+            {
+                <a asp-controller="Account" asp-action="Registration">Sign Up</a>
+                <a asp-controller="Account" asp-action="Login">Sign In</a>
+            }
         </nav>
     </header>
     <main class="pageMain">

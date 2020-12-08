@@ -9,9 +9,9 @@
     <title>Registration</title>
 </head>
 <body>
-    <form method="post" asp-controller="Account" asp-action="Login">
+    <form method="post" asp-controller="Account" asp-route-returnUrl="@Model.ReturnUrl" asp-action="Login">
         <div>
-            <input asp-for="UserName" type="text" placeholder="Email">
+            <input asp-for="UserName" type="text" placeholder="UserName">
             <span asp-validation-for="UserName"></span>
         </div>
 
@@ -20,12 +20,12 @@
             <span asp-validation-for="Password"></span>
         </div>
         <div>
-            <input asp-for="RememberMe" type="checkbox" placeholder="Password">
-            <span asp-validation-for="RememberMe"></span>
+            <input asp-for="RememberMe"/>
+            <label asp-for="RememberMe">Remember me?</label>
         </div>
 
         <div>
-            <button type="submit">Sign Up</button>
+            <button type="submit">Sign In</button>
         </div>
     </form>
 </body>

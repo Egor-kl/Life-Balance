@@ -5,6 +5,7 @@ using Life_Balance.WebApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace Life_Balance.WebApp.Controllers
 {
@@ -12,11 +13,15 @@ namespace Life_Balance.WebApp.Controllers
     {
         private readonly IIdentityService _identityService;
         private readonly IEmailService _emailService;
+        private readonly ILogger _logger;
 
-        public AccountController(IIdentityService identityService, IEmailService emailService)
+        public AccountController(IIdentityService identityService, 
+                                 IEmailService emailService, 
+                                 ILogger<AccountController> logger)
         {
             _identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));
             _emailService = emailService ?? throw new ArgumentNullException(nameof(emailService));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
 
@@ -36,8 +41,7 @@ namespace Life_Balance.WebApp.Controllers
         /// <param name="model">Register view model</param>
         /// <returns></returns>
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Registration(RegisterViewModel model)
+        public async Task<IActionResult> RegistrationAsync(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -46,6 +50,7 @@ namespace Life_Balance.WebApp.Controllers
                 if (result == null)
                 {
                     ModelState.AddModelError(string.Empty, ErrorConstants.RegistrationEmailExist);
+                    _logger.LogInformation($"Problem with registration {model.UserName}");
 
                     return View(model);
                 }
@@ -55,8 +60,9 @@ namespace Life_Balance.WebApp.Controllers
                     var callbackUrl = Url.Action("Index", "Home", new { userId, code }, protocol: HttpContext.Request.Scheme);
 
                     await _emailService.SendEmailAsync(model.Email, ErrorConstants.AccountConfirm, $"Click for confirm email: <a href='{callbackUrl}'>CLICK ME!</a>");
+                    _logger.LogInformation($"New user {model.UserName}");
 
-                    return RedirectToAction("Index", "Home");
+                    return Redirect("");
                 }
 
                 return View(model);
@@ -72,7 +78,12 @@ namespace Life_Balance.WebApp.Controllers
         [HttpGet]
         public IActionResult Login(string returnUrl = null)
         {
-            return View(new LoginViewModel { ReturnUrl = returnUrl });
+            var viewModel = new LoginViewModel
+            {
+                ReturnUrl = returnUrl
+            };
+
+            return View(viewModel);
         }
 
         /// <summary>
@@ -81,28 +92,35 @@ namespace Life_Balance.WebApp.Controllers
         /// <param name="model">Login view model</param>
         /// <returns></returns>
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel model)
+        public async Task<IActionResult> LoginAsync(LoginViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var result = await _identityService.LoginUserAsync(model.UserName, model.Password, model.RememberMe, false);
-                if (result.Succeeded)
+                var (result, message) = await _identityService.EmailConfirmCheckerAsync(model.UserName);
+
+                if (!result)
                 {
+                    ModelState.AddModelError(string.Empty, message);
+
+                    return View(model);
+                }
+
+                var isSignIn = await _identityService.LoginUserAsync(model.UserName, model.Password, model.RememberMe, true);
+
+                if (isSignIn.Succeeded)
+                {
+                    // Проверка на принадлежность URL приложению.
                     if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
                     {
                         return Redirect(model.ReturnUrl);
                     }
-                    else
-                    {
-                        return RedirectToAction("", "");    
-                    }
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Incorrect email or password");
+
+                    return RedirectToAction("Index", "Home");
                 }
             }
+
+            ModelState.AddModelError(string.Empty, ErrorConstants.LoginIncorrectData);
+
             return View(model);
         }
 
@@ -111,7 +129,6 @@ namespace Life_Balance.WebApp.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
             await _identityService.LogoutUserAsync();
