@@ -10,20 +10,22 @@
 <body>
 <header class="pageHeader" style="border-bottom: 1px solid gray;">
         <nav class="navigation">
-            <a href="#">Diary</a>
+            <a asp-controller="Diary" asp-action="Create">Diary</a>
             <a href="#">Balance</a>
             <a href="#">Calendar</a>
+            <a asp-controller="Profile">Profile</a>
         </nav>
     </header>
     <main class="pageMain">
         <div class="wrap">
             <div class="bc">
-            <img src="/nov2018_n07_spiegeldiaryprologue.jpg">
+            <img src="~/img/diary.jpg">
             </div>
             <div class="txt">
                 <p>Keeping a journal is an act of love. It makes you aware of your surroundings, cognizant of your actions, and open to adapting to all the changes around you. </p>
             </div>
         </div>
+        @RenderBody()
     </main>
     <footer class="pageFooter" style="border-top: 1px solid gray;">
         <a href="https://github.com/Egor-kl">Developer: Egor Kliutsuk</a>

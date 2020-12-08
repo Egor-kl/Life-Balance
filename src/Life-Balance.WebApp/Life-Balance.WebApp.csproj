@@ -32,4 +32,8 @@
     <ProjectReference Include="..\Life-Balance.Commin\Life-Balance.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\img\" />
+  </ItemGroup>
+
 </Project>
