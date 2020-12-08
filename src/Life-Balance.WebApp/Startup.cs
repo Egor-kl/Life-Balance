@@ -33,6 +33,7 @@ namespace Life_Balance.WebApp
             services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<IIdentityService, IdentityService>();
             services.AddScoped<IDiaryService, DiaryService>();
+            services.AddScoped<IProfileService, ProfileService>();
             services.AddControllersWithViews();
             services.AddReact();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
