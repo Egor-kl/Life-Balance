@@ -10,6 +10,6 @@ namespace Life_Balance.BLL.Interfaces
         /// Get profile diary.
         /// </summary>
         /// <returns></returns>
-        public List<DiaryDTO> GetAllDiary(string userId);
+        public Task<List<DiaryDTO>> GetAllDiary(string id);
     }
 }

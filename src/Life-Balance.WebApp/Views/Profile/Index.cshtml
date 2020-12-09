@@ -12,6 +12,37 @@
 </head>
 <body>
 <div>
+    @if (Model.Any())
+    {
+        <div>
+            @foreach (var item in Model)
+            {
+                <div>
+                    <div>
+                        <div>
+                            <a asp-controller="Diary" asp-action="Info" asp-route-id="@item.Id">
+                                <h5>@item.Title</h5>
+                            </a>
+                            <h6>@item.Entry</h6>
+                            <p>@item.Date</p>
+    
+                            <a asp-controller="Diary" asp-action="Edit" asp-route-id="@item.Id"><i></i>Edit"</a>
+                            <a asp-controller="Diary" asp-action="Delete" asp-route-id="@item.Id"><i></i>Delete</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div>
+            <h4>Welcome</h4>
+            <p>Manage</p>
+            <hr>
+            <p>Fill</p>
+        </div>
+    }
 </div>
 </body>
 </html>

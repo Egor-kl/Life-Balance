@@ -26,11 +26,12 @@ namespace Life_Balance.BLL.Services
         }
 
         /// <inheritdoc />
-        public List<DiaryDTO> GetAllDiary(string userId)
+        public async Task<List<DiaryDTO>> GetAllDiary(string id)
         {
-            var diary =  _db.Diary.Where(a => a.UserId == userId).ToListAsync();
+            var diary = await _db.Diary.Where(a => a.UserId == id).ToListAsync();
 
-            return  _mapper.Map<List<DiaryDTO>>(diary);
+            var diaries = _mapper.Map<List<DiaryDTO>>(diary);
+            return diaries;
         }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Life_Balance.BLL.Interfaces;
 using Life_Balance.Common.Interfaces;
@@ -31,7 +32,8 @@ namespace Life_Balance.WebApp.Controllers
         {
             var userId = await _identityService.GetUserIdByNameAsync(User.Identity.Name);
 
-            var profileDto = _profileService.GetAllDiary(userId);
+            var profileDto = _profileService.GetAllDiary(userId).GetAwaiter().GetResult();
+            
             _logger.LogInformation($"{profileDto.Count} diaries showed for user {User.Identity.Name}.");
 
             var diaryEntryViewModel = new List<DiaryEntryViewModel>();
