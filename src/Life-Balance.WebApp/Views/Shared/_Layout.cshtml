@@ -9,7 +9,7 @@
 </head>
 <body>
 <header class="pageHeader" style="border-bottom: 1px solid gray;">
-        <nav class="navigation">
+        <div class="navigation">
             @if (User.Identity.IsAuthenticated)
             {
                 <a asp-controller="Diary" asp-action="Create">Diary</a>
@@ -25,7 +25,7 @@
                 <a asp-controller="Account" asp-action="Registration">Sign Up</a>
                 <a asp-controller="Account" asp-action="Login">Sign In</a>
             }
-        </nav>
+        </div>
     </header>
     <main class="pageMain">
         <div class="wrap">
@@ -36,11 +36,11 @@
                 <p>Keeping a journal is an act of love. It makes you aware of your surroundings, cognizant of your actions, and open to adapting to all the changes around you. </p>
             </div>
         </div>
-        @RenderBody()
     </main>
     <footer class="pageFooter" style="border-top: 1px solid gray;">
         <a href="https://github.com/Egor-kl">Developer: Egor Kliutsuk</a>
     </footer>
+    @RenderBody()
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

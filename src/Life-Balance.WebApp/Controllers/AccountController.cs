@@ -5,6 +5,7 @@ using Life_Balance.WebApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
 
 namespace Life_Balance.WebApp.Controllers
@@ -41,7 +42,7 @@ namespace Life_Balance.WebApp.Controllers
         /// <param name="model">Register view model</param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> RegistrationAsync(RegisterViewModel model)
+        public async Task<IActionResult> Registration(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -59,10 +60,12 @@ namespace Life_Balance.WebApp.Controllers
                 {
                     var callbackUrl = Url.Action("Index", "Home", new { userId, code }, protocol: HttpContext.Request.Scheme);
 
-                    await _emailService.SendEmailAsync(model.Email, ErrorConstants.AccountConfirm, $"Click for confirm email: <a href='{callbackUrl}'>CLICK ME!</a>");
+                    var body = $"Hello, {model.UserName}. Click for confirm email: <a href='{callbackUrl}'>CLICK ME!</a>";
+
+                    await _emailService.SendEmailAsync(model.Email, ErrorConstants.AccountConfirm, body);
                     _logger.LogInformation($"New user {model.UserName}");
 
-                    return Redirect("");
+                    return View("RegistartionSucceeded");
                 }
 
                 return View(model);
@@ -96,25 +99,10 @@ namespace Life_Balance.WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var (result, message) = await _identityService.EmailConfirmCheckerAsync(model.UserName);
-
-                if (!result)
-                {
-                    ModelState.AddModelError(string.Empty, message);
-
-                    return View(model);
-                }
-
-                var isSignIn = await _identityService.LoginUserAsync(model.UserName, model.Password, model.RememberMe, true);
+                var isSignIn = await _identityService.LoginUserAsync(model.UserName, model.Password, model.RememberMe, false);
 
                 if (isSignIn.Succeeded)
                 {
-                    // Проверка на принадлежность URL приложению.
-                    if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
-                    {
-                        return Redirect(model.ReturnUrl);
-                    }
-
                     return RedirectToAction("Index", "Home");
                 }
             }
@@ -129,6 +117,7 @@ namespace Life_Balance.WebApp.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Logout()
         {
             await _identityService.LogoutUserAsync();

@@ -6,27 +6,28 @@
 <!doctype html>
 <html>
 <head>
-    <title>Registration</title>
+    <title>Login</title>
 </head>
 <body>
-    <form method="post" asp-controller="Account" asp-route-returnUrl="@Model.ReturnUrl" asp-action="Login">
-        <div>
-            <input asp-for="UserName" type="text" placeholder="UserName">
-            <span asp-validation-for="UserName"></span>
-        </div>
+<form method="post" asp-controller="Account" asp-action="Login">
+    <div>
+        <input asp-for="UserName" type="text" placeholder="UserName">
+        <span asp-validation-for="UserName"></span>
+    </div>
 
-        <div>
-            <input asp-for="Password" type="password" placeholder="Password">
-            <span asp-validation-for="Password"></span>
-        </div>
-        <div>
-            <input asp-for="RememberMe"/>
-            <label asp-for="RememberMe">Remember me?</label>
-        </div>
+    <div >
+        <input asp-for="Password" type="password" placeholder="Password">
+        <span asp-validation-for="Password"></span>
+    </div>
 
-        <div>
-            <button type="submit">Sign In</button>
-        </div>
-    </form>
+    <div>
+            <input asp-for="RememberMe" />
+            <label asp-for="RememberMe">RememberMe</label>
+    </div>
+
+    <div >
+        <button type="submit">Sign In</button>
+    </div>
+</form>
 </body>
 </html>
