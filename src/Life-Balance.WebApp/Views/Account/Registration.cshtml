@@ -3,36 +3,38 @@
 @{
     Layout = null;
 }
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Registration</title>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="~/css/AccountCSS/style.css">
 </head>
 <body>
-    <form method="post" asp-controller="Account" asp-action="Registration">
-        <div >
-            <input asp-for="Email" type="text"  placeholder="Email">
-            <span asp-validation-for="Email" ></span>
-        </div>
+<form method="post" asp-controller="Account" asp-action="Registration" class="form">
+    <h1 class="form__title">Sign Up</h1>
 
-        <div >
-            <input asp-for="UserName" type="text" placeholder="UserName">
-            <span asp-validation-for="UserName" ></span>
-        </div>
+    <div class="form__group">
+        <input asp-for="Email" class="form__input" placeholder=" ">
+        <label class="form__label">Email</label>
+    </div>
 
-        <div >
-            <input asp-for="Password" type="password" placeholder="Password">
-            <span asp-validation-for="Password"></span>
-        </div>
+    <div class="form__group">
+        <input asp-for="UserName" class="form__input" placeholder=" ">
+        <label class="form__label">Username</label>
+    </div>
 
-        <div>
-            <input asp-for="PasswordConfirm" type="password" placeholder="Confirm password">
-            <span asp-validation-for="PasswordConfirm" ></span>
-        </div>
+    <div class="form__group">
+        <input asp-for="Password" class="form__input" placeholder=" ">
+        <label class="form__label">Password</label>
+    </div>
 
-        <div >
-            <button type="submit">Sign Up</button>
-        </div>
-    </form>
+    <div class="form__group">
+        <input asp-for="PasswordConfirm" class="form__input" placeholder=" ">
+        <label class="form__label">Confirm password</label>
+    </div>
+
+    <button type="submit" class="form__button">Sign Up</button>
+</form>
 </body>
 </html>

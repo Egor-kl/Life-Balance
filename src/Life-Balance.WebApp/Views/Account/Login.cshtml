@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="~/css/AccountCSS/style.css">
 </head>
 <body>
-    <form method="post" class="form">
+    <form method="post" asp-controller="Account" asp-action="Login" class="form">
         <h1 class="form__title">Sign In</h1>
         <div class="form__group">
             <input asp-for="UserName" class="form__input" placeholder=" ">
