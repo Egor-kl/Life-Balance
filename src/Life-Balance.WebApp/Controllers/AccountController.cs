@@ -117,7 +117,6 @@ namespace Life_Balance.WebApp.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> Logout()
         {
             await _identityService.LogoutUserAsync();
