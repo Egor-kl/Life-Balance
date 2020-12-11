@@ -144,8 +144,7 @@ namespace Life_Balance.WebApp.Controllers
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                _logger.LogInformation($"{User.Identity.Name} don't view info about entry. Problem on server side.");
             }
         }
     }

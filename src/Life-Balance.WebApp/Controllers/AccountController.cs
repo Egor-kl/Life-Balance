@@ -54,7 +54,7 @@ namespace Life_Balance.WebApp.Controllers
                 if (result == null)
                 {
                     ModelState.AddModelError(string.Empty, ErrorConstants.RegistrationEmailExist);
-                    _logger.LogInformation($"Problem with registration {model.UserName}");
+                    _logger.LogInformation($"Problem with registration {model.UserName} on the server side.");
 
                     return View(model);
                 }
@@ -111,6 +111,7 @@ namespace Life_Balance.WebApp.Controllers
             if (!result)
             {
                 ModelState.AddModelError(string.Empty, message);
+                _logger.LogInformation($"{model.UserName} is not confirm email and have error.");
 
                 return View(model);
             }
@@ -121,6 +122,7 @@ namespace Life_Balance.WebApp.Controllers
 
                 if (isSignIn.Succeeded)
                 {
+                    _logger.LogInformation($"{model.UserName} is login.");
                     return RedirectToAction("Index", "Home");
                 }
             }
@@ -138,6 +140,7 @@ namespace Life_Balance.WebApp.Controllers
         public async Task<IActionResult> Logout()
         {
             await _identityService.LogoutUserAsync();
+            _logger.LogInformation($"{User.Identity.Name} is logout.");
             return RedirectToAction("", "");
         }
 
