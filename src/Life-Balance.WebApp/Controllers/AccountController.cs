@@ -14,14 +14,17 @@ namespace Life_Balance.WebApp.Controllers
         private readonly IIdentityService _identityService;
         private readonly IEmailService _emailService;
         private readonly ILogger _logger;
+        private readonly IRazorViewToString _razorViewToString;
 
         public AccountController(IIdentityService identityService, 
                                  IEmailService emailService, 
-                                 ILogger<AccountController> logger)
+                                 ILogger<AccountController> logger, 
+                                 IRazorViewToString razorViewToString)
         {
             _identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));
             _emailService = emailService ?? throw new ArgumentNullException(nameof(emailService));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _razorViewToString = razorViewToString ?? throw new ArgumentNullException(nameof(razorViewToString));
         }
 
 
