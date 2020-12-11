@@ -1,4 +1,6 @@
-﻿@{
+﻿@model Life_Balance.WebApp.Model.Email
+
+@{
     Layout = null;
 }
 
@@ -18,13 +20,13 @@
             </div>
             <div class="main">
                 <div class="header">
-                    Hello, USERNAME , please confirm your account
+                    Hello, @Model.UserName , please confirm your account
                 </div>
                 <div class="text">
                     Thank you for creating your Life-Balance Account
                 </div>
                 <div class="button">
-                    <a href="#" target="_blank" class="link">Confirm!</a>
+                    <a href="@Model.Code" target="_blank" class="link">Confirm!</a>
                 </div>
                 <hr class="separator" />
                 <div class="mistake">

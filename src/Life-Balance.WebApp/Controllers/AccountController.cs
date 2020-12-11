@@ -5,6 +5,7 @@ using Life_Balance.WebApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
+using Life_Balance.WebApp.Model;
 using Microsoft.Extensions.Logging;
 
 namespace Life_Balance.WebApp.Controllers
@@ -60,9 +61,15 @@ namespace Life_Balance.WebApp.Controllers
 
                 if (result.Succeeded)
                 {
-                    var callbackUrl = Url.Action("Index", "Home", new { userId, code }, protocol: HttpContext.Request.Scheme);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId, code }, protocol: HttpContext.Request.Scheme);
 
-                    var body = $"Hello, {model.UserName}. Click for confirm email: <a href='{callbackUrl}'>CLICK ME!</a>";
+                    var email = new Email
+                    {
+                        UserName = model.UserName,
+                        Code = callbackUrl
+                    };
+                    
+                    var body = await _razorViewToString.RenderViewToStringAsync("Views/Email/Confirm.cshtml", email);
 
                     await _emailService.SendEmailAsync(model.Email, ErrorConstants.AccountConfirm, body);
                     _logger.LogInformation($"New user {model.UserName}");
@@ -97,8 +104,17 @@ namespace Life_Balance.WebApp.Controllers
         /// <param name="model">Login view model</param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> LoginAsync(LoginViewModel model)
+        public async Task<IActionResult> Login(LoginViewModel model)
         {
+            var (result, message) = await _identityService.EmailConfirmCheckerAsync(model.UserName);
+
+            if (!result)
+            {
+                ModelState.AddModelError(string.Empty, message);
+
+                return View(model);
+            }
+            
             if (ModelState.IsValid)
             {
                 var isSignIn = await _identityService.LoginUserAsync(model.UserName, model.Password, model.RememberMe, false);
@@ -123,6 +139,30 @@ namespace Life_Balance.WebApp.Controllers
         {
             await _identityService.LogoutUserAsync();
             return RedirectToAction("", "");
+        }
+
+        /// <summary>
+        /// Confirm email.
+        /// </summary>
+        /// <param name="userId">Id.</param>
+        /// <param name="code">Confirmation usl.</param>
+        /// <returns>View.</returns>
+        [HttpGet]
+        public async Task<IActionResult> ConfirmEmail(string userId, string code)
+        {
+            if (userId != null && code != null)
+            {
+                var (result, _) = await _identityService.ConfirmEmail(userId, code);
+
+                if (result.Succeeded)
+                {
+                    _logger.LogInformation($"{userId} confirm email");
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+
+            _logger.LogInformation($"{userId} don't confirm email. Error on server side.");
+            return RedirectToAction("Error", "Home");
         }
     }
 }
