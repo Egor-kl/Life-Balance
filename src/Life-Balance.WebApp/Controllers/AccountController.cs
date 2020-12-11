@@ -5,7 +5,6 @@ using Life_Balance.WebApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
 
 namespace Life_Balance.WebApp.Controllers
