@@ -2,8 +2,6 @@ using System;
 using System.Threading.Tasks;
 using Life_Balance.BLL.Interfaces;
 using Life_Balance.BLL.ModelsDTO;
-using Life_Balance.Common.Interfaces;
-using Life_Balance.DAL.Models;
 using Life_Balance.WebApp.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -13,16 +11,13 @@ namespace Life_Balance.WebApp.Controllers
     public class DiaryController : Controller
     {
         private readonly IDiaryService _diaryService;
-        private readonly IRepository<Diary> _diaryRepository;
         private readonly ILogger _logger;
         private readonly IIdentityService _identityService;
 
         public DiaryController(IDiaryService diaryService,
-                               IRepository<Diary> diaryRepository, 
                                ILogger<DiaryController> logger, 
                                IIdentityService identityService)
         {
-            _diaryRepository = diaryRepository ?? throw new ArgumentNullException(nameof(diaryRepository));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));
             _diaryService = diaryService ?? throw new ArgumentNullException(nameof(diaryService));
@@ -136,16 +131,11 @@ namespace Life_Balance.WebApp.Controllers
         /// <returns></returns>
         public async Task<IActionResult> Info(int id)
         {
-            try
-            {
                 var userId = await _identityService.GetUserIdByNameAsync(User.Identity.Name);
-
+                
+                _logger.LogInformation($"{User.Identity.Name} view info about entry.");
+                
                 return View(await _diaryService.GetEntryById(id));
-            }
-            catch (Exception e)
-            {
-                _logger.LogInformation($"{User.Identity.Name} don't view info about entry. Problem on server side.");
-            }
         }
     }
 }

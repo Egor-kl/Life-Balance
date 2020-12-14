@@ -36,6 +36,7 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Pages\Profile\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\EmailCSS\style.css" />
   </ItemGroup>
 
 </Project>
