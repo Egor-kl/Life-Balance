@@ -136,16 +136,11 @@ namespace Life_Balance.WebApp.Controllers
         /// <returns></returns>
         public async Task<IActionResult> Info(int id)
         {
-            try
-            {
                 var userId = await _identityService.GetUserIdByNameAsync(User.Identity.Name);
-
+                
+                _logger.LogInformation($"{User.Identity.Name} view info about entry.");
+                
                 return View(await _diaryService.GetEntryById(id));
-            }
-            catch (Exception e)
-            {
-                _logger.LogInformation($"{User.Identity.Name} don't view info about entry. Problem on server side.");
-            }
         }
     }
 }
