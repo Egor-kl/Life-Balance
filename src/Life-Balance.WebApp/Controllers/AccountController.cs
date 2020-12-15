@@ -53,34 +53,41 @@ namespace Life_Balance.WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var (result, userId, code) = await _identityService.CreateUserAsync(model.Email, model.UserName, model.Password);
-
-                if (result == null)
+                try
                 {
-                    ModelState.AddModelError(string.Empty, ErrorConstants.RegistrationEmailExist);
-                    _logger.LogInformation($"Problem with registration {model.UserName} on the server side.");
+                    var (result, userId, code) = await _identityService.CreateUserAsync(model.Email, model.UserName, model.Password);
 
-                    return View(model);
-                }
-
-                if (result.Succeeded)
-                {
-                    await _profileService.AddNewProfile(model.UserName, userId);
-                    
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId, code }, protocol: HttpContext.Request.Scheme);
-
-                    var email = new Email
+                    if (result == null)
                     {
-                        UserName = model.UserName,
-                        Code = callbackUrl
-                    };
+                        ModelState.AddModelError(string.Empty, ErrorConstants.RegistrationEmailExist);
+                        _logger.LogInformation($"Problem with registration {model.UserName} on the server side.");
+
+                        return View(model);
+                    }
+
+                    if (result.Succeeded)
+                    {
+                        await _profileService.AddNewProfile(model.UserName, userId);
                     
-                    var body = await _razorViewToString.RenderViewToStringAsync("Views/Email/Confirm.cshtml", email);
+                        var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId, code }, protocol: HttpContext.Request.Scheme);
 
-                    await _emailService.SendEmailAsync(model.Email, ErrorConstants.AccountConfirm, body);
-                    _logger.LogInformation($"New user {model.UserName}");
+                        var email = new Email
+                        {
+                            UserName = model.UserName,
+                            Code = callbackUrl
+                        };
+                    
+                        var body = await _razorViewToString.RenderViewToStringAsync("Views/Email/Confirm.cshtml", email);
 
-                    return View("RegistartionSucceeded");
+                        await _emailService.SendEmailAsync(model.Email, ErrorConstants.AccountConfirm, body);
+                        _logger.LogInformation($"New user {model.UserName}");
+
+                        return View("RegistartionSucceeded");
+                    }
+                }
+                catch (Exception e)
+                {
+                    _logger.LogInformation($"{e.Message} when user registration");
                 }
 
                 return View(model);
@@ -112,25 +119,32 @@ namespace Life_Balance.WebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
-            var (result, message) = await _identityService.EmailConfirmCheckerAsync(model.UserName);
-
-            if (!result)
+            try
             {
-                ModelState.AddModelError(string.Empty, message);
-                _logger.LogInformation($"{model.UserName} is not confirm email and have error.");
+                var (result, message) = await _identityService.EmailConfirmCheckerAsync(model.UserName);
 
-                return View(model);
-            }
-            
-            if (ModelState.IsValid)
-            {
-                var isSignIn = await _identityService.LoginUserAsync(model.UserName, model.Password, model.RememberMe, false);
-
-                if (isSignIn.Succeeded)
+                if (!result)
                 {
-                    _logger.LogInformation($"{model.UserName} is login.");
-                    return RedirectToAction("Index", "Home");
+                    ModelState.AddModelError(string.Empty, message);
+                    _logger.LogInformation($"{model.UserName} is not confirm email and have error.");
+
+                    return View(model);
                 }
+            
+                if (ModelState.IsValid)
+                {
+                    var isSignIn = await _identityService.LoginUserAsync(model.UserName, model.Password, model.RememberMe, false);
+
+                    if (isSignIn.Succeeded)
+                    {
+                        _logger.LogInformation($"{model.UserName} is login.");
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                _logger.LogInformation($"{e.Message} when user login");
             }
 
             ModelState.AddModelError(string.Empty, ErrorConstants.LoginIncorrectData);
