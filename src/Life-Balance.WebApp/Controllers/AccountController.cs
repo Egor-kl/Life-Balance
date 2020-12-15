@@ -22,12 +22,14 @@ namespace Life_Balance.WebApp.Controllers
         public AccountController(IIdentityService identityService, 
                                  IEmailService emailService, 
                                  ILogger<AccountController> logger, 
-                                 IRazorViewToString razorViewToString)
+                                 IRazorViewToString razorViewToString, 
+                                 IProfileService profileService)
         {
             _identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));
             _emailService = emailService ?? throw new ArgumentNullException(nameof(emailService));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _razorViewToString = razorViewToString ?? throw new ArgumentNullException(nameof(razorViewToString));
+            _profileService = profileService ?? throw new ArgumentNullException(nameof(profileService));
         }
 
 

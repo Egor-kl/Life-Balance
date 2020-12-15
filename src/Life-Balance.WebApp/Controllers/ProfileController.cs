@@ -17,7 +17,7 @@ namespace Life_Balance.WebApp.Controllers
         private readonly IIdentityService _identityService;
         private readonly IProfileService _profileService;
 
-        public ProfileController(ILogger<ProfileController> logger,  IIdentityService identityService, IRepository<Profile> diaryRepository, IProfileService profileService)
+        public ProfileController(ILogger<ProfileController> logger, IIdentityService identityService, IProfileService profileService)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));
@@ -93,7 +93,7 @@ namespace Life_Balance.WebApp.Controllers
                 }
                 catch (Exception e)
                 {
-                    _logger.LogInformation($"{User.Identity.Name} don't edit profile. Error on the server side.");
+                    _logger.LogInformation($"{User.Identity.Name} don't edit profile. Error on the server side. {e.Message}");
                 }
             }
             

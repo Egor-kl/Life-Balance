@@ -17,7 +17,8 @@ namespace Life_Balance.BLL.Interfaces
         /// <summary>
         /// Add new profile
         /// </summary>
-        /// <param name="profile">entity profile</param>
+        /// <param name="userName">username</param>
+        /// <param name="userId">user id</param>
         /// <returns></returns>
         public Task AddNewProfile(string userName, string userId);
 

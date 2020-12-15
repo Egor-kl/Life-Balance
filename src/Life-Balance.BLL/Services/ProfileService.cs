@@ -35,7 +35,7 @@ namespace Life_Balance.BLL.Services
         }
         
         /// <inheritdoc />
-        public async Task AddNewProfile(string userId, string userName)
+        public async Task AddNewProfile(string userName, string userId)
         {
             var profile = new Profile() {UserName = userName, UserId = userId};
             await _profileRepository.AddAsync(profile);
