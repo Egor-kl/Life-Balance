@@ -5,6 +5,7 @@ using Life_Balance.WebApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
+using Life_Balance.DAL.Models;
 using Life_Balance.WebApp.Model;
 using Microsoft.Extensions.Logging;
 
@@ -16,6 +17,7 @@ namespace Life_Balance.WebApp.Controllers
         private readonly IEmailService _emailService;
         private readonly ILogger _logger;
         private readonly IRazorViewToString _razorViewToString;
+        private readonly IProfileService _profileService; 
 
         public AccountController(IIdentityService identityService, 
                                  IEmailService emailService, 
@@ -61,6 +63,8 @@ namespace Life_Balance.WebApp.Controllers
 
                 if (result.Succeeded)
                 {
+                    await _profileService.AddNewProfile(model.UserName, userId);
+                    
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId, code }, protocol: HttpContext.Request.Scheme);
 
                     var email = new Email

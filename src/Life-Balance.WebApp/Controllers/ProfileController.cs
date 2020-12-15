@@ -54,5 +54,18 @@ namespace Life_Balance.WebApp.Controllers
             
             return View(diaryEntryViewModel);
         }
+
+        [HttpGet]
+        public IActionResult Update()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(ProfileViewModel model)
+        {
+            var user = _profileService.UpdateProfile(model.UserName, model.Avatar);
+            return ViewBag(model);
+        }
     }
 }

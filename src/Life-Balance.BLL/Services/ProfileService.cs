@@ -33,6 +33,14 @@ namespace Life_Balance.BLL.Services
             var diaries = _mapper.Map<List<DiaryDTO>>(diary);
             return diaries;
         }
+        
+        /// <inheritdoc />
+        public async Task AddNewProfile(string userId, string userName)
+        {
+            var profile = new Profile() {UserName = userName, UserId = userId};
+            await _profileRepository.AddAsync(profile);
+            await _profileRepository.SaveChangesAsync();
+        }
 
         /// <inheritdoc />
         public async Task UpdateProfile(string userName, byte[] avatar)

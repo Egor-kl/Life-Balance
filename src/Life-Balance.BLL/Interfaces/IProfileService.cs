@@ -15,6 +15,13 @@ namespace Life_Balance.BLL.Interfaces
         public Task<List<DiaryDTO>> GetAllDiary(string id);
 
         /// <summary>
+        /// Add new profile
+        /// </summary>
+        /// <param name="profile">entity profile</param>
+        /// <returns></returns>
+        public Task AddNewProfile(string userName, string userId);
+
+        /// <summary>
         /// Update profile.
         /// </summary>
         /// <param name="userName">User Name</param>
