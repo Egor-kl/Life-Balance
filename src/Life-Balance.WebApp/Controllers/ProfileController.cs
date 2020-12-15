@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Life_Balance.BLL.Interfaces;
+using Life_Balance.BLL.ModelsDTO;
 using Life_Balance.Common.Interfaces;
 using Life_Balance.DAL.Models;
 using Life_Balance.WebApp.ViewModels;
@@ -55,17 +55,49 @@ namespace Life_Balance.WebApp.Controllers
             return View(diaryEntryViewModel);
         }
 
+        /// <summary>
+        /// Edit page
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
-        public IActionResult Update()
+        public IActionResult Edit()
         {
-            return View();
+            var profileDto = new ProfileDTO();
+
+            var model = new ProfileViewModel()
+            {
+                Avatar = profileDto.Avatar,
+                UserName = profileDto.UserName
+            };
+            
+            return View(model);
         }
 
+        /// <summary>
+        /// Edit profile
+        /// </summary>
+        /// <param name="model">profile view model</param>
+        /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> Update(ProfileViewModel model)
+        public async Task<IActionResult> Edit(ProfileViewModel model)
         {
-            var user = _profileService.UpdateProfile(model.UserName, model.Avatar);
-            return ViewBag(model);
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    await _profileService.UpdateProfile(model.UserName, model.Avatar);
+                    
+                    _logger.LogInformation($"{User.Identity.Name} edit profile");
+
+                    return RedirectToAction("Index");
+                }
+                catch (Exception e)
+                {
+                    _logger.LogInformation($"{User.Identity.Name} don't edit profile. Error on the server side.");
+                }
+            }
+            
+            return View(model);
         }
     }
 }
