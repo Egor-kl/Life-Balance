@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Life_Balance.BLL.Interfaces;
 using Life_Balance.BLL.ModelsDTO;
-using Life_Balance.Common.Interfaces;
-using Life_Balance.DAL.Models;
 using Life_Balance.WebApp.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;

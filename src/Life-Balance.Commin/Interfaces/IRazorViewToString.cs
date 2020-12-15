@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Life_Balance.BLL.Interfaces
+namespace Life_Balance.Common.Interfaces
 {
     public interface IRazorViewToString
     {
