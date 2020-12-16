@@ -1,87 +1,199 @@
-﻿body { 
-  display: grid;
-  grid-template-areas: 
-    "header"
-    "main"
-    "footer";
-  grid-template-rows: 60px 1fr 60px;
-  height: 100vh;
-  margin: 0;
+﻿*{
   padding: 0;
-  color: #ffffff;
+  margin: 0;
+  border: 0;
 }
+/* обратились ко всем тегам на странице и обнулили все отступы и границы */
 
-a{
-  color: #ffffff;
-  text-decoration: none;
-  font-size: 26px;
+*,*:before,*:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }
+/* Поменяли подсчет ширины блока так,чтобы было удобнее верстать */
 
-header, footer{
-  background: #000000;
-}
+:focus,:active{outline:none}
+a:focus,a:active{outline: none;}
+/* Убираем линии обводки у некоторых браузеров */
 
-main{
-  background-color: #ffffff;
-}
+nav,footer,header,aside{display: block;}
+/* Сделали html5 теги блочными */
 
-.pageHeader {
-  grid-area: header;
-}
-
-.pageFooter {
-  grid-area: footer;
-  text-align: center;
-}
-
-.pageMain { 
-  grid-area: main;      
-}
-
-.navigation{
-  text-align: center;
-  margin-top: 0.8rem;
-}
-
-.navigation a{
-  margin-right: 40px;
-  text-decoration: none;
-  background-image: linear-gradient(currentColor, currentColor);
-  background-position: 0% 100%;
-  background-repeat: no-repeat;
-  background-size: 0% 2px;
-  transition: background-size .3s;
-}
-
-.navigation a:hover{
-  background-size: 100% 1px;
-}
-
-.pageFooter a{
-  font-size: 16px;
-}
-
-.wrap {
-  position: relative;
-  text-align: -webkit-center;
-}
-
-.wrap img {
+html,body {
+  height: 100%;
   width: 100%;
+  font-size: 100%;
+  line-height: 1;
+  font-size: 14px;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust:100%;
+  -webkit-text-size-adjust: 100%;
+}
+/* Параметры уравнивают поведение шрифтов и элдементов для разных браузеров,в том числе запрещают самомовольное увеличение шрифтов на айфонее например. */
+
+input,button,textarea{font-family:inherit;}
+
+/* Наследование семейства шрифта */
+
+input::-ms-clear{display: none;}
+button{cursor:pointer;}
+button::-moz-focus-inner{padding: 0;border: 0;}
+a,a:visited{text-decoration: none;}
+a:hover{text-decoration: none;}
+ul li{list-style: none;}
+img{vertical-align: top;}
+
+h1,h2,h3,h4,h5,h6 {font-style: inherit;font-weight: 400;}
+
+.header {
+  justify-content: center;
+  align-items: center;
+  flex: auto;
+  max-height: 80px;
+  background: black;
 }
 
-.bc{
-  opacity: 0.2;
- background: black;
+.nav__menu, .nav__menu a {
+  min-height: 80px;
+  font-size: 20px;
+  color: white;
+  text-decoration: none;
+  background: black;
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.txt{
-  font-family: 'Do Hyeon', sans-serif;
-  color: black;
-  font-size: 24px;
-  position: absolute;
-  top: 40%;
-  left: 40%;
-  transform: translate(-50%, -50%);
-  width: 300px;
+.nav__menu__item1 {
+  display: flex;
+  align-items: center;
+}
+
+.container {
+  max-width: 1530px;
+  padding: 0 15px;
+  margin:0 auto ;
+}
+
+.content {
+  flex: 1 1 auto;
+}
+
+.background {
+  background: url("../img/background.jpg");
+  max-width: 1920px;
+  min-height: 1080px;
+}
+
+.about__block {
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+  height: 100px;
+  padding-top: 250px;
+  padding-left: 150px;
+}
+
+.about__block__diary {
+  padding: 10px;
+  border: 2px solid #fff;
+  font-size: 25px;
+  color: white;
+  letter-spacing: 0.3px;
+}
+
+.getstart {
+  padding-top: 470px;
+  padding-left: 442px;
+}
+
+.button a {
+  font-size: 26px;
+  text-decoration: none;
+  color: white;
+  border: 3px solid white;
+  padding: 5px;
+}
+
+.footer {
+  background: #000;
+}
+
+.footer__row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80px;
+}
+
+.footer__text, .footer__text a {
+  text-decoration: none;
+  color: white;
+  letter-spacing:0.3px;
+}
+
+@media (max-width:1530px) {
+  .container {
+    max-width: 970px;
+  }
+  .background {
+    min-height: 930px;
+  }
+}
+
+@media (max-width:992px) {
+  .container {
+    max-width: 750px;
+  }
+  .content {
+    min-height: 550px;
+  }
+  .background {
+    max-height: 550px;
+  }
+}
+
+@media (max-width:767px) {
+  .container{
+    max-width: none;
+  }
+  .about__block {
+    padding-top: 10px;
+    padding-left: 10px;
+  }
+  .background {
+    min-height: 930px;
+  }
+  .getstart {
+    padding-top: 250px;
+    padding-left: 290px ;
+  }
+}
+
+@media (max-width:767px) {
+  .about__block {
+    padding: 40px 5px 40px 5px;
+    margin: 0;
+  }
+  .background {
+    min-height: 930px;
+  }
+  .getstart {
+    padding-top: 150px;
+    padding-left: 100px ;
+  }
+}
+
+@media (max-width:414px) {
+  .about__block {
+    padding: 20px 5px 20px 5px;
+    margin: 0;
+  }
+  .background {
+    min-height: 655px;
+  }
+  .getstart {
+    padding-top: 150px;
+    padding-left: 110px ;
+  }
 }

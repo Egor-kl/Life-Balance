@@ -12,6 +12,12 @@
 </head>
 <body>
 <div>
+    
+<div class="nav__menu__item3">
+     <form method="post" asp-controller="Account" asp-action="Logout">
+         <input type="submit" value="Logout"/>
+     </form>
+</div>
     @if (Model.Any())
     {
         <div>
@@ -25,7 +31,7 @@
                             </a>
                             <h6>@item.Entry</h6>
                             <p>@item.Date</p>
-    
+
                             <a asp-controller="Diary" asp-action="Edit" asp-route-id="@item.Id"><i></i>Edit"</a>
                             <a asp-controller="Diary" asp-action="Delete" asp-route-id="@item.Id"><i></i>Delete</a>
                         </div>

@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 namespace Life_Balance.WebApp.Controllers.API
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     public class DiaryController : Controller
     {
         private readonly IDiaryService _diaryService;

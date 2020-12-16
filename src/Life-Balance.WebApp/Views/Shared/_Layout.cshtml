@@ -4,47 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Life_Balance.WebApp</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-<header class="pageHeader" style="border-bottom: 1px solid gray;">
-        <div class="navigation">
-            @if (User.Identity.IsAuthenticated)
-            {
-                <a asp-controller="Diary" asp-action="Create">Diary</a>
-                <a href="#">Balance</a>
-                <a href="#">Calendar</a>
-                <a asp-controller="Profile">Profile</a>
-                <form method="post" asp-controller="Account" asp-action="Logout">
-                    <input type="submit" value="logout"/>
-                </form>
-            }
-            else
-            {
-                <a asp-controller="Account" asp-action="Registration">Sign Up</a>
-                <a asp-controller="Account" asp-action="Login">Sign In</a>
-            }
-        </div>
-    </header>
-    <main class="pageMain">
-        <div class="wrap">
-            <div class="bc">
-            <img src="~/img/diary.jpg">
-            </div>
-            <div class="txt">
-                <p>Keeping a journal is an act of love. It makes you aware of your surroundings, cognizant of your actions, and open to adapting to all the changes around you. </p>
-            </div>
-        </div>
-    </main>
-    <footer class="pageFooter" style="border-top: 1px solid gray;">
-        <a href="https://github.com/Egor-kl">Developer: Egor Kliutsuk</a>
-    </footer>
-    @RenderBody()
-
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @RenderSection("Scripts", required: false)
+<h1>S</h1>
+@RenderBody()
 </body>
 </html>
