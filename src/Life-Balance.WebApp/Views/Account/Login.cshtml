@@ -3,14 +3,17 @@
 @{
     Layout = null;
 }
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Sign In</title>
+    <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="~/css/Account/style.css">
 </head>
 <body>
+<div class="container">
     <form method="post" asp-controller="Account" asp-action="Login" class="form">
         <h1 class="form__title">Sign In</h1>
         <div class="form__group">
@@ -18,14 +21,18 @@
             <label class="form__label">Username</label>
         </div>
         <div class="form__group">
-            <input asp-for="Password" type="password" class="form__input" placeholder=" ">
+            <input type="password" asp-for="Password" class="form__input" placeholder=" ">
             <label class="form__label">Password</label>
         </div>
         <div>
             <input asp-for="RememberMe" class="form__check" type="checkbox">
-            <label class="form__check">Remember me?</label>
+            <label asp-for="RememberMe" class="form__check">Remember me?</label>
         </div>
-        <button class="form__button">Sign In</button>
+        <button type="submit" class="form__button">Sign In</button>
+        <br>
+        <p class="form_registration">Are you already registered?</p>
+        <p class="signup"><a asp-controller="Account" asp-action="Registration"> Sign Up!</a></p>
     </form>
+</div>
 </body>
 </html>

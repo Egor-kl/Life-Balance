@@ -8,33 +8,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Sign Up</title>
+    <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="~/css/Account/style.css">
 </head>
 <body>
-<form method="post" asp-controller="Account" asp-action="Registration" class="form">
-    <h1 class="form__title">Sign Up</h1>
-
-    <div class="form__group">
-        <input asp-for="Email" class="form__input" placeholder=" ">
-        <label class="form__label">Email</label>
-    </div>
-
-    <div class="form__group">
-        <input asp-for="UserName" class="form__input" placeholder=" ">
-        <label class="form__label">Username</label>
-    </div>
-
-    <div class="form__group">
-        <input asp-for="Password" class="form__input" placeholder=" ">
-        <label class="form__label">Password</label>
-    </div>
-
-    <div class="form__group">
-        <input asp-for="PasswordConfirm" class="form__input" placeholder=" ">
-        <label class="form__label">Confirm password</label>
-    </div>
-
-    <button type="submit" class="form__button">Sign Up</button>
-</form>
+<div class="container">
+    <form method="post" asp-controller="Account" asp-action="Registration" class="form">
+        <h1 class="form__title">Sign Up</h1>
+        <div class="form__group">
+            <input asp-for="UserName" class="form__input" placeholder=" ">
+            <label class="form__label">Username</label>
+        </div>
+        <div class="form__group">
+            <input asp-for="Email" class="form__input" placeholder=" ">
+            <label class="form__label">Email</label>
+        </div>
+        <div class="form__group">
+            <input asp-for="Password" type="password" class="form__input" placeholder=" ">
+            <label class="form__label">Password</label>
+        </div>
+        <div class="form__group">
+            <input asp-for="PasswordConfirm" class="form__input" placeholder=" ">
+            <label class="form__label">Password confirm</label>
+        </div>
+        <button type="submit" class="form__button">Sign Up</button>
+        <br>
+        <p class="form_registration">You have an account?</p>
+        <p class="signup"><a asp-controller="Account" asp-action="Login"> Sign In!</a></p>
+    </form>
+</div>
 </body>
 </html>

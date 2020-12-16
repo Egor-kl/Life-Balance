@@ -83,3 +83,27 @@
     font-size: 12px;
     color: #e0e0e0;
 }
+
+.form_registration, a {
+    text-align: center;
+    color: #9e9e9e;
+    font-size: 14px;
+}
+
+.signup {
+    text-align: center;
+    margin: 0;
+}
+
+.container {
+    margin:0 auto;
+    padding: 10px;
+    max-width: 430px;
+}
+
+
+@media (max-width:400px) {
+    .container {
+        max-width: none;
+    }
+}
