@@ -59,17 +59,19 @@ namespace Life_Balance.WebApp.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Edit()
+        public async Task<IActionResult> Edit(int id)
         {
-            var diaryDto = new DiaryDTO();
-
+            var userId = await _identityService.GetUserIdByNameAsync(User.Identity.Name);
+            
+            var diary = _diaryService.GetEntryById(id).GetAwaiter().GetResult();
+            
             var model = new DiaryEntryViewModel()
             {
-                Id = diaryDto.Id,
-                UserId = diaryDto.UserId,
-                Title = diaryDto.Title,
-                Entry = diaryDto.Entries,
-                Date = diaryDto.Date
+                Id = id,
+                UserId = userId,
+                Title = diary.Title,
+                Entry = diary.Entries,
+                Date = diary.Date
             };
             
             return View(model);
@@ -88,11 +90,19 @@ namespace Life_Balance.WebApp.Controllers
                 {
                     var userId = await _identityService.GetUserIdByNameAsync(User.Identity.Name);
 
-                    await _diaryService.UpdateEntry(model.Title, model.Entry, DateTime.Now);
+                    var diaryDto = new DiaryDTO()
+                    {
+                        Id = model.Id,
+                        UserId = userId,
+                        Title = model.Title,
+                        Entries = model.Entry
+                    };
+
+                    await _diaryService.UpdateEntry(diaryDto);
 
                     _logger.LogInformation($"{User.Identity.Name} successfully edited entry with id: {model.Id}.");
                 
-                    RedirectToAction("Index", "Profile");
+                    return RedirectToAction("Index", "Profile");
                 }
                 catch (Exception e)
                 {
@@ -132,10 +142,20 @@ namespace Life_Balance.WebApp.Controllers
         public async Task<IActionResult> Info(int id)
         {
                 var userId = await _identityService.GetUserIdByNameAsync(User.Identity.Name);
-                
-                _logger.LogInformation($"{User.Identity.Name} view info about entry.");
-                
-                return View(await _diaryService.GetEntryById(id));
+            
+                var diary = _diaryService.GetEntryById(id).GetAwaiter().GetResult();
+            
+                var model = new DiaryEntryViewModel()
+                {
+                    Id = id,
+                    UserId = userId,
+                    Title = diary.Title,
+                    Entry = diary.Entries,
+                    Date = diary.Date
+                };
+            
+                _logger.LogInformation($"{User.Identity.Name} view info about entry with {id}.");
+                return View(model);
         }
     }
 }

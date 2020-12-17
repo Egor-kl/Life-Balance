@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Life_Balance.BLL.Interfaces;
 using Life_Balance.BLL.ModelsDTO;
 using Life_Balance.Common.Interfaces;
-using Life_Balance.DAL;
 using Life_Balance.DAL.Models;
 
 namespace Life_Balance.BLL.Services
@@ -73,13 +71,11 @@ namespace Life_Balance.BLL.Services
         /// <summary>
         /// Edit entry
         /// </summary>
-        /// <param name="title">title entry</param>
-        /// <param name="description">description entry</param>
-        /// <param name="dateTime">date</param>
+        /// <param name="diary"></param>
         /// <returns></returns>
-        public async Task UpdateEntry(string title, string description, DateTime dateTime)
+        public async Task UpdateEntry(DiaryDTO diary)
         {
-            var entry = new Diary() {Title = title, Date = dateTime, Entries = description};
+            var entry = new Diary() {Title = diary.Title, Entries = diary.Entries, UserId = diary.UserId, Id = diary.Id, Date = DateTime.Now};
             _diaryRepository.Update(entry);
             await _diaryRepository.SaveChangesAsync();
         }

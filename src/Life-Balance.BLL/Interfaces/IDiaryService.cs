@@ -45,6 +45,6 @@ namespace Life_Balance.BLL.Interfaces
         /// <param name="description">description entry</param>
         /// <param name="dateTime">date</param>
         /// <returns></returns>
-        public Task UpdateEntry(string title, string description, DateTime dateTime);
+        public Task UpdateEntry(DiaryDTO diaryDto);
     }
 }
