@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Life_Balance.BLL.ModelsDTO;
-using Life_Balance.DAL.Models;
 
 namespace Life_Balance.BLL.Interfaces
 {
+    /// <summary>
+    /// Profile interface.
+    /// </summary>
     public interface IProfileService
     {
         /// <summary>

@@ -5,6 +5,9 @@ using Life_Balance.DAL.Models;
 
 namespace Life_Balance.BLL.Interfaces
 {
+    /// <summary>
+    /// Diary interface.
+    /// </summary>
     public interface IDiaryService
     {
         /// <summary>

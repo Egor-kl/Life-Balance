@@ -40,6 +40,7 @@ namespace Life_Balance.WebApp
             var mapperConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new DiaryProfile());
+                mc.AddProfile(new ProfileMapperProfile());
             });
 
             IMapper mapper = mapperConfig.CreateMapper();

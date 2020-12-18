@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace Life_Balance.BLL.Services
 {
+    /// <summary>
+    /// Email service.
+    /// </summary>
     public class EmailService : IEmailService
     {
         public async Task SendEmailAsync(string email, string subject, string message)

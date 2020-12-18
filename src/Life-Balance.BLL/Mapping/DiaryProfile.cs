@@ -4,6 +4,9 @@ using Profile = AutoMapper.Profile;
 
 namespace Life_Balance.BLL.Mapping
 {
+    /// <summary>
+    /// Diary Mapper.
+    /// </summary>
     public class DiaryProfile : Profile
     {
         public DiaryProfile()
