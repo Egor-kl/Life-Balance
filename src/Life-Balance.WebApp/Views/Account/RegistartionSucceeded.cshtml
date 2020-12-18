@@ -18,13 +18,13 @@
             </div>
             <div class="main">
                 <div class="header">
-                    Hello, @Model.UserName, Thank you for creating your Life-Balance Account
+                    Hello, @User.Identity.Name, Thank you for creating your Life-Balance Account
                 </div>
                 <div class="text">
                     If you dont confirm your email, please, confirm him.
                 </div>
                 <div class="button">
-                    <a href="#" class="link">Home Page!</a>
+                    <a asp-controller="Home" asp-action="Index" class="link">Home Page!</a>
                 </div>
                 <hr class="separator" />
                 <div class="mistake">

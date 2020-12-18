@@ -28,7 +28,17 @@ namespace Life_Balance.WebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<LifeBalanceDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlConnections")));
-            services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<LifeBalanceDbContext>().AddDefaultTokenProviders();
+            services.AddIdentity<User, IdentityRole>(options =>
+                {
+                    options.Password.RequiredLength = 5;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireDigit = false;
+                })
+                .AddEntityFrameworkStores<LifeBalanceDbContext>()
+                .AddDefaultTokenProviders();
+            
             services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<IIdentityService, IdentityService>();
             services.AddScoped<IDiaryService, DiaryService>();
