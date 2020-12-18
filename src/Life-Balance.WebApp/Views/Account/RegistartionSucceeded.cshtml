@@ -1,18 +1,42 @@
-﻿@model object
-
-@{
+﻿@{
     Layout = null;
 }
 
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
 <head>
-    <title>title</title>
+    <meta charset="UTF-8">
+    <title>Registration successful!</title>
+    <link rel="stylesheet" href="/css/Account/confirm.css">
 </head>
 <body>
-<div>
-    <h1>Registration succed!</h1>
+<div class="container">
+    <div class="content">
+        <div class="wrapper">
+            <div class="logo">
+                Life Balance
+            </div>
+            <div class="main">
+                <div class="header">
+                    Hello, @Model.UserName, Thank you for creating your Life-Balance Account
+                </div>
+                <div class="text">
+                    If you dont confirm your email, please, confirm him.
+                </div>
+                <div class="button">
+                    <a href="#" class="link">Home Page!</a>
+                </div>
+                <hr class="separator" />
+                <div class="mistake">
+                 <a target="_blank" href="https://mail.google.com/mail/u/1/#inbox">Gmail</a>
+                 <a target="_blank" href="https://e.mail.ru/inbox/">Mail ru</a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            Life Balance © 2020
+        </div>
+    </div>
 </div>
 </body>
 </html>
