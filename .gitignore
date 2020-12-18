@@ -349,7 +349,6 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 src/Life-Balance.WebApp/appsettings.json
-src/Life-Balance.WebApp/appsettings.json
 /.idea/.idea.Life-Balance/.idea/codeStyles/codeStyleConfig.xml
 /.idea/.idea.Life-Balance/.idea/contentModel.xml
 /.idea/.idea.Life-Balance/.idea/encodings.xml
@@ -363,3 +362,4 @@ src/Life-Balance.WebApp/appsettings.json
 *.config
 *.zip
 /.idea
+*.json
