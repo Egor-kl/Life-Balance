@@ -30,7 +30,7 @@ namespace Life_Balance.WebApp.Controllers
         {
             var userId = await _identityService.GetUserIdByNameAsync(User.Identity.Name);
 
-            var profileDto = _profileService.GetAllDiary(userId).GetAwaiter().GetResult();
+            var profileDto = await _profileService.GetAllDiary(userId);
             
             _logger.LogInformation($"{profileDto.Count} diaries showed for user {User.Identity.Name}.");
 
