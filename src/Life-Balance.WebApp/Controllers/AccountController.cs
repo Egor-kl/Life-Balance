@@ -119,32 +119,35 @@ namespace Life_Balance.WebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
-            try
+            if (ModelState.IsValid)
             {
-                var (result, message) = await _identityService.EmailConfirmCheckerAsync(model.UserName);
-
-                if (!result)
+                try
                 {
-                    ModelState.AddModelError(string.Empty, message);
-                    _logger.LogInformation($"{model.UserName} is not confirm email and have error.");
+                    var (result, message) = await _identityService.EmailConfirmCheckerAsync(model.UserName);
 
-                    return View(model);
-                }
-            
-                if (ModelState.IsValid)
-                {
-                    var isSignIn = await _identityService.LoginUserAsync(model.UserName, model.Password, model.RememberMe, false);
-
-                    if (isSignIn.Succeeded)
+                    if (!result)
                     {
-                        _logger.LogInformation($"{model.UserName} is login.");
-                        return RedirectToAction("Index", "Home");
+                        ModelState.AddModelError(string.Empty, message);
+                        _logger.LogInformation($"{model.UserName} is not confirm email and have error.");
+
+                        return View(model);
+                    }
+            
+                    if (ModelState.IsValid)
+                    {
+                        var isSignIn = await _identityService.LoginUserAsync(model.UserName, model.Password, model.RememberMe, false);
+
+                        if (isSignIn.Succeeded)
+                        {
+                            _logger.LogInformation($"{model.UserName} is login.");
+                            return RedirectToAction("Index", "Home");
+                        }
                     }
                 }
-            }
-            catch (Exception e)
-            {
-                _logger.LogInformation($"{e.Message} when user login");
+                catch (Exception e)
+                {
+                    _logger.LogInformation($"{e.Message} when user login");
+                }
             }
 
             ModelState.AddModelError(string.Empty, ErrorConstants.LoginIncorrectData);
