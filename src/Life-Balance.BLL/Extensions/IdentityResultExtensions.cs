@@ -10,7 +10,7 @@ namespace Life_Balance.BLL.Extencions
         /// <summary>
         /// Identity.
         /// </summary>
-        /// <param name="result">Результат Identity.</param>
+        /// <param name="result">Identity result.</param>
         /// <returns>Result.</returns>
         public static Result ToApplicationResult(this IdentityResult result)
         {
@@ -22,10 +22,10 @@ namespace Life_Balance.BLL.Extencions
         }
 
         /// <summary>
-        /// Перевод для приложения (SignIn).
+        /// Sign in identity
         /// </summary>
-        /// <param name="result">Результат SignIn.</param>
-        /// <returns>Результат.</returns>
+        /// <param name="result">sign in result</param>
+        /// <returns>Result</returns>
         public static Result ToApplicationResult(this SignInResult result)
         {
             result = result ?? throw new ArgumentNullException(nameof(result));

@@ -12,5 +12,8 @@ namespace Life_Balance.DAL
         public LifeBalanceDbContext(DbContextOptions<LifeBalanceDbContext> options) : base(options)
         {
         }
+
+        public DbSet<Diary> Diary { get; set; }
+        public DbSet<Profile> Profiles { get; set; }
     }
 }

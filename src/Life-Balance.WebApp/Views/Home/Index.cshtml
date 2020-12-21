@@ -1,8 +1,68 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    Layout = null;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Life Balance</title>
+    <link rel="stylesheet" href="~/css/site.css">
+</head>
+<body>
+<div class="header">
+    <div class="container">
+        <div class="nav__menu">
+            <div class="nav__menu__item1">
+                <a asp-controller="Home" asp-action="Index">LIFE BALANCE</a>
+            </div>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div class="nav__menu__item2">
+                    <a asp-controller="Diary" asp-action="Create">DIARY</a>
+                </div>
+                <div class="nav__menu__item3">
+                    <a asp-controller="Profile" asp-action="Index">PROFILE</a>
+                </div>
+            }
+            else
+            {
+                <div class="nav__menu__item3">
+                    <a asp-controller="Account" asp-action="Login">SIGN IN</a>
+                </div>
+            }
+        </div>
+    </div>
 </div>
+<div class="content">
+    <div class="background">
+        <div class="container">
+            <div class="about__block">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div class="getstart">
+                        <div class="button"><a asp-controller="Diary" asp-action="Create">Get started!</a></div>
+                    </div>
+                }
+                else
+                {
+                    <div class="getstart">
+                        <div class="button"><a asp-controller="Account" asp-action="Login">Get started!</a></div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <div class="footer__row">
+        <div class="footer__text">
+            <p>Backend: <a href="https://www.linkedin.com/in/egor-kliutsuk/" target="_blank">Egor Kliutsuk</a></p>
+            <p>Front-end: <a href="https://github.com/YanSurma" target="_blank">Yan Surma</a></p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

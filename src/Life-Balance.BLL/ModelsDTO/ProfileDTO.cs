@@ -1,8 +1,6 @@
-﻿using Life_Balance.Common.Interfaces;
-
-namespace Life_Balance.DAL.Models
+﻿namespace Life_Balance.BLL.ModelsDTO
 {
-    public class Profile : IHasDbIdentity
+    public class ProfileDTO
     {
         /// <summary>
         /// Profile Id.

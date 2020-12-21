@@ -3,6 +3,9 @@ using System.Threading.Tasks;
 
 namespace Life_Balance.BLL.Interfaces
 {
+    /// <summary>
+    /// Identity interface.
+    /// </summary>
     public interface IIdentityService
     {
         /// <summary>

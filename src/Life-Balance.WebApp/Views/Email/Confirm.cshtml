@@ -1,0 +1,132 @@
+﻿@model Life_Balance.WebApp.Model.Email
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<style>
+    .container {
+        font-family: 'Roboto', sans-serif;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .content {
+        background-color: #ffffff;
+        max-width: 32rem;
+        min-width: 20rem;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .wrapper {
+        margin: 1rem 2rem;
+    }
+
+    .logo {
+        color: #000;
+        font-weight: 700;
+        text-align: center;
+        font-size: 2rem;
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .header {
+        font-weight: 300;
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .main {
+        text-align: center;
+    }
+
+    .text {
+        font-size: 1.25rem;
+        font-weight: 100;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+    }
+
+    .button {
+        display: inline-block;
+        margin-top: 2rem;
+        margin-bottom: 3rem;
+    }
+
+    .link {
+        background-color: #000;
+        border-radius: 4px;
+        color: #ffffff;
+        font-weight: 300;
+        line-height: 2rem;
+        padding: 1rem 1.5rem;
+        text-decoration: none;
+        white-space: nowrap;
+        font-size: 1rem;
+    }
+
+    .mistake {
+        font-size: 0.75rem;
+        font-weight: 300;
+    }
+
+    .separator {
+        background-color: #000;
+        border: 0;
+        height: 1px;
+        margin-bottom: 1rem;
+    }
+
+    .copyright {
+        background-color: #000;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+        color: #868686;
+        text-align: center;
+        font-weight: 300;
+        font-size: 1rem;
+    }
+</style>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Email</title>
+</head>
+<body>
+<div class="container">
+    <div class="content">
+        <div class="wrapper">
+            <div class="logo">
+                Life Balance
+            </div>
+            <div class="main">
+                <div class="header">
+                    Hello, @Model.UserName , please confirm your account
+                </div>
+                <div class="text">
+                    Thank you for creating your Life-Balance Account
+                </div>
+                <div class="button">
+                    <a href="@Model.Code" target="_blank" class="link">Confirm!</a>
+                </div>
+                <hr class="separator" />
+                <div class="mistake">
+                    This message (including all attachments) is confidential and intended only for the addressee. If you received it by mistake, please contact us immediately and then remove it.
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            Life Balance © 2020
+        </div>
+    </div>
+</div>
+</body>
+</html>

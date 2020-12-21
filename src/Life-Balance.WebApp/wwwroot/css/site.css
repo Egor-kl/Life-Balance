@@ -1,71 +1,199 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
-
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+﻿*{
+  padding: 0;
+  margin: 0;
+  border: 0;
 }
+/* обратились ко всем тегам на странице и обнулили все отступы и границы */
 
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
+*,*:before,*:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }
+/* Поменяли подсчет ширины блока так,чтобы было удобнее верстать */
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
+:focus,:active{outline:none}
+a:focus,a:active{outline: none;}
+/* Убираем линии обводки у некоторых браузеров */
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
+nav,footer,header,aside{display: block;}
+/* Сделали html5 теги блочными */
 
-/* Sticky footer styles
--------------------------------------------------- */
-html {
+html,body {
+  height: 100%;
+  width: 100%;
+  font-size: 100%;
+  line-height: 1;
   font-size: 14px;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust:100%;
+  -webkit-text-size-adjust: 100%;
 }
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
+/* Параметры уравнивают поведение шрифтов и элдементов для разных браузеров,в том числе запрещают самомовольное увеличение шрифтов на айфонее например. */
+
+input,button,textarea{font-family:inherit;}
+
+/* Наследование семейства шрифта */
+
+input::-ms-clear{display: none;}
+button{cursor:pointer;}
+button::-moz-focus-inner{padding: 0;border: 0;}
+a,a:visited{text-decoration: none;}
+a:hover{text-decoration: none;}
+ul li{list-style: none;}
+img{vertical-align: top;}
+
+h1,h2,h3,h4,h5,h6 {font-style: inherit;font-weight: 400;}
+
+.header {
+  justify-content: center;
+  align-items: center;
+  flex: auto;
+  max-height: 80px;
+  background: black;
+}
+
+.nav__menu, .nav__menu a {
+  min-height: 80px;
+  font-size: 20px;
+  color: white;
+  text-decoration: none;
+  background: black;
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav__menu__item1 {
+  display: flex;
+  align-items: center;
+}
+
+.container {
+  max-width: 1530px;
+  padding: 0 15px;
+  margin:0 auto ;
+}
+
+.content {
+  flex: 1 1 auto;
+}
+
+.background {
+  background: url("../img/background.jpg");
+  max-width: 1920px;
+  min-height: 1080px;
+}
+
+.about__block {
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+  height: 100px;
+  padding-top: 250px;
+  padding-left: 150px;
+}
+
+.about__block__diary {
+  padding: 10px;
+  border: 2px solid #fff;
+  font-size: 25px;
+  color: white;
+  letter-spacing: 0.3px;
+}
+
+.getstart {
+  padding-top: 470px;
+  padding-left: 442px;
+}
+
+.button a {
+  font-size: 26px;
+  text-decoration: none;
+  color: white;
+  border: 3px solid white;
+  padding: 5px;
+}
+
+.footer {
+  background: #000;
+}
+
+.footer__row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80px;
+}
+
+.footer__text, .footer__text a {
+  text-decoration: none;
+  color: white;
+  letter-spacing:0.3px;
+}
+
+@media (max-width:1530px) {
+  .container {
+    max-width: 970px;
+  }
+  .background {
+    min-height: 930px;
   }
 }
 
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
-}
-
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-}
-
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+@media (max-width:992px) {
+  .container {
+    max-width: 750px;
+  }
+  .content {
+    min-height: 550px;
+  }
+  .background {
+    max-height: 550px;
+  }
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
+@media (max-width:767px) {
+  .container{
+    max-width: none;
+  }
+  .about__block {
+    padding-top: 10px;
+    padding-left: 10px;
+  }
+  .background {
+    min-height: 930px;
+  }
+  .getstart {
+    padding-top: 250px;
+    padding-left: 290px ;
+  }
 }
 
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+@media (max-width:767px) {
+  .about__block {
+    padding: 40px 5px 40px 5px;
+    margin: 0;
+  }
+  .background {
+    min-height: 930px;
+  }
+  .getstart {
+    padding-top: 150px;
+    padding-left: 100px ;
+  }
 }
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+
+@media (max-width:414px) {
+  .about__block {
+    padding: 20px 5px 20px 5px;
+    margin: 0;
+  }
+  .background {
+    min-height: 655px;
+  }
+  .getstart {
+    padding-top: 150px;
+    padding-left: 110px ;
+  }
 }
