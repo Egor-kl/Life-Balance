@@ -7,6 +7,7 @@ using Life_Balance.BLL.Interfaces;
 using Life_Balance.BLL.ModelsDTO;
 using Life_Balance.Common.Interfaces;
 using Life_Balance.DAL;
+using Life_Balance.DAL.Models;
 using Microsoft.EntityFrameworkCore;
 using Profile = Life_Balance.DAL.Models.Profile;
 
@@ -17,12 +18,14 @@ namespace Life_Balance.BLL.Services
         private readonly LifeBalanceDbContext _db;
         private readonly IMapper _mapper;
         private readonly IRepository<Profile> _profileRepository;
+        private readonly IRepository<Diary> _diaryRepository;
 
-        public ProfileService(LifeBalanceDbContext db, IMapper mapper, IRepository<Profile> profileRepository)
+        public ProfileService(LifeBalanceDbContext db, IMapper mapper, IRepository<Profile> profileRepository, IRepository<Diary> diaryRepository = null)
         {
             _db = db ?? throw new ArgumentNullException(nameof(db));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _profileRepository = profileRepository ?? throw new ArgumentNullException(nameof(profileRepository));
+            _diaryRepository = diaryRepository ?? throw new ArgumentNullException(nameof(diaryRepository));
         }
 
         /// <inheritdoc />
