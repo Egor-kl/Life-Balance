@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 namespace Life_Balance.WebApp.Controllers.API
 {
     [ApiController]
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
     public class DiaryController : Controller
     {
         private readonly IDiaryService _diaryService;
@@ -31,8 +31,7 @@ namespace Life_Balance.WebApp.Controllers.API
         /// </summary>
         /// <param name="dateTime">date of entry</param>
         /// <returns>json result</returns>
-        [HttpGet]
-        public async Task<IActionResult> GetByDate([FromQuery] DateTime dateTime)
+        public async Task<IActionResult> GetByDate(DateTime dateTime)
         {
            var diary = await _diaryService.GetEntryByDate(dateTime);
            
@@ -47,7 +46,7 @@ namespace Life_Balance.WebApp.Controllers.API
         /// <param name="id">diary id.</param>
         /// <returns>json result</returns>
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById([FromQuery] int id)
+        public async Task<IActionResult> GetById(int id)
         {
             var diary = await _diaryService.GetEntryById(id);
             
