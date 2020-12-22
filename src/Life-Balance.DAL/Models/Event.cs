@@ -3,7 +3,7 @@ using System;
 
 namespace Life_Balance.DAL.Models
 {
-    class Event : IHasDbIdentity
+    public class Event : IHasDbIdentity
     {
         /// <summary>
         /// ID Key.
