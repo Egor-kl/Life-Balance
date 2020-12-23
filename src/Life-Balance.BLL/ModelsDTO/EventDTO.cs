@@ -24,12 +24,12 @@ namespace Life_Balance.BLL.ModelsDTO
         /// <summary>
         /// Meetings start date.
         /// </summary>
-        public DateTime Start { get; set; }
+        public string Start { get; set; }
 
         /// <summary>
         /// Meetings end date.
         /// </summary>
-        public DateTime End { get; set; }
+        public string End { get; set; }
 
 
         public string UserId { get; set; }

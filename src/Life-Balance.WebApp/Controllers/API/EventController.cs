@@ -29,18 +29,13 @@ namespace Life_Balance.WebApp.Controllers.API
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
         /// <summary>
         /// Add new event.
         /// </summary>
         /// <param name="model">Event view model.</param>
         /// <returns>View</returns>
         [HttpPost]
-        public async Task<IActionResult> Create(EventViewModel model)
+        public async Task<IActionResult> Create([FromBody]EventViewModel model)
         {
             var userId = await _identityService.GetUserIdByNameAsync(User.Identity.Name);
 
