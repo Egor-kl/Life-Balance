@@ -43,8 +43,7 @@ namespace Life_Balance.WebApp.Controllers
                     Id = a.Id,
                     UserId = a.UserId,
                     Title = a.Title,
-                    Entry = a.Entries,
-                    Date = a.Date
+                    Entry = a.Entries
                 };
                 
                 diaryEntryViewModel.Add(diary);
