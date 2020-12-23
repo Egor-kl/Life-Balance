@@ -11,15 +11,15 @@ namespace Life_Balance.WebApp.Controllers.API
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class EventController : Controller
+    public class CalendarController : Controller
     {
         private readonly IEventService _eventService;
         private readonly ILogger _logger;
         private readonly IIdentityService _identityService;
         private readonly IMapper _mapper;
 
-        public EventController(IEventService eventService,
-                               ILogger<EventController> logger,
+        public CalendarController(IEventService eventService,
+                               ILogger<CalendarController> logger,
                                IIdentityService identityService,
                                IMapper mapper)
         {
@@ -27,6 +27,11 @@ namespace Life_Balance.WebApp.Controllers.API
             _identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));
             _eventService = eventService ?? throw new ArgumentNullException(nameof(eventService));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+        }
+
+        public IActionResult Index()
+        {
+            return View();
         }
 
         /// <summary>

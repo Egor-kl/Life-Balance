@@ -1,4 +1,6 @@
 using AutoMapper;
+using JavaScriptEngineSwitcher.ChakraCore;
+using JavaScriptEngineSwitcher.Extensions.MsDependencyInjection;
 using Life_Balance.BLL.Interfaces;
 using Life_Balance.BLL.Mapping;
 using Life_Balance.BLL.Repository;
@@ -9,10 +11,12 @@ using Life_Balance.DAL.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using React.AspNet;
 
 namespace Life_Balance.WebApp
 {
@@ -48,10 +52,16 @@ namespace Life_Balance.WebApp
             services.AddControllersWithViews();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddReact();
+            services.AddJsEngineSwitcher(options => options.DefaultEngineName = ChakraCoreJsEngine.EngineName).AddChakraCore();
+            
+            
             var mapperConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new DiaryProfile());
                 mc.AddProfile(new ProfileMapperProfile());
+                mc.AddProfile(new EventProfile());
             });
 
             IMapper mapper = mapperConfig.CreateMapper();
@@ -70,6 +80,9 @@ namespace Life_Balance.WebApp
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
+
+            app.UseReact(config => { });
+            
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

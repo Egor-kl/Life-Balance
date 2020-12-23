@@ -4,7 +4,7 @@ using Profile = AutoMapper.Profile;
 
 namespace Life_Balance.BLL.Mapping
 {
-    class EventProfile : Profile
+    public class EventProfile : Profile
     {
         public EventProfile()
         {
