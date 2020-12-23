@@ -8,7 +8,7 @@ using AutoMapper;
 
 namespace Life_Balance.BLL.Services
 {
-    class EventService : IEventService
+    public class EventService : IEventService
     {
         private readonly IRepository<Event> _eventRepository;
         private readonly IMapper _mapper;

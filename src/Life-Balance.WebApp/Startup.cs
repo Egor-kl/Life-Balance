@@ -44,6 +44,7 @@ namespace Life_Balance.WebApp
             services.AddScoped<IDiaryService, DiaryService>();
             services.AddScoped<IProfileService, ProfileService>();
             services.AddScoped<IRazorViewToString, RazorViewToString>();
+            services.AddScoped<IEventService, EventService>();
             services.AddControllersWithViews();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             
