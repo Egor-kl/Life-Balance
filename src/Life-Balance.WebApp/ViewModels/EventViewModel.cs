@@ -17,11 +17,11 @@ namespace Life_Balance.WebApp.ViewModels
         /// <summary>
         /// Event start date.
         /// </summary>
-        public DateTime Start { get; set; }
+        public string Start { get; set; }
 
         /// <summary>
         /// Event end date.
         /// </summary>
-        public DateTime End { get; set; }
+        public string End { get; set; }
     }
 }

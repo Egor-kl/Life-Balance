@@ -1,14 +1,16 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Threading.Tasks;
+using AutoMapper;
 using Life_Balance.BLL.Interfaces;
 using Life_Balance.BLL.ModelsDTO;
 using Life_Balance.WebApp.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Threading.Tasks;
 
-namespace Life_Balance.WebApp.Controllers
+namespace Life_Balance.WebApp.Controllers.API
 {
+    [ApiController]
+    [Route("api/[controller]")]
     public class EventController : Controller
     {
         private readonly IEventService _eventService;
@@ -33,15 +35,6 @@ namespace Life_Balance.WebApp.Controllers
         }
 
         /// <summary>
-        /// View form for create new event.
-        /// </summary>
-        /// <returns>View model</returns>
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        /// <summary>
         /// Add new event.
         /// </summary>
         /// <param name="model">Event view model.</param>
@@ -49,25 +42,12 @@ namespace Life_Balance.WebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(EventViewModel model)
         {
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    var userId = await _identityService.GetUserIdByNameAsync(User.Identity.Name);
+            var userId = await _identityService.GetUserIdByNameAsync(User.Identity.Name);
 
-                    var events = _mapper.Map<EventDTO>(model);
-                    await _eventService.Create(events, userId);
-
-                    _logger.LogInformation($"{User.Identity.Name} add new event");
-                    RedirectToAction("Index", "Profile");
-                }
-                catch (ArgumentException ex)
-                {
-                    _logger.LogError($"Event model is not valid {ex.Message}");
-                }
-            }
-
-            return View(model);
+            var events = _mapper.Map<EventDTO>(model);
+            await _eventService.Create(events, userId);
+            
+            return Json(events);
         }
     }
 }
