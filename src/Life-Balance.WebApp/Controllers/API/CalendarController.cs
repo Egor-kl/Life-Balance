@@ -41,7 +41,7 @@ namespace Life_Balance.WebApp.Controllers.API
         /// <param name="model">Event view model.</param>
         /// <returns>View</returns>
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody]EventViewModel model)
+        public async Task<IActionResult> CreateEvent([FromBody]EventViewModel model)
         {
             var userId = await _identityService.GetUserIdByNameAsync(User.Identity.Name);
 
@@ -49,6 +49,18 @@ namespace Life_Balance.WebApp.Controllers.API
             await _eventService.Create(events, userId);
             
             return Json(events);
+        }
+
+        /// <summary>
+        /// Get event by id.
+        /// </summary>
+        /// <param name="id">event id</param>
+        /// <returns></returns>
+        public async Task<IActionResult> GetEventById(int id)
+        {
+            var evenTask = await _eventService.GetById(id);
+
+            return Json(evenTask);
         }
     }
 }

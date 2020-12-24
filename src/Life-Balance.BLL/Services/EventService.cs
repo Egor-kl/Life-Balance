@@ -27,5 +27,27 @@ namespace Life_Balance.BLL.Services
             await _eventRepository.AddAsync(newEvent);
             await _eventRepository.SaveChangesAsync();
         }
+
+        /// <inheritdoc />
+        public Task<Event> GetById(int id)
+        {
+            return _eventRepository.GetEntityAsync(e => e.Id == id);
+        }
+
+        /// <inheritdoc />
+        public async Task DeleteEvent(int id)
+        {
+            var events = new Event(){Id = id};
+            _eventRepository.Delete(events);
+            await _eventRepository.SaveChangesAsync();
+        }
+
+        /// <inheritdoc />
+        public async Task UpdateEvent(EventDTO eventDto)
+        {
+            var events = new Event() {Title = eventDto.Title, Note = eventDto.Note, Start = eventDto.Start, End = eventDto.End};
+            _eventRepository.Update(events);
+            await _eventRepository.SaveChangesAsync();
+        }
     }
 }
