@@ -29,6 +29,7 @@ namespace Life_Balance.WebApp.Controllers.API
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             return View();

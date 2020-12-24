@@ -18,14 +18,9 @@ namespace Life_Balance.BLL.ModelsDTO
         public string Title { get; set; }
 
         /// <summary>
-        /// Start date entries.
+        /// Datetime.
         /// </summary>
-        public string StartDate { get; set; }
-        
-        /// <summary>
-        /// End date entries.
-        /// </summary>
-        public string EndDate { get; set; }
+        public DateTime Date { get; set; }
 
         /// <summary>
         /// Notes.

@@ -49,7 +49,7 @@ namespace Life_Balance.BLL.Services
         /// <returns></returns>
         public async Task CreateNewEntry(string title, string description, DateTime dateTime, string userId)
         {
-            var diaryDto = new DiaryDTO() {Title = title, Entries = description};
+            var diaryDto = new DiaryDTO() {Title = title, Entries = description, Date = DateTime.Now};
             var entry = _mapper.Map<Diary>(diaryDto);
             entry.UserId = userId;
             await _diaryRepository.AddAsync(entry);
@@ -75,7 +75,7 @@ namespace Life_Balance.BLL.Services
         /// <returns></returns>
         public async Task UpdateEntry(DiaryDTO diary)
         {
-            var entry = new Diary() {Title = diary.Title, Entries = diary.Entries, UserId = diary.UserId, Id = diary.Id};
+            var entry = new Diary() {Title = diary.Title, Entries = diary.Entries, UserId = diary.UserId, Id = diary.Id, Date = DateTime.Now};
             _diaryRepository.Update(entry);
             await _diaryRepository.SaveChangesAsync();
         }
