@@ -9,9 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ClientApp\**" />
     <Compile Remove="Views\Новая папка\**" />
+    <Content Remove="ClientApp\**" />
     <Content Remove="Views\Новая папка\**" />
+    <EmbeddedResource Remove="ClientApp\**" />
     <EmbeddedResource Remove="Views\Новая папка\**" />
+    <None Remove="ClientApp\**" />
     <None Remove="Views\Новая папка\**" />
   </ItemGroup>
 
@@ -21,6 +25,7 @@
     <PackageReference Include="JavaScriptEngineSwitcher.Extensions.MsDependencyInjection" Version="3.3.0" />
     <PackageReference Include="JavaScriptEngineSwitcher.V8" Version="3.9.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.8">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -40,12 +45,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="app\components" />
+    <Folder Include="app\store" />
     <Folder Include="wwwroot\img\" />
   </ItemGroup>
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Pages\Profile\Index.cshtml" />
     <_ContentIncludedByDefault Remove="wwwroot\css\EmailCSS\style.css" />
+    <_ContentIncludedByDefault Remove="app\public\manifest.json" />
   </ItemGroup>
 
 </Project>

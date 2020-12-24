@@ -17,6 +17,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using React.AspNet;
+using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 
 namespace Life_Balance.WebApp
 {
@@ -81,6 +82,11 @@ namespace Life_Balance.WebApp
                 app.UseHsts();
             }
 
+            app.UseCors(options =>
+                options.WithOrigins("http://localhost:3000")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod());
+            
             app.UseReact(config => { });
             
             app.UseHttpsRedirection();
