@@ -62,5 +62,32 @@ namespace Life_Balance.WebApp.Controllers.API
 
             return Json(evenTask);
         }
+
+        /// <summary>
+        /// Delete event by id.
+        /// </summary>
+        /// <param name="id">event id</param>
+        /// <returns></returns>
+        [HttpDelete]
+        public async Task<IActionResult> DeleteById(int id)
+        {
+            await _eventService.DeleteEvent(id);
+            return Ok();
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateEvent(EventViewModel model)
+        {
+            var eventDto = new EventDTO()
+            {
+                Title = model.Title,
+                Note = model.Note,
+                Start = model.Start,
+                End = model.End
+            };
+            
+            await _eventService.UpdateEvent(eventDto);
+            return Ok(model);
+        }
     }
 }
