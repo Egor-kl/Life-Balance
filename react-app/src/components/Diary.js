@@ -4,11 +4,10 @@ import * as actions from "../actions/diary";
 
 const Diary = (props) => {
     
-
     useEffect(() => {
         props.fetchAllDiary()
     }, [])
-
+    
     return(
         <div>diary not form</div>
     )
@@ -20,6 +19,5 @@ const mapStateToProps = state => ({
 
 const mapActionToProps = {
     fetchAllDiary: actions.fetchAll
-}
 
 export default connect(mapStateToProps, mapActionToProps)(Diary);
