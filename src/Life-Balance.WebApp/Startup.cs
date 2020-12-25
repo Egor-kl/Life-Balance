@@ -52,7 +52,8 @@ namespace Life_Balance.WebApp
             services.AddScoped<IEventService, EventService>();
             services.AddControllersWithViews();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-            
+
+            services.AddCors();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddReact();
             services.AddJsEngineSwitcher(options => options.DefaultEngineName = ChakraCoreJsEngine.EngineName).AddChakraCore();
@@ -72,6 +73,11 @@ namespace Life_Balance.WebApp
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors(options =>
+            options.WithOrigins("http://localhost:3000")
+            .AllowAnyHeader()
+            .AllowAnyMethod());
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -81,11 +87,6 @@ namespace Life_Balance.WebApp
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
-
-            app.UseCors(options =>
-                options.WithOrigins("http://localhost:3000")
-                    .AllowAnyHeader()
-                    .AllowAnyMethod());
             
             app.UseReact(config => { });
             
