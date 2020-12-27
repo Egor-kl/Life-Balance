@@ -29,6 +29,11 @@ export const diary = (state = initialState, action) => {
                 ...state,
                 list: state.list.filter(x => x.id != action.payload)
             }
+        case ACTION_TYPES.FETCH_BY_ID:
+            return {
+                ...state,
+                list: [...state.list, action.payload]
+            }
             
         default:
             return state

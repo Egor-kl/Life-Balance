@@ -1,6 +1,6 @@
 const DiaryForm = (props) => {
     return(
-        <dv>form Diary</dv>
+        <div>form Diary</div>
     )
 }
 

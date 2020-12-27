@@ -1,0 +1,236 @@
+*{
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+/* обратились ко всем тегам на странице и обнулили все отступы и границы */
+
+*,*:before,*:after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+/* Поменяли подсчет ширины блока так,чтобы было удобнее верстать */
+
+:focus,:active{outline:none}
+a:focus,a:active{outline: none;}
+/* Убираем линии обводки у некоторых браузеров */
+
+nav,footer,header,aside{display: block;}
+/* Сделали html5 теги блочными */
+
+html,body {
+    height: 100%;
+    width: 100%;
+    font-size: 100%;
+    line-height: 1;
+    font-size: 14px;
+    -ms-text-size-adjust: 100%;
+    -moz-text-size-adjust:100%;
+    -webkit-text-size-adjust: 100%;
+}
+/* Параметры уравнивают поведение шрифтов и элдементов для разных браузеров,в том числе запрещают самомовольное увеличение шрифтов на айфонее например. */
+
+input,button,textarea{font-family:inherit;}
+
+/* Наследование семейства шрифта */
+
+input::-ms-clear{display: none;}
+button{cursor:pointer;}
+button::-moz-focus-inner{padding: 0;border: 0;}
+a,a:visited{text-decoration: none;}
+a:hover{text-decoration: none;}
+ul li{list-style: none;}
+img{vertical-align: top;}
+
+h1,h2,h3,h4,h5,h6 {font-style: inherit;font-weight: 400;}
+
+.content {
+    flex: 1 1 auto;
+}
+
+.background {
+    background:url("../../assets/img/background.jpg");
+    max-width: 1920px;
+    min-height: 920px;
+}
+
+.diary__block {
+    display: flex;
+    flex-direction: column;
+    padding-top: 100px;
+    padding-left: 100px;
+}
+
+.diary__field1 {
+    color: white;
+}
+
+.title1 {
+    padding: 0 0 10px 0;
+    font-size: 20px;
+    color: white;
+}
+
+.textarea1 {
+    display: flex;
+}
+
+.title {
+    padding-left: 30px;
+    font-family:'Indie Flower', cursive;
+    margin-bottom: 1rem;
+    background-color:black;
+    width: 1335px;
+    height: 50px;
+    resize: none;
+    font-size: 31px;
+    color:wheat;
+    border-radius: 7px;
+    border: 2px solid wheat;
+    vertical-align:top;
+}
+
+.notes {
+    padding: 20px 30px 0px 30px;
+    font-family:'Indie Flower', cursive;
+    margin-bottom: 1rem;
+    background-color:black;
+    width: 1335px;
+    height: 550px;
+    resize: none;
+    font-size: 26px;
+    color:wheat;
+    border-radius: 7px;
+    border: 2px solid wheat;
+    vertical-align:top;
+}
+
+.title2 {
+    padding:0  0 10px 0;
+    font-size: 20px;
+    color: white;
+}
+
+.textarea2 {
+    display: flex;
+}
+
+.button {
+    padding-left: 1262px;
+}
+
+.button__button {
+    display: flex;
+    padding:5px 7px 5px 7px;
+    border: 1px solid wheat;
+    background-color: #000;
+    color: white;
+    border-radius: 7px;
+    font-size: 22px;
+}
+
+@media (max-width:1530px) {
+    .container {
+        max-width: 992px;
+    }
+    .textarea1 {
+        max-height: 50px;
+        max-width: 992px;
+        padding: 0px;
+    }
+    .textarea2{
+        max-width: 992px;
+        padding: 0;
+        max-height: 450px
+    }
+
+    .button{
+        padding-left: 790px;
+        padding-top: 110px;
+    }
+}
+
+@media (max-width:992px) {
+    .content {
+        min-height: 550px;
+    }
+    .background {
+        max-height: 550px;
+    }
+    .textarea1 {
+        max-height: 50px;
+        max-width: 9920px;
+        padding: 0px;
+    }
+    .textarea2{
+        max-width: 992px;
+        padding: 0;
+        max-height: 450px
+    }
+    .button{
+        padding-left: 550px;
+        padding-top: 110px;
+    }
+}
+
+@media (max-width:767px) {
+    .textarea1 {
+        max-height: 50px;
+        max-width: 9920px;
+        padding: 0px;
+    }
+    .textarea2{
+        max-width: 992px;
+        padding: 0;
+        max-height: 450px
+    }
+    .button{
+        padding-left: 550px;
+        padding-top: 110px;
+    }
+}
+
+@media (max-width:767px) {
+    .diary__block {
+        padding: 40px 5px 40px 5px;
+        margin: 0;
+    }
+    .background {
+        min-height: 930px;
+    }
+    .button{
+        padding-left: 40  0px;
+        padding-top: 110px;
+    }
+}
+
+@media (max-width:666px) {
+    .diary__block {
+        padding: 40px 5px 40px 5px;
+        margin: 0;
+    }
+    .background {
+        min-height: 930px;
+    }
+    .button{
+        padding-left: 0px;
+        padding-top: 110px;
+    }
+}
+
+@media (max-width:414px) {
+    .diary__block {
+        padding: 0;
+        padding-top: 10px;
+        margin: 0;
+    }
+    .background {
+        min-height: 414px;
+    }
+
+    .button{
+        padding-top: 110px;
+        padding-left: 0px;
+    }
+}
