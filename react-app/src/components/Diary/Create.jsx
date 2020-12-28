@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import * as actions from "../../actions/diary";
 import '../../styles/diary/style.css';
 
-const CreateDiary = (props) => {
+const Create = (props) => {
 
     useEffect(() => {
-        props.fetchAllDiary()
+        props.create(props.data, true)
     }, [])
 
     return(
@@ -19,7 +19,7 @@ const CreateDiary = (props) => {
                                 <p>TITLE</p>
                             </div>
                             <div className="textarea1">
-                                <textarea className="title" value={props.data.title}></textarea>
+                                <textarea className="title" ></textarea>
                             </div>
                         </div>
                         <div className="diary__field2">
@@ -27,7 +27,7 @@ const CreateDiary = (props) => {
                                 <p>ENTRIES</p>
                             </div>
                             <div className="textarea2">
-                                <textarea className="notes" value={props.data.entries}></textarea>
+                                <textarea className="notes" ></textarea>
                             </div>
                         </div>
                         <div className="button">
@@ -47,8 +47,7 @@ const mapStateToProps = state => ({
 })
 
 const mapActionToProps = {
-    fetchAllDiary: actions.fetchAll,
-    deleteById: actions.Delete
+    create: actions.Create
 }
 
-export default connect(mapStateToProps, mapActionToProps)(CreateDiary);
+export default connect(mapStateToProps, mapActionToProps)(Create);

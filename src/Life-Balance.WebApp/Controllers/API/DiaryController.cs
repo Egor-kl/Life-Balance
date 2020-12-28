@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Life_Balance.BLL.Interfaces;
+using Life_Balance.BLL.ModelsDTO;
 using Life_Balance.Common.Interfaces;
 using Life_Balance.DAL.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -50,7 +51,7 @@ namespace Life_Balance.WebApp.Controllers.API
         {
             var diary = await _diaryService.GetEntryById(id);
             
-            _logger.LogInformation($"Successfully sent diary with Id: {diary.Date}.");
+            _logger.LogInformation($"Successfully sent diary with Id: {diary.Id}.");
            
             return Json(diary);
         }
@@ -67,6 +68,32 @@ namespace Life_Balance.WebApp.Controllers.API
             _logger.LogInformation($"Successfully sent diary all diary: {diaries.Count}.");
            
             return Json(diaries);
+        }
+
+        /// <summary>
+        /// Delete by id.
+        /// </summary>
+        /// <param name="id">Diary id.</param>
+        /// <returns></returns>
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteById(int id)
+        {
+            await _diaryService.DeleteEntry(id);
+            
+            return NoContent();
+        }
+
+        /// <summary>
+        /// Update entry.
+        /// </summary>
+        /// <param name="data">model</param>
+        /// <returns></returns>
+        [HttpPut]
+        public async Task<IActionResult> Update(DiaryDTO data)
+        {
+            await _diaryService.UpdateEntry(data);
+
+            return Ok();
         }
     }
 }

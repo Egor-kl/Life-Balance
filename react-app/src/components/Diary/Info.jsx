@@ -8,17 +8,20 @@ const Info = (props) => {
         props.fetchById(props.match.params.id)
     }, [])
 
+    console.log(props.location.state.id)
+
     return(
         <div className="content">
             <div className="background">
                 <div className="container">
+
                     <div className="diary__block">
                         <div className="diary__field1">
                             <div className="title1">
                                 <p>TITLE</p>
                             </div>
                             <div className="textarea1">
-                                <textarea className="title" value={props.diaryList.map(x => x.title)} readOnly={true}></textarea>
+                                <textarea className="title" defaultValue={props.location.state.title} readOnly={true}></textarea>
                             </div>
                         </div>
                         <div className="diary__field2">
@@ -26,7 +29,7 @@ const Info = (props) => {
                                 <p>ENTRIES</p>
                             </div>
                             <div className="textarea2">
-                                <textarea className="notes" value={props.diaryList.map(x => x.entries)} readOnly={true}></textarea>
+                                <textarea className="notes" defaultValue={props.location.state.entries} readOnly={true}></textarea>
                             </div>
                         </div>
                     </div>

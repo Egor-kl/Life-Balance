@@ -11,7 +11,7 @@ const ProfileItem = (props) => {
 
     const onDelete = id => {
         if (window.confirm('Are you sure to delete this record?'))
-            props.deleteById(id,()=>addToast("Deleted successfully", { appearance: 'info' }))
+            props.deleteById(id, ()=>addToast("Deleted successfully", { appearance: 'info' }))
     }
 
 
@@ -26,10 +26,16 @@ const ProfileItem = (props) => {
                 </div>
                 <div className="pr__buttons">
                     <div className="pr__button1">
-                        <NavLink to={'diary/' + props.id}>Info</NavLink>
+                        <Link to={{
+                            pathname: 'diary/info/'+props.id,
+                            state: { id: props.id, date: props.date, title: props.title, entries : props.entries }
+                        }}>Info</Link>
                     </div>
                     <div className="pr__button1">
-                        <NavLink to={'diary/edit/' + props.id}>Edit</NavLink>
+                        <Link to={{
+                            pathname: 'diary/edit/'+props.id,
+                            state: { id: props.id, date: props.date, title: props.title, entries : props.entries }
+                        }}>Edit</Link>
                     </div>
                     <div className="pr__button1">
                         <button onClick={() => onDelete(props.id)}>Delete</button>
@@ -45,9 +51,7 @@ const mapStateToProp = state => ({
 })
 
 const mapActionToProps = {
-    fetchAllDiary: actions.fetchAll,
-    deleteById: actions.Delete,
-    updateDiary: actions.Update
+    deleteById: actions.Delete
 }
 
 export default connect(mapStateToProp, mapActionToProps)(ProfileItem);

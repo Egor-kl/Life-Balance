@@ -11,7 +11,7 @@ const Header = (props) => {
                         <NavLink to="/">LIFE BALANCE</NavLink>
                     </div>
                     <div className="nav__menu__item2">
-                        <NavLink to="api/diary">DIARY</NavLink>
+                        <NavLink to="diary/create">DIARY</NavLink>
                     </div>
                     <div className="nav__menu__item3">
                         <NavLink to="/profile">PROFILE</NavLink>
