@@ -44,30 +44,15 @@ namespace Life_Balance.BLL.Services
         /// </summary>
         /// <param name="title">title of entry</param>
         /// <param name="description">description of entry</param>
+        /// <param name="dateTime">date of entry</param>
         /// <param name="userId">user id</param>
         /// <returns></returns>
-        public async Task CreateNewEntry(string title, string description, string userId)
+        public async Task CreateNewEntry(string title, string description, DateTime dateTime, string userId)
         {
             var diaryDto = new DiaryDTO() {Title = title, Entries = description, Date = DateTime.Now};
             var entry = _mapper.Map<Diary>(diaryDto);
             entry.UserId = userId;
             await _diaryRepository.AddAsync(entry);
-            await _diaryRepository.SaveChangesAsync();
-        }
-        
-        /// <summary>
-        /// Update entry.
-        /// </summary>
-        /// <param name="title">diary title.</param>
-        /// <param name="entries">diary entry.</param>
-        /// <param name="userId">user id</param>
-        /// <returns></returns>
-        public async Task UpdateEntry(string title, string entries, string userId)
-        {
-            var diaryDto = new DiaryDTO() { Title = title, Entries = entries, Date = DateTime.Now};
-            var entry = _mapper.Map<Diary>(diaryDto);
-            entry.UserId = userId;
-            _diaryRepository.Update(entry);
             await _diaryRepository.SaveChangesAsync();
         }
 
@@ -80,6 +65,18 @@ namespace Life_Balance.BLL.Services
         {
             var entry = new Diary() {Id = entryId};
             _diaryRepository.Delete(entry);
+            await _diaryRepository.SaveChangesAsync();
+        }
+
+        /// <summary>
+        /// Edit entry
+        /// </summary>
+        /// <param name="diary"></param>
+        /// <returns></returns>
+        public async Task UpdateEntry(DiaryDTO diary)
+        {
+            var entry = new Diary() {Title = diary.Title, Entries = diary.Entries, UserId = diary.UserId, Id = diary.Id, Date = DateTime.Now};
+            _diaryRepository.Update(entry);
             await _diaryRepository.SaveChangesAsync();
         }
     }

@@ -29,21 +29,26 @@ namespace Life_Balance.WebApp.Controllers.API
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        /// <summary>
-        /// Create event
-        /// </summary>
-        /// <param name="title">Event title</param>
-        /// <param name="note">Event note</param>
-        /// <param name="start">Event start</param>
-        /// <param name="end">Event end</param>
-        /// <param name="userId">user id</param>
-        /// <returns></returns>
-        [HttpPost]
-        public async Task<IActionResult> CreateEvent(string title, string note, string start, string end, string userId)
+        [HttpGet]
+        public IActionResult Index()
         {
-            await _eventService.Create(title, note, start, end, userId);
+            return View();
+        }
+
+        /// <summary>
+        /// Add new event.
+        /// </summary>
+        /// <param name="model">Event view model.</param>
+        /// <returns>View</returns>
+        [HttpPost]
+        public async Task<IActionResult> CreateEvent([FromBody]EventViewModel model)
+        {
+            var userId = await _identityService.GetUserIdByNameAsync(User.Identity.Name);
+
+            var events = _mapper.Map<EventDTO>(model);
+            await _eventService.Create(events, userId);
             
-            return Ok();
+            return Json(events);
         }
 
         /// <summary>
@@ -71,18 +76,22 @@ namespace Life_Balance.WebApp.Controllers.API
         }
 
         /// <summary>
-        /// Update event
+        /// Update event.
         /// </summary>
-        /// <param name="title">Event title</param>
-        /// <param name="note">Event note</param>
-        /// <param name="start">Event start</param>
-        /// <param name="end">Event end</param>
-        /// <param name="userId">user id</param>
+        /// <param name="model">View model.</param>
         /// <returns></returns>
         [HttpPut]
-        public async Task<IActionResult> UpdateEvent(string title, string note, string start, string end, string userId)
+        public async Task<IActionResult> UpdateEvent(EventViewModel model)
         {
-            await _eventService.UpdateEvent(title, note, start, end, userId);
+            var eventDto = new EventDTO()
+            {
+                Title = model.Title,
+                Note = model.Note,
+                Start = model.Start,
+                End = model.End
+            };
+            
+            await _eventService.UpdateEvent(eventDto);
             return NoContent();
         }
     }

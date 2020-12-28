@@ -20,20 +20,11 @@ namespace Life_Balance.BLL.Services
         }
 
         /// <inheritdoc />
-        public async Task Create(string title, string note, string start, string end, string userId)
+        public async Task Create(EventDTO events, string userId)
         {
-            var eventDto = new EventDTO(){Title = title, Note = note, Start = start, End = end};
-            var events = _mapper.Map<Event>(eventDto);
-            await _eventRepository.AddAsync(events);
-            await _eventRepository.SaveChangesAsync();
-        }
-        
-        /// <inheritdoc />
-        public async Task UpdateEvent(string title, string note, string start, string end, string userId)
-        {
-            var eventDto = new EventDTO() {Title = title, Note = note, Start = start, End = end};
-            var events = _mapper.Map<Event>(eventDto);
-            _eventRepository.Update(events);
+            var newEvent = _mapper.Map<Event>(events);
+            newEvent.UserId = userId;
+            await _eventRepository.AddAsync(newEvent);
             await _eventRepository.SaveChangesAsync();
         }
 
@@ -48,6 +39,14 @@ namespace Life_Balance.BLL.Services
         {
             var events = new Event(){Id = id};
             _eventRepository.Delete(events);
+            await _eventRepository.SaveChangesAsync();
+        }
+
+        /// <inheritdoc />
+        public async Task UpdateEvent(EventDTO eventDto)
+        {
+            var events = new Event() {Title = eventDto.Title, Note = eventDto.Note, Start = eventDto.Start, End = eventDto.End};
+            _eventRepository.Update(events);
             await _eventRepository.SaveChangesAsync();
         }
     }

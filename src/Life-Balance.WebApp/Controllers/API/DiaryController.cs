@@ -74,7 +74,7 @@ namespace Life_Balance.WebApp.Controllers.API
         /// Delete by id.
         /// </summary>
         /// <param name="id">Diary id.</param>
-        /// <returns>No content</returns>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteById(int id)
         {
@@ -84,31 +84,14 @@ namespace Life_Balance.WebApp.Controllers.API
         }
 
         /// <summary>
-        /// Update entry
+        /// Update entry.
         /// </summary>
-        /// <param name="title">Diary title</param>
-        /// <param name="entries">Diary entry</param>
-        /// <param name="userId">user id</param>
+        /// <param name="data">model</param>
         /// <returns></returns>
         [HttpPut]
-        public async Task<IActionResult> Update(string title, string entries, string userId)
+        public async Task<IActionResult> Update(DiaryDTO data)
         {
-            await _diaryService.UpdateEntry(title, entries, userId);
-
-            return Ok();
-        }
-
-        /// <summary>
-        /// Create new entry.
-        /// </summary>
-        /// <param name="title">diary title.</param>
-        /// <param name="entry">diary entry.</param>
-        /// <param name="userId">user id.</param>
-        /// <returns>Ok</returns>
-        [HttpPost]
-        public async Task<IActionResult> Create(string title, string entry, string userId)
-        {
-            await _diaryService.CreateNewEntry(title, entry, userId);
+            await _diaryService.UpdateEntry(data);
 
             return Ok();
         }
