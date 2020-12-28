@@ -9,10 +9,13 @@ namespace Life_Balance.BLL.Interfaces
         /// <summary>
         /// Create new event
         /// </summary>
-        /// <param name="events">Event DTO</param>
-        /// <param name="userId">User Id.</param>
+        /// <param name="title">Event title</param>
+        /// <param name="note">Event note</param>
+        /// <param name="start">Start event</param>
+        /// <param name="end">End event</param>
+        /// <param name="userId">user id</param>
         /// <returns></returns>
-        public Task Create(EventDTO events, string userId);
+        public Task Create(string title, string note, string start, string end, string userId);
 
         /// <summary>
         /// Get event by id.
@@ -29,10 +32,14 @@ namespace Life_Balance.BLL.Interfaces
         public Task DeleteEvent(int id);
 
         /// <summary>
-        /// Update event.
+        /// Update entry.
         /// </summary>
-        /// <param name="eventDto">Event dto model.</param>
+        /// <param name="title">Event title</param>
+        /// <param name="note">Event note</param>
+        /// <param name="start">Start event</param>
+        /// <param name="end">End event</param>
+        /// <param name="userId">user id</param>
         /// <returns></returns>
-        public Task UpdateEvent(EventDTO eventDto);
+        public Task UpdateEvent(string title, string note, string start, string end, string userId);
     }
 }

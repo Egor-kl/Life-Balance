@@ -43,7 +43,7 @@ namespace Life_Balance.WebApp.Controllers
                 {
                     var userId = await _identityService.GetUserIdByNameAsync(User.Identity.Name);
                     model.UserId = userId;
-                    await _diaryService.CreateNewEntry(model.Title, model.Entry, DateTime.Now, userId);
+                    await _diaryService.CreateNewEntry(model.Title, model.Entry, userId);
                 
                     _logger.LogInformation($"{User.Identity.Name} successfully created diary with id {model.Id}.");
                 
@@ -90,15 +90,7 @@ namespace Life_Balance.WebApp.Controllers
                 {
                     var userId = await _identityService.GetUserIdByNameAsync(User.Identity.Name);
 
-                    var diaryDto = new DiaryDTO()
-                    {
-                        Id = model.Id,
-                        UserId = userId,
-                        Title = model.Title,
-                        Entries = model.Entry
-                    };
-
-                    await _diaryService.UpdateEntry(diaryDto);
+                    await _diaryService.UpdateEntry(model.Title, model.Entry, userId);
 
                     _logger.LogInformation($"{User.Identity.Name} successfully edited entry with id: {model.Id}.");
                 

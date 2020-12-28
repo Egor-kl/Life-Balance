@@ -29,10 +29,9 @@ namespace Life_Balance.BLL.Interfaces
         /// </summary>
         /// <param name="title">title entry</param>
         /// <param name="description">description entry</param>
-        /// <param name="dateTime">date</param>
         /// <param name="userId">user id</param>
         /// <returns></returns>
-        public Task CreateNewEntry(string title, string description, DateTime dateTime, string userId);
+        public Task CreateNewEntry(string title, string description, string userId);
 
         /// <summary>
         /// Delete entry by id;
@@ -46,8 +45,8 @@ namespace Life_Balance.BLL.Interfaces
         /// </summary>
         /// <param name="title">title entry</param>
         /// <param name="description">description entry</param>
-        /// <param name="dateTime">date</param>
+        /// <param name="userId">user id</param>
         /// <returns></returns>
-        public Task UpdateEntry(DiaryDTO diaryDto);
+        public Task UpdateEntry(string title, string description, string userId);
     }
 }
