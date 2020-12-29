@@ -56,5 +56,13 @@ namespace Life_Balance.BLL.Services
             _eventRepository.Update(events);
             await _eventRepository.SaveChangesAsync();
         }
+
+        /// <inheritdoc />
+        public Task<Event> GetEventByUserId(string userId)
+        {
+            var events = _eventRepository.GetEntityAsync(x => x.UserId == userId);
+
+            return events;
+        }
     }
 }

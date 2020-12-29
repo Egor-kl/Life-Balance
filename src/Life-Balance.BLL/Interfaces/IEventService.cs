@@ -28,7 +28,7 @@ namespace Life_Balance.BLL.Interfaces
         public Task GetAll();
 
         /// <summary>
-        /// Delete eveny by id.
+        /// Delete event by id.
         /// </summary>
         /// <param name="id">Event id.</param>
         /// <returns></returns>
@@ -40,5 +40,12 @@ namespace Life_Balance.BLL.Interfaces
         /// <param name="eventDto">Event dto model.</param>
         /// <returns></returns>
         public Task UpdateEvent(EventDTO eventDto);
+
+        /// <summary>
+        /// Get event by user id.
+        /// </summary>
+        /// <param name="userId">user id.</param>
+        /// <returns></returns>
+        public Task<Event> GetEventByUserId(string userId);
     }
 }

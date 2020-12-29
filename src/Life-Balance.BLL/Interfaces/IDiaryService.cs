@@ -45,5 +45,11 @@ namespace Life_Balance.BLL.Interfaces
         /// <param name="diaryDto"></param>
         /// <returns></returns>
         public Task UpdateEntry(DiaryDTO diaryDto);
+
+        /// <summary>
+        /// Get diary by user id.
+        /// </summary>
+        /// <returns></returns>
+        public Task<Diary> GetDiaryByUserId(string userId);
     }
 }
