@@ -1,6 +1,4 @@
-﻿@model IEnumerable<DiaryEntryViewModel>
-
-@{
+﻿@{
     Layout = null;
 }
 
@@ -66,13 +64,13 @@
                   </div>
                   <div class="pr__buttons">
                     <div class="pr__button1">
-                      <a asp-controller="Diary" asp-action="Info" asp-route-id="@item.Id">Info</a>
+                      <a asp-controller="Diary" asp-action="" asp-route-id="@item.Id">Info</a>
                     </div>
                     <div class="pr__button1">
-                      <a asp-controller="Diary" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                      <a asp-controller="Diary" asp-action="" asp-route-id="@item.Id">Edit</a>
                     </div>
                     <div class="pr__button1">
-                      <a asp-controller="Diary" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                      <a asp-controller="Diary" asp-action="" asp-route-id="@item.Id">Delete</a>
                     </div>
                   </div>
                 </div>

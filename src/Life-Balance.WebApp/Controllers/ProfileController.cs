@@ -1,9 +1,6 @@
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Life_Balance.BLL.Interfaces;
-using Life_Balance.BLL.ModelsDTO;
-using Life_Balance.WebApp.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -34,67 +31,7 @@ namespace Life_Balance.WebApp.Controllers
             
             _logger.LogInformation($"{profileDto.Count} diaries showed for user {User.Identity.Name}.");
 
-            var diaryEntryViewModel = new List<DiaryEntryViewModel>();
-
-            profileDto.ForEach(a =>
-            {
-                var diary = new DiaryEntryViewModel()
-                {
-                    Id = a.Id,
-                    UserId = a.UserId,
-                    Title = a.Title,
-                    Entry = a.Entries
-                };
-                
-                diaryEntryViewModel.Add(diary);
-            });
-            
-            return View(diaryEntryViewModel);
-        }
-
-        /// <summary>
-        /// Edit page
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        public IActionResult Edit()
-        {
-            var profileDto = new ProfileDTO();
-
-            var model = new ProfileViewModel()
-            {
-                Avatar = profileDto.Avatar,
-                UserName = profileDto.UserName
-            };
-            
-            return View(model);
-        }
-
-        /// <summary>
-        /// Edit profile
-        /// </summary>
-        /// <param name="model">profile view model</param>
-        /// <returns></returns>
-        [HttpPost]
-        public async Task<IActionResult> Edit(ProfileViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    await _profileService.UpdateProfile(model.UserName, model.Avatar);
-                    
-                    _logger.LogInformation($"{User.Identity.Name} edit profile");
-
-                    return RedirectToAction("Index");
-                }
-                catch (Exception e)
-                {
-                    _logger.LogInformation($"{User.Identity.Name} don't edit profile. Error on the server side. {e.Message}");
-                }
-            }
-            
-            return View(model);
+            return View();
         }
     }
 }
