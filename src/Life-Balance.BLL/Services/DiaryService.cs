@@ -42,14 +42,11 @@ namespace Life_Balance.BLL.Services
         /// <summary>
         /// Add new entry
         /// </summary>
-        /// <param name="title">title of entry</param>
-        /// <param name="description">description of entry</param>
-        /// <param name="dateTime">date of entry</param>
+        /// <param name="diaryDto">Dto model.</param>
         /// <param name="userId">user id</param>
         /// <returns></returns>
-        public async Task CreateNewEntry(string title, string description, DateTime dateTime, string userId)
+        public async Task CreateNewEntry(DiaryDTO diaryDto, string userId)
         {
-            var diaryDto = new DiaryDTO() {Title = title, Entries = description, Date = DateTime.Now};
             var entry = _mapper.Map<Diary>(diaryDto);
             entry.UserId = userId;
             await _diaryRepository.AddAsync(entry);
