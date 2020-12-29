@@ -22,6 +22,12 @@ namespace Life_Balance.BLL.Interfaces
         public Task<Event> GetById(int id);
 
         /// <summary>
+        /// Get all event.
+        /// </summary>
+        /// <returns></returns>
+        public Task GetAll();
+
+        /// <summary>
         /// Delete eveny by id.
         /// </summary>
         /// <param name="id">Event id.</param>

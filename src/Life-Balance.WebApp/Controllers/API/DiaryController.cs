@@ -92,6 +92,11 @@ namespace Life_Balance.WebApp.Controllers.API
             return Ok();
         }
 
+        /// <summary>
+        /// Create new entry.
+        /// </summary>
+        /// <param name="diaryDto">model</param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Create([FromBody]DiaryDTO diaryDto)
         {

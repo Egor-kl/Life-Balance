@@ -2,9 +2,11 @@
 using Life_Balance.BLL.ModelsDTO;
 using Life_Balance.Common.Interfaces;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Life_Balance.DAL.Models;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 
 namespace Life_Balance.BLL.Services
 {
@@ -32,6 +34,11 @@ namespace Life_Balance.BLL.Services
         public Task<Event> GetById(int id)
         {
             return _eventRepository.GetEntityAsync(e => e.Id == id);
+        }
+
+        public async Task GetAll()
+        {
+            await _eventRepository.GetAll().ToListAsync();
         }
 
         /// <inheritdoc />
