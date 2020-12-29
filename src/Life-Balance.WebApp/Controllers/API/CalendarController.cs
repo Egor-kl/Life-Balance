@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Life_Balance.BLL.Interfaces;
 using Life_Balance.BLL.ModelsDTO;
+using Life_Balance.Common.Interfaces;
+using Life_Balance.DAL.Models;
 using Life_Balance.WebApp.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -16,14 +18,17 @@ namespace Life_Balance.WebApp.Controllers.API
         private readonly IEventService _eventService;
         private readonly ILogger _logger;
         private readonly IIdentityService _identityService;
+        private readonly IRepository<Event> _eventRepository;
 
         public CalendarController(IEventService eventService,
                                ILogger<CalendarController> logger,
-                               IIdentityService identityService)
+                               IIdentityService identityService,
+                               IRepository<Event> repository)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));
             _eventService = eventService ?? throw new ArgumentNullException(nameof(eventService));
+            _eventRepository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
 
         /// <summary>
@@ -33,11 +38,11 @@ namespace Life_Balance.WebApp.Controllers.API
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            await _eventService.GetAll();
+            var events = _eventRepository.GetAll();
             
             _logger.LogInformation("Successfully sent all event.");
 
-            return Ok();
+            return Ok(events);
         }
 
         /// <summary>

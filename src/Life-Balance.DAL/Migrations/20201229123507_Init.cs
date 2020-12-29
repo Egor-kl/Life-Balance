@@ -63,6 +63,23 @@ namespace Life_Balance.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Events",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(nullable: true),
+                    Note = table.Column<string>(nullable: true),
+                    Start = table.Column<string>(nullable: true),
+                    End = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Events", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Profiles",
                 columns: table => new
                 {
@@ -242,6 +259,9 @@ namespace Life_Balance.DAL.Migrations
 
             migrationBuilder.DropTable(
                 name: "Diary");
+
+            migrationBuilder.DropTable(
+                name: "Events");
 
             migrationBuilder.DropTable(
                 name: "Profiles");
