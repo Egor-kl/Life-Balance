@@ -1,4 +1,5 @@
-﻿using Life_Balance.Common.Interfaces;
+﻿using System.Collections.Generic;
+using Life_Balance.Common.Interfaces;
 
 namespace Life_Balance.DAL.Models
 {
@@ -21,5 +22,9 @@ namespace Life_Balance.DAL.Models
 
 
         public string UserId { get; set; }
+        
+        public ICollection<Diary> Diaries { get; set; }
+        
+        public ICollection<Event> Events { get; set; }
     }
 }

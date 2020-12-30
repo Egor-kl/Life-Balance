@@ -27,5 +27,7 @@ namespace Life_Balance.DAL.Models
 
 
         public string UserId { get; set; }
+        
+        public string ProfileId { get; set; }
     }
 }

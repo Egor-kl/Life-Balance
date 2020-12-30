@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Life_Balance.DAL.Migrations
 {
     [DbContext(typeof(LifeBalanceDbContext))]
-    [Migration("20201229123507_Init")]
+    [Migration("20201230224950_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,6 +34,12 @@ namespace Life_Balance.DAL.Migrations
                     b.Property<string>("Entries")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ProfileId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ProfileId1")
+                        .HasColumnType("int");
+
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
@@ -41,6 +47,8 @@ namespace Life_Balance.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProfileId1");
 
                     b.ToTable("Diary");
                 });
@@ -52,14 +60,20 @@ namespace Life_Balance.DAL.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("End")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("End")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Note")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Start")
+                    b.Property<string>("ProfileId")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ProfileId1")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Start")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
@@ -68,6 +82,8 @@ namespace Life_Balance.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProfileId1");
 
                     b.ToTable("Events");
                 });
@@ -287,6 +303,20 @@ namespace Life_Balance.DAL.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("Life_Balance.DAL.Models.Diary", b =>
+                {
+                    b.HasOne("Life_Balance.DAL.Models.Profile", null)
+                        .WithMany("Diaries")
+                        .HasForeignKey("ProfileId1");
+                });
+
+            modelBuilder.Entity("Life_Balance.DAL.Models.Event", b =>
+                {
+                    b.HasOne("Life_Balance.DAL.Models.Profile", null)
+                        .WithMany("Events")
+                        .HasForeignKey("ProfileId1");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

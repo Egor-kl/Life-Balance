@@ -47,39 +47,6 @@ namespace Life_Balance.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Diary",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(nullable: true),
-                    Date = table.Column<DateTime>(nullable: false),
-                    Entries = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Diary", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Events",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(nullable: true),
-                    Note = table.Column<string>(nullable: true),
-                    Start = table.Column<string>(nullable: true),
-                    End = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Events", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Profiles",
                 columns: table => new
                 {
@@ -200,6 +167,55 @@ namespace Life_Balance.DAL.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Diary",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(nullable: true),
+                    Date = table.Column<DateTime>(nullable: false),
+                    Entries = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: true),
+                    ProfileId = table.Column<string>(nullable: true),
+                    ProfileId1 = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Diary", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Diary_Profiles_ProfileId1",
+                        column: x => x.ProfileId1,
+                        principalTable: "Profiles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Events",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(nullable: true),
+                    Note = table.Column<string>(nullable: true),
+                    Start = table.Column<DateTime>(nullable: false),
+                    End = table.Column<DateTime>(nullable: false),
+                    UserId = table.Column<string>(nullable: true),
+                    ProfileId = table.Column<string>(nullable: true),
+                    ProfileId1 = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Events", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Events_Profiles_ProfileId1",
+                        column: x => x.ProfileId1,
+                        principalTable: "Profiles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -238,6 +254,16 @@ namespace Life_Balance.DAL.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Diary_ProfileId1",
+                table: "Diary",
+                column: "ProfileId1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Events_ProfileId1",
+                table: "Events",
+                column: "ProfileId1");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -264,13 +290,13 @@ namespace Life_Balance.DAL.Migrations
                 name: "Events");
 
             migrationBuilder.DropTable(
-                name: "Profiles");
-
-            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Profiles");
         }
     }
 }
