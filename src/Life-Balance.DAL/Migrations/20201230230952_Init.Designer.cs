@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Life_Balance.DAL.Migrations
 {
     [DbContext(typeof(LifeBalanceDbContext))]
-    [Migration("20201230224950_Init")]
+    [Migration("20201230230952_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

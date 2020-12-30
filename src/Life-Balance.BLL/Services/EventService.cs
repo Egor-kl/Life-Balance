@@ -52,8 +52,8 @@ namespace Life_Balance.BLL.Services
         /// <inheritdoc />
         public async Task UpdateEvent(EventDTO eventDto)
         {
-            var events = new Event() {Title = eventDto.Title, Note = eventDto.Note, Start = eventDto.Start, End = eventDto.End};
-            _eventRepository.Update(events);
+            var update = _mapper.Map<Event>(eventDto);
+            _eventRepository.Update(update);
             await _eventRepository.SaveChangesAsync();
         }
 
