@@ -23,12 +23,12 @@ namespace Life_Balance.DAL.Models
         /// <summary>
         /// Event start date.
         /// </summary>
-        public string Start { get; set; }
+        public DateTime Start { get; set; }
 
         /// <summary>
         /// Event end date.
         /// </summary>
-        public string End { get; set; }
+        public DateTime End { get; set; }
 
 
         public string UserId { get; set; }
