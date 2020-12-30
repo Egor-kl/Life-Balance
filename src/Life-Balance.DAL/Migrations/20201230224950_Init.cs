@@ -177,24 +177,15 @@ namespace Life_Balance.DAL.Migrations
                     Date = table.Column<DateTime>(nullable: false),
                     Entries = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: true),
-<<<<<<< HEAD:src/Life-Balance.DAL/Migrations/20201230224950_Init.cs
                     ProfileId = table.Column<string>(nullable: true),
                     ProfileId1 = table.Column<int>(nullable: true)
-=======
-                    ProfileId = table.Column<int>(nullable: true)
->>>>>>> 224f21ec921bece9a4110f34e77e2941fab370c0:src/Life-Balance.DAL/Migrations/20201230161549_Init.cs
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Diary", x => x.Id);
                     table.ForeignKey(
-<<<<<<< HEAD:src/Life-Balance.DAL/Migrations/20201230224950_Init.cs
                         name: "FK_Diary_Profiles_ProfileId1",
                         column: x => x.ProfileId1,
-=======
-                        name: "FK_Diary_Profiles_ProfileId",
-                        column: x => x.ProfileId,
->>>>>>> 224f21ec921bece9a4110f34e77e2941fab370c0:src/Life-Balance.DAL/Migrations/20201230161549_Init.cs
                         principalTable: "Profiles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -211,24 +202,15 @@ namespace Life_Balance.DAL.Migrations
                     Start = table.Column<DateTime>(nullable: false),
                     End = table.Column<DateTime>(nullable: false),
                     UserId = table.Column<string>(nullable: true),
-<<<<<<< HEAD:src/Life-Balance.DAL/Migrations/20201230224950_Init.cs
                     ProfileId = table.Column<string>(nullable: true),
                     ProfileId1 = table.Column<int>(nullable: true)
-=======
-                    ProfileId = table.Column<int>(nullable: true)
->>>>>>> 224f21ec921bece9a4110f34e77e2941fab370c0:src/Life-Balance.DAL/Migrations/20201230161549_Init.cs
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Events", x => x.Id);
                     table.ForeignKey(
-<<<<<<< HEAD:src/Life-Balance.DAL/Migrations/20201230224950_Init.cs
                         name: "FK_Events_Profiles_ProfileId1",
                         column: x => x.ProfileId1,
-=======
-                        name: "FK_Events_Profiles_ProfileId",
-                        column: x => x.ProfileId,
->>>>>>> 224f21ec921bece9a4110f34e77e2941fab370c0:src/Life-Balance.DAL/Migrations/20201230161549_Init.cs
                         principalTable: "Profiles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -274,7 +256,6 @@ namespace Life_Balance.DAL.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-<<<<<<< HEAD:src/Life-Balance.DAL/Migrations/20201230224950_Init.cs
                 name: "IX_Diary_ProfileId1",
                 table: "Diary",
                 column: "ProfileId1");
@@ -283,16 +264,6 @@ namespace Life_Balance.DAL.Migrations
                 name: "IX_Events_ProfileId1",
                 table: "Events",
                 column: "ProfileId1");
-=======
-                name: "IX_Diary_ProfileId",
-                table: "Diary",
-                column: "ProfileId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Events_ProfileId",
-                table: "Events",
-                column: "ProfileId");
->>>>>>> 224f21ec921bece9a4110f34e77e2941fab370c0:src/Life-Balance.DAL/Migrations/20201230161549_Init.cs
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

@@ -10,11 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Life_Balance.DAL.Migrations
 {
     [DbContext(typeof(LifeBalanceDbContext))]
-<<<<<<< HEAD:src/Life-Balance.DAL/Migrations/20201230224950_Init.Designer.cs
     [Migration("20201230224950_Init")]
-=======
-    [Migration("20201230161549_Init")]
->>>>>>> 224f21ec921bece9a4110f34e77e2941fab370c0:src/Life-Balance.DAL/Migrations/20201230161549_Init.Designer.cs
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,14 +34,10 @@ namespace Life_Balance.DAL.Migrations
                     b.Property<string>("Entries")
                         .HasColumnType("nvarchar(max)");
 
-<<<<<<< HEAD:src/Life-Balance.DAL/Migrations/20201230224950_Init.Designer.cs
                     b.Property<string>("ProfileId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("ProfileId1")
-=======
-                    b.Property<int?>("ProfileId")
->>>>>>> 224f21ec921bece9a4110f34e77e2941fab370c0:src/Life-Balance.DAL/Migrations/20201230161549_Init.Designer.cs
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
@@ -56,11 +48,7 @@ namespace Life_Balance.DAL.Migrations
 
                     b.HasKey("Id");
 
-<<<<<<< HEAD:src/Life-Balance.DAL/Migrations/20201230224950_Init.Designer.cs
                     b.HasIndex("ProfileId1");
-=======
-                    b.HasIndex("ProfileId");
->>>>>>> 224f21ec921bece9a4110f34e77e2941fab370c0:src/Life-Balance.DAL/Migrations/20201230161549_Init.Designer.cs
 
                     b.ToTable("Diary");
                 });
@@ -78,16 +66,8 @@ namespace Life_Balance.DAL.Migrations
                     b.Property<string>("Note")
                         .HasColumnType("nvarchar(max)");
 
-<<<<<<< HEAD:src/Life-Balance.DAL/Migrations/20201230224950_Init.Designer.cs
                     b.Property<string>("ProfileId")
                         .HasColumnType("nvarchar(max)");
-=======
-                    b.Property<int?>("ProfileId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Start")
-                        .HasColumnType("datetime2");
->>>>>>> 224f21ec921bece9a4110f34e77e2941fab370c0:src/Life-Balance.DAL/Migrations/20201230161549_Init.Designer.cs
 
                     b.Property<int?>("ProfileId1")
                         .HasColumnType("int");
@@ -103,11 +83,7 @@ namespace Life_Balance.DAL.Migrations
 
                     b.HasKey("Id");
 
-<<<<<<< HEAD:src/Life-Balance.DAL/Migrations/20201230224950_Init.Designer.cs
                     b.HasIndex("ProfileId1");
-=======
-                    b.HasIndex("ProfileId");
->>>>>>> 224f21ec921bece9a4110f34e77e2941fab370c0:src/Life-Balance.DAL/Migrations/20201230161549_Init.Designer.cs
 
                     b.ToTable("Events");
                 });
@@ -333,22 +309,14 @@ namespace Life_Balance.DAL.Migrations
                 {
                     b.HasOne("Life_Balance.DAL.Models.Profile", null)
                         .WithMany("Diaries")
-<<<<<<< HEAD:src/Life-Balance.DAL/Migrations/20201230224950_Init.Designer.cs
                         .HasForeignKey("ProfileId1");
-=======
-                        .HasForeignKey("ProfileId");
->>>>>>> 224f21ec921bece9a4110f34e77e2941fab370c0:src/Life-Balance.DAL/Migrations/20201230161549_Init.Designer.cs
                 });
 
             modelBuilder.Entity("Life_Balance.DAL.Models.Event", b =>
                 {
                     b.HasOne("Life_Balance.DAL.Models.Profile", null)
                         .WithMany("Events")
-<<<<<<< HEAD:src/Life-Balance.DAL/Migrations/20201230224950_Init.Designer.cs
                         .HasForeignKey("ProfileId1");
-=======
-                        .HasForeignKey("ProfileId");
->>>>>>> 224f21ec921bece9a4110f34e77e2941fab370c0:src/Life-Balance.DAL/Migrations/20201230161549_Init.Designer.cs
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
