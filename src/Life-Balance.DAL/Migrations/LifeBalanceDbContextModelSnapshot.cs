@@ -35,7 +35,7 @@ namespace Life_Balance.DAL.Migrations
                     b.Property<string>("ProfileId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ProfileId1")
+                    b.Property<int?>("ProfileId")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
@@ -46,7 +46,7 @@ namespace Life_Balance.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProfileId1");
+                    b.HasIndex("ProfileId");
 
                     b.ToTable("Diary");
                 });
@@ -81,7 +81,7 @@ namespace Life_Balance.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProfileId1");
+                    b.HasIndex("ProfileId");
 
                     b.ToTable("Events");
                 });
@@ -314,7 +314,7 @@ namespace Life_Balance.DAL.Migrations
                 {
                     b.HasOne("Life_Balance.DAL.Models.Profile", null)
                         .WithMany("Events")
-                        .HasForeignKey("ProfileId1");
+                        .HasForeignKey("ProfileId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
