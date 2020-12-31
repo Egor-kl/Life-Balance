@@ -18,16 +18,19 @@ namespace Life_Balance.WebApp.Controllers.API
         private readonly IRepository<Diary> _diaryRepository;
         private readonly ILogger _logger;
         private readonly IIdentityService _identityService;
+        private readonly IProfileService _profileService;
 
         public DiaryController(IDiaryService diaryService,
                                IRepository<Diary> diaryRepository, 
                                ILogger<DiaryController> logger,
-                               IIdentityService identityService)
+                               IIdentityService identityService,
+                               IProfileService profileService)
         {
             _diaryRepository = diaryRepository ?? throw new ArgumentNullException(nameof(diaryRepository));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _diaryService = diaryService ?? throw new ArgumentNullException(nameof(diaryService));
             _identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));
+            _profileService = profileService ?? throw new ArgumentNullException(nameof(profileService));
         }
 
         
@@ -100,7 +103,9 @@ namespace Life_Balance.WebApp.Controllers.API
         [HttpPost]
         public async Task<IActionResult> Create([FromBody]DiaryDTO diaryDto)
         {
-            await _diaryService.CreateNewEntry(diaryDto, "userId");
+            var userId = _identityService.GetUserIdByNameAsync(User.Identity.Name).ToString();
+            
+            await _diaryService.CreateNewEntry(diaryDto, "userid"); // userid replace later
             
             return Ok();
         }

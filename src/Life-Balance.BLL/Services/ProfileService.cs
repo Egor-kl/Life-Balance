@@ -27,15 +27,6 @@ namespace Life_Balance.BLL.Services
             _profileRepository = profileRepository ?? throw new ArgumentNullException(nameof(profileRepository));
             _diaryRepository = diaryRepository ?? throw new ArgumentNullException(nameof(diaryRepository));
         }
-
-        /// <inheritdoc />
-        public async Task<List<DiaryDTO>> GetAllDiary(string id)
-        {
-            var diary = await _db.Diary.Where(a => a.UserId == id).ToListAsync();
-
-            var diaries = _mapper.Map<List<DiaryDTO>>(diary);
-            return diaries;
-        }
         
         /// <inheritdoc />
         public async Task AddNewProfile(string userName, string userId)
@@ -51,6 +42,33 @@ namespace Life_Balance.BLL.Services
             var profile = new Profile() {UserName = userName, Avatar = avatar};
             _profileRepository.Update(profile);
             await _profileRepository.SaveChangesAsync();
+        }
+
+        /// <inheritdoc />
+        public async Task<List<EventDTO>> GetEventByUserId(string userId)
+        {
+            var listEvent = await _db.Events.Where(a => a.UserId == userId).ToListAsync();
+
+            var events = _mapper.Map<List<EventDTO>>(listEvent);
+            return events;
+        }
+
+        /// <inheritdoc />
+        public async Task<List<ProfileDTO>> GetProfileIdByUserId(string userId)
+        {
+            var profile = await _db.Profiles.Where(a => a.UserId == userId).ToListAsync();
+
+            var profiles = _mapper.Map<List<ProfileDTO>>(profile);
+            return profiles;
+        }
+
+        /// <inheritdoc />
+        public async Task<List<DiaryDTO>> GetAllDiaryByUserId(string id)
+        {
+            var diary = await _db.Diary.Where(a => a.UserId == id).ToListAsync();
+
+            var diaries = _mapper.Map<List<DiaryDTO>>(diary);
+            return diaries;
         }
     }
 }
