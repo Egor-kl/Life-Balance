@@ -62,6 +62,23 @@ namespace Life_Balance.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ToDos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    IsComplete = table.Column<bool>(nullable: false),
+                    Time = table.Column<DateTime>(nullable: false),
+                    UserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ToDos", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -288,6 +305,9 @@ namespace Life_Balance.DAL.Migrations
 
             migrationBuilder.DropTable(
                 name: "Events");
+
+            migrationBuilder.DropTable(
+                name: "ToDos");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
