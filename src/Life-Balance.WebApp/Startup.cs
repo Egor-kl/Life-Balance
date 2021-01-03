@@ -65,6 +65,7 @@ namespace Life_Balance.WebApp
                 mc.AddProfile(new DiaryProfile());
                 mc.AddProfile(new ProfileMapperProfile());
                 mc.AddProfile(new EventProfile());
+                mc.AddProfile(new ToDoProfile());
             });
 
             IMapper mapper = mapperConfig.CreateMapper();
