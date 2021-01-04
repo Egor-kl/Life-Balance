@@ -8,7 +8,7 @@ namespace Life_Balance.BLL.Mapping
     {
         public ToDoProfile()
         {
-            CreateMap<ToDo, ToDoDTO>();
+            CreateMap<ToDo, ToDoDTO>().ReverseMap();
         }
     }
 }

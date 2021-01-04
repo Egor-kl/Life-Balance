@@ -28,5 +28,7 @@ namespace Life_Balance.BLL.ModelsDTO
         /// Time of event.
         /// </summary>
         public DateTime Time { get; set; }
+
+        public string UserId { get; set; }
     }
 }

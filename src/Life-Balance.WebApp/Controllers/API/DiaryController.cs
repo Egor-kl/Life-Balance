@@ -32,9 +32,7 @@ namespace Life_Balance.WebApp.Controllers.API
             _identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));
             _profileService = profileService ?? throw new ArgumentNullException(nameof(profileService));
         }
-
         
-
         /// <summary>
         /// Get diary by id
         /// </summary>

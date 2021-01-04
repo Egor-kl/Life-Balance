@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Life_Balance.BLL.Interfaces;
@@ -46,21 +48,27 @@ namespace Life_Balance.BLL.Services
         }
 
         /// <inheritdoc />
-        public async Task GetAllTask()
+        public async Task<List<ToDo>> GetAllTask()
         {
-            await _toDoRepository.GetAll().ToListAsync();
+            return await _toDoRepository.GetAll().ToListAsync();
         }
 
         /// <inheritdoc />
-        public async Task GetCompleteTask()
+        public async Task<List<ToDo>> GetCompleteTask()
         {
-            await _toDoRepository.GetEntityAsync(a => a.IsComplete == true);
+            return await _toDoRepository.GetAll().Where(a => a.IsComplete == true).ToListAsync();
         }
         
         /// <inheritdoc />
-        public async Task GetUncompletedTask()
+        public async Task<List<ToDo>> GetUncompletedTask()
         {
-            await _toDoRepository.GetEntityAsync(a => a.IsComplete == false);
+            return await _toDoRepository.GetAll().Where(a => a.IsComplete == false).ToListAsync();
+        }
+
+        /// <inheritdoc />
+        public async Task<ToDo> GetById(int id)
+        {
+            return await _toDoRepository.GetEntityAsync(a => a.Id == id);
         }
     }
 }

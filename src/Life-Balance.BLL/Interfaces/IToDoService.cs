@@ -31,18 +31,24 @@ namespace Life_Balance.BLL.Interfaces
         /// Get all task.
         /// </summary>
         /// <returns></returns>
-        public Task GetAllTask();
+        public Task<List<ToDo>> GetAllTask();
 
         /// <summary>
         /// Get complete task.
         /// </summary>
         /// <returns></returns>
-        public Task GetCompleteTask();
+        public Task<List<ToDo>> GetCompleteTask();
 
         /// <summary>
         /// Get uncompleted task
         /// </summary>
         /// <returns></returns>
-        public Task GetUncompletedTask();
+        public Task<List<ToDo>> GetUncompletedTask();
+
+        /// <summary>
+        /// Get task by id.
+        /// </summary>
+        /// <returns></returns>
+        public Task<ToDo> GetById(int id);
     }
 }
