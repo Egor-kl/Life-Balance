@@ -22,11 +22,11 @@ namespace Life_Balance.WebApp.Controllers.API
         }
 
         /// <summary>
-        /// Get profile
+        /// Get all diary by user id.
         /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        public async Task<IActionResult> Index()
+        /// <returns>json</returns>
+        [HttpGet("diaries")]
+        public async Task<IActionResult> GetAllDiary()
         {
             var userId = await _identityService.GetUserIdByNameAsync(User.Identity.Name);
 
@@ -35,6 +35,38 @@ namespace Life_Balance.WebApp.Controllers.API
             _logger.LogInformation($"{profileDto.Count} diaries showed for user {User.Identity.Name}.");
 
             return Ok(profileDto);
+        }
+
+        /// <summary>
+        /// Get all events by user id.
+        /// </summary>
+        /// <returns>json</returns>
+        [HttpGet("events")]
+        public async Task<IActionResult> GetAllEvents()
+        {
+            var userId = await _identityService.GetUserIdByNameAsync(User.Identity.Name);
+
+            var eventsDto = await _profileService.GetAllEventByUserId(userId);
+            
+            _logger.LogInformation($"{eventsDto.Count} diaries showed for user {User.Identity.Name}.");
+
+            return Ok(eventsDto);
+        }
+        
+        /// <summary>
+        /// Get all tasks by user id.
+        /// </summary>
+        /// <returns>json</returns>
+        [HttpGet("tasks")]
+        public async Task<IActionResult> GetAllTask()
+        {
+            var userId = await _identityService.GetUserIdByNameAsync(User.Identity.Name);
+
+            var taskDto = await _profileService.GetAllTaskByUserId(userId);
+            
+            _logger.LogInformation($"{taskDto.Count} diaries showed for user {User.Identity.Name}.");
+
+            return Ok(taskDto);
         }
     }
 }

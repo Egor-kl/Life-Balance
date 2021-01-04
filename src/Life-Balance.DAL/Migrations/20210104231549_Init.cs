@@ -62,23 +62,6 @@ namespace Life_Balance.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ToDos",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    IsComplete = table.Column<bool>(nullable: false),
-                    Time = table.Column<DateTime>(nullable: false),
-                    UserId = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ToDos", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -233,6 +216,31 @@ namespace Life_Balance.DAL.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "ToDos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    IsComplete = table.Column<bool>(nullable: false),
+                    Time = table.Column<DateTime>(nullable: false),
+                    UserId = table.Column<string>(nullable: true),
+                    ProfileId = table.Column<string>(nullable: true),
+                    ProfileId1 = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ToDos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ToDos_Profiles_ProfileId1",
+                        column: x => x.ProfileId1,
+                        principalTable: "Profiles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -280,6 +288,11 @@ namespace Life_Balance.DAL.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Events_ProfileId1",
                 table: "Events",
+                column: "ProfileId1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ToDos_ProfileId1",
+                table: "ToDos",
                 column: "ProfileId1");
         }
 

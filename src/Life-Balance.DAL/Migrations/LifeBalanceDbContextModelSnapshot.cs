@@ -120,6 +120,12 @@ namespace Life_Balance.DAL.Migrations
                     b.Property<bool>("IsComplete")
                         .HasColumnType("bit");
 
+                    b.Property<string>("ProfileId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ProfileId1")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("Time")
                         .HasColumnType("datetime2");
 
@@ -130,6 +136,8 @@ namespace Life_Balance.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProfileId1");
 
                     b.ToTable("ToDos");
                 });
@@ -341,6 +349,13 @@ namespace Life_Balance.DAL.Migrations
                 {
                     b.HasOne("Life_Balance.DAL.Models.Profile", null)
                         .WithMany("Events")
+                        .HasForeignKey("ProfileId1");
+                });
+
+            modelBuilder.Entity("Life_Balance.DAL.Models.ToDo", b =>
+                {
+                    b.HasOne("Life_Balance.DAL.Models.Profile", null)
+                        .WithMany("ToDo")
                         .HasForeignKey("ProfileId1");
                 });
 
