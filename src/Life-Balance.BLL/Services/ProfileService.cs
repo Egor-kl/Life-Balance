@@ -45,12 +45,21 @@ namespace Life_Balance.BLL.Services
         }
 
         /// <inheritdoc />
-        public async Task<List<EventDTO>> GetEventByUserId(string userId)
+        public async Task<List<EventDTO>> GetAllEventByUserId(string userId)
         {
             var listEvent = await _db.Events.Where(a => a.UserId == userId).ToListAsync();
 
             var events = _mapper.Map<List<EventDTO>>(listEvent);
             return events;
+        }
+
+        /// <inheritdoc/>
+        public async Task<List<ToDoDTO>> GetAllTaskByUserId(string userId)
+        {
+            var listTask = await _db.ToDos.Where(a => a.UserId == userId).ToListAsync();
+
+            var tasks = _mapper.Map<List<ToDoDTO>>(listTask);
+            return tasks;
         }
 
         /// <inheritdoc />
