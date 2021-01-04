@@ -31,7 +31,7 @@ namespace Life_Balance.WebApp.Controllers.API
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var events = _eventService.GetAll();
+            var events = await _eventService.GetAll();
             
             _logger.LogInformation("Successfully sent all event.");
 

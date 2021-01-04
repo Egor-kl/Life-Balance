@@ -1,4 +1,5 @@
-﻿using Life_Balance.BLL.ModelsDTO;
+﻿using System.Collections.Generic;
+using Life_Balance.BLL.ModelsDTO;
 using System.Threading.Tasks;
 using Life_Balance.DAL.Models;
 
@@ -25,7 +26,7 @@ namespace Life_Balance.BLL.Interfaces
         /// Get all event.
         /// </summary>
         /// <returns></returns>
-        public Task GetAll();
+        public Task<List<Event>> GetAll();
 
         /// <summary>
         /// Delete event by id.

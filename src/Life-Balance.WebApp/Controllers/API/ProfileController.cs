@@ -1,6 +1,9 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Life_Balance.BLL.Interfaces;
+using Life_Balance.BLL.ModelsDTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -19,6 +22,28 @@ namespace Life_Balance.WebApp.Controllers.API
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));
             _profileService = profileService ?? throw new ArgumentNullException(nameof(profileService));
+        }
+
+        /// <summary>
+        /// Get profile.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("profile")]
+        public async Task<Dictionary<int, object>> GetProfile()
+        {
+            var userId = await _identityService.GetUserIdByNameAsync(User.Identity.Name);
+
+            Dictionary<int, object> profile = new Dictionary<int, object>();
+            
+            var eventByUserId= await _profileService.GetAllEventByUserId(userId);
+            var taskByUserId = await _profileService.GetAllTaskByUserId(userId);
+            var diaryByUserId = await _profileService.GetAllDiaryByUserId(userId);
+
+            profile.Add(1, eventByUserId);
+            profile.Add(2, taskByUserId);
+            profile.Add(3, diaryByUserId);
+
+            return profile;
         }
 
         /// <summary>
