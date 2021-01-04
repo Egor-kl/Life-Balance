@@ -50,6 +50,7 @@ namespace Life_Balance.WebApp
             services.AddScoped<IProfileService, ProfileService>();
             services.AddScoped<IRazorViewToString, RazorViewToString>();
             services.AddScoped<IEventService, EventService>();
+            services.AddScoped<IToDoService, ToDoService>();
             services.AddControllersWithViews();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddSwaggerGen();
