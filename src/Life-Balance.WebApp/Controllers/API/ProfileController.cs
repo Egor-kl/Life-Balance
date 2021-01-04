@@ -4,8 +4,10 @@ using Life_Balance.BLL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace Life_Balance.WebApp.Controllers
+namespace Life_Balance.WebApp.Controllers.API
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class ProfileController : Controller
     {
         private readonly ILogger _logger;
@@ -23,6 +25,7 @@ namespace Life_Balance.WebApp.Controllers
         /// Get profile
         /// </summary>
         /// <returns></returns>
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var userId = await _identityService.GetUserIdByNameAsync(User.Identity.Name);
@@ -31,7 +34,7 @@ namespace Life_Balance.WebApp.Controllers
             
             _logger.LogInformation($"{profileDto.Count} diaries showed for user {User.Identity.Name}.");
 
-            return View();
+            return Ok(profileDto);
         }
     }
 }

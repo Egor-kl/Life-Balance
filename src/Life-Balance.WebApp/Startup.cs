@@ -17,7 +17,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using React.AspNet;
-using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 
 namespace Life_Balance.WebApp
 {
@@ -35,7 +34,6 @@ namespace Life_Balance.WebApp
             services.AddDbContext<LifeBalanceDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlConnections")));
             services.AddIdentity<User, IdentityRole>(options =>
                 {
-                    options.Password.RequiredLength = 5;
                     options.Password.RequireLowercase = false;
                     options.Password.RequireUppercase = false;
                     options.Password.RequireNonAlphanumeric = false;

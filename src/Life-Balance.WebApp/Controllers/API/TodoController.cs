@@ -131,7 +131,9 @@ namespace Life_Balance.WebApp.Controllers.API
         {
             var userId = _identityService.GetUserIdByNameAsync(User.Identity.Name).ToString();
             
-            await _toDoService.AddNewTask(toDoDto, "userid"); // userid replace later
+            await _toDoService.AddNewTask(toDoDto, userId);
+            
+            _logger.LogInformation($"{userId} add new task");
             
             return Ok();
         }

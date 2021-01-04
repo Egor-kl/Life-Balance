@@ -103,7 +103,9 @@ namespace Life_Balance.WebApp.Controllers.API
         {
             var userId = _identityService.GetUserIdByNameAsync(User.Identity.Name).ToString();
             
-            await _diaryService.CreateNewEntry(diaryDto, "userid"); // userid replace later
+            await _diaryService.CreateNewEntry(diaryDto, userId);
+            
+            _logger.LogInformation($"{userId} add new entry");
             
             return Ok();
         }

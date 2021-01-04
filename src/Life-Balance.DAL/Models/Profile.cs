@@ -26,5 +26,7 @@ namespace Life_Balance.DAL.Models
         public ICollection<Diary> Diaries { get; set; }
         
         public ICollection<Event> Events { get; set; }
+        
+        public ICollection<ToDo> ToDo { get; set; }
     }
 }
