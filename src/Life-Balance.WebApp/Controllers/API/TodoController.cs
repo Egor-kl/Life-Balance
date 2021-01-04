@@ -34,7 +34,7 @@ namespace Life_Balance.WebApp.Controllers.API
         }
         
         /// <summary>
-        /// Get diary by id
+        /// Get task by id
         /// </summary>
         /// <param name="id">diary id.</param>
         /// <returns>json result</returns>
@@ -43,7 +43,7 @@ namespace Life_Balance.WebApp.Controllers.API
         {
             var task = await _toDoService.GetById(id);
             
-            _logger.LogInformation($"Successfully sent diary with Id: {task.Id}.");
+            _logger.LogInformation($"Successfully sent task with Id: {task.Id}.");
            
             return Ok(task);
         }
@@ -57,7 +57,7 @@ namespace Life_Balance.WebApp.Controllers.API
         {
            var todo = await _toDoService.GetAllTask();
 
-            _logger.LogInformation($"Successfully sent diary all diary: .");
+            _logger.LogInformation($"Successfully sent all task: {todo.Count}.");
            
             return Ok(todo);
         }
@@ -71,6 +71,8 @@ namespace Life_Balance.WebApp.Controllers.API
         {
             var task = await _toDoService.GetCompleteTask();
             
+            _logger.LogInformation($"Successfully sent all task: {task.Count}.");
+            
             return Ok(task);
         }
         
@@ -82,6 +84,8 @@ namespace Life_Balance.WebApp.Controllers.API
         public async Task<IActionResult> GetUnCompleteTask()
         {
             var task = await _toDoService.GetUncompletedTask();
+            
+            _logger.LogInformation($"Successfully sent all task: {task.Count}.");
             
             return Ok(task);
         }
@@ -112,7 +116,7 @@ namespace Life_Balance.WebApp.Controllers.API
 
             await _toDoService.UpdateTask(toDoDto);
             
-            _logger.LogInformation($"Diary has been update");
+            _logger.LogInformation($"ToDo has been update");
 
             return Ok();
         }
