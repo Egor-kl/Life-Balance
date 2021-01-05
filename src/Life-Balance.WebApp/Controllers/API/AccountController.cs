@@ -38,7 +38,7 @@ namespace Life_Balance.WebApp.Controllers.API
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        [Route("api/Account/register")]
+        [Route("register")]
         [HttpPost]
         public async Task<IActionResult> Registration(RegisterViewModel model)
         {
@@ -92,7 +92,7 @@ namespace Life_Balance.WebApp.Controllers.API
         /// </summary>
         /// <param name="model">Login view model</param>
         /// <returns></returns>
-        [Route("api/Account/login")]
+        [Route("login")]
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
@@ -136,7 +136,7 @@ namespace Life_Balance.WebApp.Controllers.API
         /// Logout.
         /// </summary>
         /// <returns></returns>
-        [Route("api/Account/logout")]
+        [Route("logout")]
         [HttpPost]
         public async Task<IActionResult> Logout()
         {

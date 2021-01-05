@@ -1,6 +1,4 @@
 using AutoMapper;
-using JavaScriptEngineSwitcher.ChakraCore;
-using JavaScriptEngineSwitcher.Extensions.MsDependencyInjection;
 using Life_Balance.BLL.Interfaces;
 using Life_Balance.BLL.Mapping;
 using Life_Balance.BLL.Repository;
@@ -16,7 +14,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using React.AspNet;
 
 namespace Life_Balance.WebApp
 {
@@ -55,9 +52,6 @@ namespace Life_Balance.WebApp
 
             services.AddCors();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddReact();
-            services.AddJsEngineSwitcher(options => options.DefaultEngineName = ChakraCoreJsEngine.EngineName).AddChakraCore();
-            
             
             var mapperConfig = new MapperConfiguration(mc =>
             {
@@ -83,9 +77,6 @@ namespace Life_Balance.WebApp
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
-
-            app.UseReact(config => { });
-            
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
