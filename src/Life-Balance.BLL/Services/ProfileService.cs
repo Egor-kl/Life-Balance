@@ -18,14 +18,12 @@ namespace Life_Balance.BLL.Services
         private readonly LifeBalanceDbContext _db;
         private readonly IMapper _mapper;
         private readonly IRepository<Profile> _profileRepository;
-        private readonly IRepository<Diary> _diaryRepository;
 
-        public ProfileService(LifeBalanceDbContext db, IMapper mapper, IRepository<Profile> profileRepository, IRepository<Diary> diaryRepository = null)
+        public ProfileService(LifeBalanceDbContext db, IMapper mapper, IRepository<Profile> profileRepository)
         {
             _db = db ?? throw new ArgumentNullException(nameof(db));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _profileRepository = profileRepository ?? throw new ArgumentNullException(nameof(profileRepository));
-            _diaryRepository = diaryRepository ?? throw new ArgumentNullException(nameof(diaryRepository));
         }
         
         /// <inheritdoc />
