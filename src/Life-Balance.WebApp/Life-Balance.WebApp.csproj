@@ -44,10 +44,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\img\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <_ContentIncludedByDefault Remove="Pages\Profile\Index.cshtml" />
     <_ContentIncludedByDefault Remove="wwwroot\css\EmailCSS\style.css" />
     <_ContentIncludedByDefault Remove="app\public\manifest.json" />
