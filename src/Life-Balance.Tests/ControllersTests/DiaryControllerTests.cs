@@ -82,10 +82,10 @@ namespace Life_Balance.Tests.ControllersTests
         public async Task DiaryGetById_WithValidModel_Return_OkResult()
         {
             //Arrange
-            var diaryId = 1;
+            var id = 1;
             
             //Act
-            var result = await _controller.GetById(diaryId);
+            var result = await _controller.GetById(id);
 
             //Assert
             Assert.IsType<OkObjectResult>(result);
@@ -95,7 +95,7 @@ namespace Life_Balance.Tests.ControllersTests
         public async Task DiaryGetAll_WithValidModel_Return_OkResult()
         {
             //Arrange
-            IQueryable<Diary> diaries;
+            
             //Act
             var result = await _controller.GetAll();
             
