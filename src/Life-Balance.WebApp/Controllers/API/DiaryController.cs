@@ -4,6 +4,7 @@ using Life_Balance.BLL.Interfaces;
 using Life_Balance.BLL.ModelsDTO;
 using Life_Balance.Common.Interfaces;
 using Life_Balance.DAL.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -102,8 +103,8 @@ namespace Life_Balance.WebApp.Controllers.API
         public async Task<IActionResult> Create([FromBody]DiaryDTO diaryDto)
         {
             var userId = _identityService.GetUserIdByNameAsync(User.Identity.Name).ToString();
-            
-            await _diaryService.CreateNewEntry(diaryDto, userId);
+
+            await _diaryService.CreateNewEntry(diaryDto, "433e1e16-f773-4bbe-9bc1-334c2a9ad54a");
             
             _logger.LogInformation($"{userId} add new entry");
             

@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Life_Balance.BLL.Interfaces;
 using Life_Balance.BLL.ModelsDTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -94,6 +95,9 @@ namespace Life_Balance.WebApp.Controllers.API
         [HttpPost]
         public async Task<IActionResult> Create([FromBody]EventDTO eventDto)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            
             var userId = _identityService.GetUserIdByNameAsync(User.Identity.Name).ToString();
 
             await _eventService.Create(eventDto, userId);

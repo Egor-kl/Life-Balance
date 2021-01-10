@@ -13,12 +13,14 @@ namespace Life_Balance.BLL.Services
     public class DiaryService : IDiaryService
     {
         private readonly IRepository<Diary> _diaryRepository;
+        private readonly IProfileService _profileService;
         private readonly IMapper _mapper; 
 
-        public DiaryService(IRepository<Diary> diaryRepository, IMapper mapper)
+        public DiaryService(IRepository<Diary> diaryRepository, IMapper mapper, IProfileService profileService)
         {
             _diaryRepository = diaryRepository ?? throw new ArgumentNullException();
             _mapper = mapper ?? throw new ArgumentNullException();
+            _profileService = profileService ?? throw new ArgumentNullException();
         }
 
         /// <inheritdoc />
