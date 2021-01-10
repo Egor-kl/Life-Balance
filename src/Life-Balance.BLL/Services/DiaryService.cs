@@ -39,7 +39,12 @@ namespace Life_Balance.BLL.Services
         public async Task CreateNewEntry(DiaryDTO diaryDto, string userId)
         {
             var entry = _mapper.Map<Diary>(diaryDto);
+            var profile = await _profileService.GetProfileIdByUserId(userId);
             entry.UserId = userId;
+            
+            if (profile != null)
+                entry.ProfileId = profile.Id.ToString();
+            
             await _diaryRepository.AddAsync(entry);
             await _diaryRepository.SaveChangesAsync();
         }

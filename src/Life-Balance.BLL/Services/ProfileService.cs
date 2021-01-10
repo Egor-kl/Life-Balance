@@ -61,12 +61,11 @@ namespace Life_Balance.BLL.Services
         }
 
         /// <inheritdoc />
-        public async Task<List<ProfileDTO>> GetProfileIdByUserId(string userId)
+        public async Task<Profile> GetProfileIdByUserId(string userId)
         {
             var profile = await _db.Profiles.FirstOrDefaultAsync(a => a.UserId == userId);
-
-            var profiles = _mapper.Map<List<ProfileDTO>>(profile);
-            return profiles;
+            
+            return profile;
         }
 
         /// <inheritdoc />

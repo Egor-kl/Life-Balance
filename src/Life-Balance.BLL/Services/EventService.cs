@@ -15,18 +15,25 @@ namespace Life_Balance.BLL.Services
     {
         private readonly IRepository<Event> _eventRepository;
         private readonly IMapper _mapper;
+        private readonly IProfileService _profileService;
 
-        public EventService(IRepository<Event> eventRepository, IMapper mapper)
+        public EventService(IRepository<Event> eventRepository, IMapper mapper, IProfileService profileService)
         {
             _eventRepository = eventRepository ?? throw new ArgumentNullException(nameof(eventRepository));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _profileService = profileService ?? throw new ArgumentNullException(nameof(profileService));
         }
 
         /// <inheritdoc />
         public async Task Create(EventDTO events, string userId)
         {
             var newEvent = _mapper.Map<Event>(events);
+            var profile = await _profileService.GetProfileIdByUserId(userId);
             newEvent.UserId = userId;
+            
+            if (profile != null)
+                newEvent.ProfileId = profile.Id.ToString();
+            
             await _eventRepository.AddAsync(newEvent);
             await _eventRepository.SaveChangesAsync();
         }

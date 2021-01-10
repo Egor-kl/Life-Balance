@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Life_Balance.BLL.ModelsDTO;
+using Life_Balance.DAL.Models;
 
 namespace Life_Balance.BLL.Interfaces
 {
@@ -51,6 +52,6 @@ namespace Life_Balance.BLL.Interfaces
         /// </summary>
         /// <param name="userId">user id.</param>
         /// <returns></returns>
-        public Task<List<ProfileDTO>> GetProfileIdByUserId(string userId);
+        public Task<Profile> GetProfileIdByUserId(string userId);
     }
 }

@@ -14,19 +14,26 @@ namespace Life_Balance.BLL.Services
     public class ToDoService : IToDoService
     {
         private readonly IRepository<ToDo> _toDoRepository;
-        private readonly IMapper _mapper; 
+        private readonly IMapper _mapper;
+        private readonly IProfileService _profileService;
 
-        public ToDoService(IRepository<ToDo> toDoRepository, IMapper mapper)
+        public ToDoService(IRepository<ToDo> toDoRepository, IMapper mapper, IProfileService profileService)
         {
             _toDoRepository = toDoRepository ?? throw new ArgumentNullException(nameof(toDoRepository));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _profileService = profileService ?? throw new ArgumentNullException(nameof(profileService));
         }
         
         /// <inheritdoc />
         public async Task AddNewTask(ToDoDTO toDoDto, string userId)
         {
             var todo = _mapper.Map<ToDo>(toDoDto);
+            var profile = await _profileService.GetProfileIdByUserId(userId);
             todo.UserId = userId;
+            
+            if (profile != null)
+                todo.ProfileId = profile.Id.ToString();
+            
             await _toDoRepository.AddAsync(todo);
             await _toDoRepository.SaveChangesAsync();
         }
