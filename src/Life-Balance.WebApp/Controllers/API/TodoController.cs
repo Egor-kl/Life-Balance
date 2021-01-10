@@ -124,6 +124,9 @@ namespace Life_Balance.WebApp.Controllers.API
         [HttpPost]
         public async Task<IActionResult> Create([FromBody]ToDoDTO toDoDto)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            
             var userId = _identityService.GetUserIdByNameAsync(User.Identity.Name).ToString();
             
             await _toDoService.AddNewTask(toDoDto, userId);

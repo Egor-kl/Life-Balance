@@ -28,6 +28,7 @@ namespace Life_Balance.WebApp
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<LifeBalanceDbContext>();
             services.AddDbContext<LifeBalanceDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlConnections")));
             services.AddIdentity<User, IdentityRole>(options =>
                 {

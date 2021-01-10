@@ -102,9 +102,12 @@ namespace Life_Balance.WebApp.Controllers.API
         [HttpPost]
         public async Task<IActionResult> Create([FromBody]DiaryDTO diaryDto)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            
             var userId = _identityService.GetUserIdByNameAsync(User.Identity.Name).ToString();
 
-            await _diaryService.CreateNewEntry(diaryDto, "433e1e16-f773-4bbe-9bc1-334c2a9ad54a");
+            await _diaryService.CreateNewEntry(diaryDto, userId);
             
             _logger.LogInformation($"{userId} add new entry");
             
