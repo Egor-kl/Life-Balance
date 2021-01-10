@@ -66,9 +66,9 @@ namespace Life_Balance.BLL.Services
         }
 
         /// <inheritdoc />
-        public async Task<ToDo> GetById(int id)
+        public Task<ToDo> GetById(int id)
         {
-            return await _toDoRepository.GetEntityAsync(a => a.Id == id);
+            return _toDoRepository.GetEntityAsync(a => a.Id == id);
         }
     }
 }

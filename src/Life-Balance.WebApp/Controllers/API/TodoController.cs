@@ -15,22 +15,16 @@ namespace Life_Balance.WebApp.Controllers.API
     public class TodoController : ControllerBase
     {
         private readonly IToDoService _toDoService;
-        private readonly IRepository<ToDo> _toDoRepository;
         private readonly ILogger _logger;
         private readonly IIdentityService _identityService;
-        private readonly IProfileService _profileService;
 
         public TodoController(IToDoService toDoService,
-                             IRepository<ToDo> toDoRepository, 
                              ILogger<TodoController> logger,
-                             IIdentityService identityService,
-                             IProfileService profileService)
+                             IIdentityService identityService)
         {
-            _toDoRepository = toDoRepository ?? throw new ArgumentNullException(nameof(toDoRepository));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _toDoService = toDoService ?? throw new ArgumentNullException(nameof(toDoService));
             _identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));
-            _profileService = profileService ?? throw new ArgumentNullException(nameof(profileService));
         }
         
         /// <summary>
@@ -43,7 +37,7 @@ namespace Life_Balance.WebApp.Controllers.API
         {
             var task = await _toDoService.GetById(id);
             
-            _logger.LogInformation($"Successfully sent task with Id: {task.Id}.");
+            _logger.LogInformation($"Successfully sent task with Id.");
            
             return Ok(task);
         }
@@ -57,7 +51,7 @@ namespace Life_Balance.WebApp.Controllers.API
         {
            var todo = await _toDoService.GetAllTask();
 
-            _logger.LogInformation($"Successfully sent all task: {todo.Count}.");
+            _logger.LogInformation($"Successfully sent all task.");
            
             return Ok(todo);
         }
@@ -71,7 +65,7 @@ namespace Life_Balance.WebApp.Controllers.API
         {
             var task = await _toDoService.GetCompleteTask();
             
-            _logger.LogInformation($"Successfully sent all task: {task.Count}.");
+            _logger.LogInformation($"Successfully sent all completed task.");
             
             return Ok(task);
         }
@@ -85,7 +79,7 @@ namespace Life_Balance.WebApp.Controllers.API
         {
             var task = await _toDoService.GetUncompletedTask();
             
-            _logger.LogInformation($"Successfully sent all task: {task.Count}.");
+            _logger.LogInformation($"Successfully sent all uncompleted task:.");
             
             return Ok(task);
         }

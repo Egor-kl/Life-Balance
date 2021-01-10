@@ -43,7 +43,7 @@ namespace Life_Balance.WebApp.Controllers.API
         {
             var diary = await _diaryService.GetEntryById(id);
             
-            _logger.LogInformation($"Successfully sent diary with Id: {diary.Id}.");
+            _logger.LogInformation($"Successfully sent diary with Id.");
            
             return Ok(diary);
         }
@@ -57,7 +57,7 @@ namespace Life_Balance.WebApp.Controllers.API
         {
             var diaries = await _diaryRepository.GetAll().ToListAsync();
 
-            _logger.LogInformation($"Successfully sent diary all diary: {diaries.Count}.");
+            _logger.LogInformation($"Successfully sent diary all diary.");
            
             return Ok(diaries);
         }

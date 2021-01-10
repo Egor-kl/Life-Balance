@@ -90,6 +90,7 @@ namespace Life_Balance.Tests.ControllersTests
         public async Task EventGetAll_WithValidModel_Return_OkResult()
         {
             //Arrange
+            
             //Act
             var result = await _controller.GetAll();
             
