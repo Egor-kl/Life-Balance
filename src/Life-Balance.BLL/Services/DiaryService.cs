@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Life_Balance.BLL.Interfaces;
 using Life_Balance.BLL.ModelsDTO;
 using Life_Balance.Common.Interfaces;
 using Life_Balance.DAL.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Life_Balance.BLL.Services
 {
@@ -62,6 +64,14 @@ namespace Life_Balance.BLL.Services
             var diary = await _diaryRepository.GetEntityAsync(x => x.UserId == userId);
 
             return diary;
+        }
+
+        /// <inheritdoc />
+        public async Task<List<Diary>> GetAll()
+        {
+            var diaries = await _diaryRepository.GetAll().ToListAsync();
+
+            return diaries;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Life_Balance.BLL.ModelsDTO;
 using Life_Balance.DAL.Models;
@@ -51,5 +52,11 @@ namespace Life_Balance.BLL.Interfaces
         /// </summary>
         /// <returns></returns>
         public Task<Diary> GetDiaryByUserId(string userId);
+
+        /// <summary>
+        /// Get All diary.
+        /// </summary>
+        /// <returns></returns>
+        public Task<List<Diary>> GetAll();
     }
 }

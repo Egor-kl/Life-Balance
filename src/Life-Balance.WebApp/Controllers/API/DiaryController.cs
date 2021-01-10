@@ -55,7 +55,7 @@ namespace Life_Balance.WebApp.Controllers.API
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var diaries = await _diaryRepository.GetAll().ToListAsync();
+            var diaries = await _diaryService.GetAll();
 
             _logger.LogInformation($"Successfully sent diary all diary.");
            
