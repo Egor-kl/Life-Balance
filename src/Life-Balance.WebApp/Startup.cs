@@ -9,6 +9,7 @@ using Life_Balance.DAL.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,14 +28,15 @@ namespace Life_Balance.WebApp
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<LifeBalanceDbContext>();
             services.AddDbContext<LifeBalanceDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlConnections")));
             services.AddIdentity<User, IdentityRole>(options =>
                 {
-                    options.Password.RequiredLength = 5;
                     options.Password.RequireLowercase = false;
                     options.Password.RequireUppercase = false;
                     options.Password.RequireNonAlphanumeric = false;
                     options.Password.RequireDigit = false;
+                    options.User.RequireUniqueEmail = true;
                 })
                 .AddEntityFrameworkStores<LifeBalanceDbContext>()
                 .AddDefaultTokenProviders();
@@ -44,13 +46,21 @@ namespace Life_Balance.WebApp
             services.AddScoped<IDiaryService, DiaryService>();
             services.AddScoped<IProfileService, ProfileService>();
             services.AddScoped<IRazorViewToString, RazorViewToString>();
+            services.AddScoped<IEventService, EventService>();
+            services.AddScoped<IToDoService, ToDoService>();
             services.AddControllersWithViews();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddSwaggerGen();
+
+            services.AddCors();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             
             var mapperConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new DiaryProfile());
                 mc.AddProfile(new ProfileMapperProfile());
+                mc.AddProfile(new EventProfile());
+                mc.AddProfile(new ToDoProfile());
             });
 
             IMapper mapper = mapperConfig.CreateMapper();
@@ -74,14 +84,19 @@ namespace Life_Balance.WebApp
 
             app.UseRouting();
 
+            app.UseCors(options => options.AllowAnyOrigin()
+                              .AllowAnyHeader()
+                              .AllowAnyMethod());
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Life Balance"));
+
             app.UseAuthorization();
             app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllers();
             });
         }
     }

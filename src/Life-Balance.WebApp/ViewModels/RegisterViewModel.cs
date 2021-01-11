@@ -31,7 +31,7 @@ namespace Life_Balance.WebApp.Models
         /// </summary>
         [Required]
         [DataType(DataType.Password)]
-        [Compare(nameof(Password))]
+        [Compare(nameof(Password), ErrorMessage = "Passwords do not match")]
         public string PasswordConfirm { get; set; }
     }
 }

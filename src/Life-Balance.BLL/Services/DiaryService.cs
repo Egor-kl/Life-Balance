@@ -1,66 +1,55 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Life_Balance.BLL.Interfaces;
 using Life_Balance.BLL.ModelsDTO;
 using Life_Balance.Common.Interfaces;
 using Life_Balance.DAL.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Life_Balance.BLL.Services
 {
     public class DiaryService : IDiaryService
     {
         private readonly IRepository<Diary> _diaryRepository;
+        private readonly IProfileService _profileService;
         private readonly IMapper _mapper; 
 
-        public DiaryService(IRepository<Diary> diaryRepository, IMapper mapper)
+        public DiaryService(IRepository<Diary> diaryRepository, IMapper mapper, IProfileService profileService)
         {
             _diaryRepository = diaryRepository ?? throw new ArgumentNullException();
             _mapper = mapper ?? throw new ArgumentNullException();
+            _profileService = profileService ?? throw new ArgumentNullException();
         }
 
-        /// <summary>
-        /// Get entry by date
-        /// </summary>
-        /// <param name="dateTime">date of diary</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public Task<Diary> GetEntryByDate(DateTime dateTime)
         {
             return _diaryRepository.GetEntityAsync(x => x.Date == dateTime);
         }
 
-        /// <summary>
-        /// Get entry by id
-        /// </summary>
-        /// <param name="id">id entry</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public Task<Diary> GetEntryById(int id)
         {
             return _diaryRepository.GetEntityAsync(x => x.Id == id);
         }
 
-        /// <summary>
-        /// Add new entry
-        /// </summary>
-        /// <param name="title">title of entry</param>
-        /// <param name="description">description of entry</param>
-        /// <param name="dateTime">date of entry</param>
-        /// <param name="userId">user id</param>
-        /// <returns></returns>
-        public async Task CreateNewEntry(string title, string description, DateTime dateTime, string userId)
+        /// <inheritdoc />
+        public async Task CreateNewEntry(DiaryDTO diaryDto, string userId)
         {
-            var diaryDto = new DiaryDTO() {Title = title, Entries = description, Date = DateTime.Now};
             var entry = _mapper.Map<Diary>(diaryDto);
+            var profile = await _profileService.GetProfileIdByUserId(userId);
             entry.UserId = userId;
+            
+            if (profile != null)
+                entry.ProfileId = profile.Id.ToString();
+            
             await _diaryRepository.AddAsync(entry);
             await _diaryRepository.SaveChangesAsync();
         }
 
-        /// <summary>
-        /// Delete by id
-        /// </summary>
-        /// <param name="entryId">entry id</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public async Task DeleteEntry(int entryId)
         {
             var entry = new Diary() {Id = entryId};
@@ -68,16 +57,28 @@ namespace Life_Balance.BLL.Services
             await _diaryRepository.SaveChangesAsync();
         }
 
-        /// <summary>
-        /// Edit entry
-        /// </summary>
-        /// <param name="diary"></param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public async Task UpdateEntry(DiaryDTO diary)
         {
             var entry = new Diary() {Title = diary.Title, Entries = diary.Entries, UserId = diary.UserId, Id = diary.Id, Date = DateTime.Now};
             _diaryRepository.Update(entry);
             await _diaryRepository.SaveChangesAsync();
+        }
+
+        /// <inheritdoc />
+        public async Task<Diary> GetDiaryByUserId(string userId)
+        { 
+            var diary = await _diaryRepository.GetEntityAsync(x => x.UserId == userId);
+
+            return diary;
+        }
+
+        /// <inheritdoc />
+        public async Task<List<Diary>> GetAll()
+        {
+            var diaries = await _diaryRepository.GetAll().ToListAsync();
+
+            return diaries;
         }
     }
 }

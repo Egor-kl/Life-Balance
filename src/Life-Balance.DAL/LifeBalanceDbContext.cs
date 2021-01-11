@@ -15,5 +15,7 @@ namespace Life_Balance.DAL
 
         public DbSet<Diary> Diary { get; set; }
         public DbSet<Profile> Profiles { get; set; }
+        public DbSet<Event> Events { get; set; }
+        public DbSet<ToDo> ToDos { get; set; }
     }
 }

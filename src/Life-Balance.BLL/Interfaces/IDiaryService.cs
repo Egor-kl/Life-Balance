@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Life_Balance.BLL.ModelsDTO;
 using Life_Balance.DAL.Models;
@@ -25,14 +26,12 @@ namespace Life_Balance.BLL.Interfaces
         public Task<Diary> GetEntryById(int id);
 
         /// <summary>
-        /// Add new entry
+        /// Add new diary entry
         /// </summary>
-        /// <param name="title">title entry</param>
-        /// <param name="description">description entry</param>
-        /// <param name="dateTime">date</param>
-        /// <param name="userId">user id</param>
+        /// <param name="diaryDto">diaryDto model.</param>
+        /// /// <param name="userId">User id.</param>
         /// <returns></returns>
-        public Task CreateNewEntry(string title, string description, DateTime dateTime, string userId);
+        public Task CreateNewEntry(DiaryDTO diaryDto, string userId);
 
         /// <summary>
         /// Delete entry by id;
@@ -42,12 +41,22 @@ namespace Life_Balance.BLL.Interfaces
         public Task DeleteEntry(int entryId);
 
         /// <summary>
-        /// Edit entry
+        /// Update entry
         /// </summary>
-        /// <param name="title">title entry</param>
-        /// <param name="description">description entry</param>
-        /// <param name="dateTime">date</param>
+        /// <param name="diaryDto"></param>
         /// <returns></returns>
         public Task UpdateEntry(DiaryDTO diaryDto);
+
+        /// <summary>
+        /// Get diary by user id.
+        /// </summary>
+        /// <returns></returns>
+        public Task<Diary> GetDiaryByUserId(string userId);
+
+        /// <summary>
+        /// Get All diary.
+        /// </summary>
+        /// <returns></returns>
+        public Task<List<Diary>> GetAll();
     }
 }

@@ -2,31 +2,32 @@
 
 namespace Life_Balance.BLL.ModelsDTO
 {
-    /// <summary>
-    /// Mapping for Diary.
-    /// </summary>
-    public class DiaryDTO
+    public class ToDoDTO
     {
         /// <summary>
-        /// Id.
+        /// Id
         /// </summary>
         public int Id { get; set; }
 
         /// <summary>
-        /// Title entries.
+        /// Title of event.
         /// </summary>
         public string Title { get; set; }
 
         /// <summary>
-        /// Datetime.
+        /// Description of event.
         /// </summary>
-        public DateTime Date { get; set; }
+        public string Description { get; set; }
 
         /// <summary>
-        /// Notes.
+        /// Complete or not event.
         /// </summary>
-        public string Entries { get; set; }
+        public bool IsComplete { get; set; }
 
+        /// <summary>
+        /// Time of event.
+        /// </summary>
+        public DateTime Time { get; set; }
 
         public string UserId { get; set; }
     }

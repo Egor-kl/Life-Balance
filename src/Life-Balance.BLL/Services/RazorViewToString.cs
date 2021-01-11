@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Routing;
 
+/// Implementation: https://github.com/aspnet/Entropy/tree/master/samples/Mvc.RenderViewToString
 
 namespace Life_Balance.BLL.Services
 {
