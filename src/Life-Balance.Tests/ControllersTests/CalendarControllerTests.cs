@@ -23,25 +23,6 @@ namespace Life_Balance.Tests.ControllersTests
                                                                                 IdentityMock.Object);
 
         [Fact]
-        public async Task EventCreate_WithValidModel_Return_OkResult()
-        {
-            //Arrange
-            var eventDto = new EventDTO
-            {
-                Title = "FAKE",
-                Note = "FAKE",
-                Start = DateTime.Now,
-                End = DateTime.Now.AddHours(1)
-            };
-
-            //Act
-            var result = await _controller.Create(eventDto);
-            
-            //Assert
-            Assert.IsType<OkResult>(result);
-        }
-        
-        [Fact]
         public async Task EventUpdate_WithValidModel_Return_OkResult()
         {
             //Arrange

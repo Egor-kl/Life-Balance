@@ -44,24 +44,6 @@ namespace Life_Balance.Tests.ControllersTests
         }
         
         [Fact] 
-        public async Task AccountLogin_WithValidModel_Return_OkResult()
-        {
-            //Arrange
-            var model = new LoginViewModel()
-            {
-                UserName = "Fake",
-                Password = "Fake1!",
-                RememberMe = true,
-                ReturnUrl = "some"
-            };
-            //Act
-            var result = await _controller.Login(model);
-            
-            //Assert
-            Assert.IsType<OkResult>(result);
-        }
-        
-        [Fact] 
         public async Task AccountLogin_WithNotValidModel_Return_BadRequest()
         {
             //Arrange
@@ -75,18 +57,6 @@ namespace Life_Balance.Tests.ControllersTests
             
             //Assert
             Assert.IsType<BadRequestObjectResult>(result);
-        }
-        
-        [Fact] 
-        public async Task AccountLogout_WithValidModel_Return_OkResult()
-        {
-            //Arrange
-            
-            //Act
-            var result = await _controller.Logout();
-            
-            //Assert
-            Assert.IsType<OkResult>(result);
         }
     }
 }

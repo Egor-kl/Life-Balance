@@ -19,15 +19,5 @@ namespace Life_Balance.Tests.ControllersTests
                                                                                 IdentityMock.Object,
                                                                                 ProfileServiceMock.Object);
 
-        [Fact]
-        public async Task ProfileGetProfile_WithValidModel_Return_Dictionary()
-        {
-            //Arrange
-            
-            //Act
-            var result = await _controller.GetProfile();
-            //Assert
-            Assert.IsType<Dictionary<int, object>>(result);
-        }
     }
 }

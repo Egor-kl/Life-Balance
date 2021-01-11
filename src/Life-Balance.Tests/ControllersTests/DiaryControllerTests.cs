@@ -30,24 +30,6 @@ namespace Life_Balance.Tests.ControllersTests
                                                                            ProfileMock.Object);
 
         [Fact]
-        public async Task DiaryCreate_WithValidModel_Return_OkResult()
-        {
-            //Arrange
-            var diaryDto = new DiaryDTO
-            {
-                Entries = "Fake",
-                Title = "Fake",
-                Date = DateTime.Now
-            };
-            
-            //Act
-            var result = await _controller.Create(diaryDto);
-            
-            //Assert
-            Assert.IsType<OkResult>(result);
-        }
-
-        [Fact]
         public async Task DiaryUpdate_WithValidModel_Return_OkResult()
         {
             //Arrange

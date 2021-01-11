@@ -25,25 +25,6 @@ namespace Life_Balance.Tests.ControllersTests
                                                                            IdentityMock.Object);
         
         [Fact]
-        public async Task TodoCreate_WithValidModel_Return_OkResult()
-        {
-            //Arrange
-            var toDoDto = new ToDoDTO
-            {
-                Title = "FAKE",
-                Description = "FAKE",
-                IsComplete = false,
-                Time = DateTime.Now.AddHours(1)
-            };
-            
-            //Act
-            var result = await _controller.Create(toDoDto);
-            
-            //Assert
-            Assert.IsType<OkResult>(result);
-        }
-
-        [Fact]
         public async Task TodoUpdate_WithValidModel_Return_OkResult()
         {
             //Arrange
