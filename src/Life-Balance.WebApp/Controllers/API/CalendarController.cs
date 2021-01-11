@@ -82,7 +82,7 @@ namespace Life_Balance.WebApp.Controllers.API
 
             await _eventService.UpdateEvent(eventDto);
             
-            _logger.LogInformation($"User modified entry in diary.");
+            _logger.LogInformation($"User modified event.");
 
             return Ok();
         }
@@ -102,7 +102,7 @@ namespace Life_Balance.WebApp.Controllers.API
 
             await _eventService.Create(eventDto, userId);
             
-            _logger.LogInformation($"{userId} made an entry in diary.");
+            _logger.LogInformation($"{userId} add new event");
             
             return Ok();
         }
