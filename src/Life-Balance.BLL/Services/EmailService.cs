@@ -50,9 +50,8 @@ namespace Life_Balance.BLL.Services
                 .Build();
 
             var mailSettingSection = configuration.GetSection("MailSettings");
-            var mailSettings = mailSettingSection.Get<MailSettings>();
 
-            return mailSettings;
+            return (MailSettings)mailSettingSection;
         }
     }
 }
