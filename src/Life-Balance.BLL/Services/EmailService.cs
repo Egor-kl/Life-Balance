@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Life_Balance.BLL.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Life_Balance.BLL.Interfaces;
 
 namespace Life_Balance.BLL.Services
 {
@@ -14,13 +15,13 @@ namespace Life_Balance.BLL.Services
     /// </summary>
     public class EmailService : IEmailService
     {
-        private readonly MailSettings _mailConfig;
+        private readonly IMailSettings _mailConfig;
 
-        public EmailService()
+        public EmailService(IMailSettings mailConfig)
         {
-            _mailConfig = MailKitConfiguration();
+            _mailConfig = mailConfig ?? throw new ArgumentNullException(nameof(mailConfig));
         }
-        
+
         public async Task SendEmailAsync(string email, string subject, string message)
         {
             var emailMessage = new MimeMessage();
@@ -43,15 +44,16 @@ namespace Life_Balance.BLL.Services
             }
         }
         
-        private MailSettings MailKitConfiguration()
-        {
-            var configuration = new ConfigurationBuilder()
-                .AddJsonFile("mailsettings.json")
-                .Build();
+        //private MailSettings MailKitConfiguration()
+        //{
+        //    var configuration = new ConfigurationBuilder()
+        //        .AddJsonFile("mailsettings.json")
+        //        .Build();
 
-            var mailSettingSection = configuration.GetSection("MailSettings");
+        //    var mailSettingSection = configuration.GetSection("MailSettings");
+        //    //services.AddSingleton(Configuration.GetSection("MailSettings").Get<MailSettings>());
 
-            return (MailSettings)mailSettingSection;
-        }
+        //    return (MailSettings)mailSettingSection;
+        //}
     }
 }

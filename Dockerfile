@@ -18,4 +18,4 @@ RUN dotnet publish "Life-Balance.WebApp.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-CMD ASPNETCORE_URLS=http://*:$PORT dotnet Life-Balance.WepApp.dll
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet Life-Balance.WebApp.dll

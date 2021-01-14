@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Life_Balance.BLL.Models;
 
 namespace Life_Balance.WebApp
 {
@@ -40,8 +41,9 @@ namespace Life_Balance.WebApp
                 })
                 .AddEntityFrameworkStores<LifeBalanceDbContext>()
                 .AddDefaultTokenProviders();
-            
-            services.AddScoped<IEmailService, EmailService>();
+
+            services.AddSingleton<IMailSettings>(Configuration.GetSection("MailSettings").Get<MailSettings>());
+            services.AddTransient<IEmailService, EmailService>();
             services.AddScoped<IIdentityService, IdentityService>();
             services.AddScoped<IDiaryService, DiaryService>();
             services.AddScoped<IProfileService, ProfileService>();
