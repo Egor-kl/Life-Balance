@@ -30,7 +30,7 @@ namespace Life_Balance.WebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<LifeBalanceDbContext>();
-            services.AddDbContext<LifeBalanceDbContext>(options => options.UseNpgsql(Configuration.GetConnectionString("PostgreConnections")));
+            services.AddDbContext<LifeBalanceDbContext>(options => options.UseNpgsql(Configuration.GetConnectionString("PostgresConnections")));
             services.AddIdentity<User, IdentityRole>(options =>
                 {
                     options.Password.RequireLowercase = false;
