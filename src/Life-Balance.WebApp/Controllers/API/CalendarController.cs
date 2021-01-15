@@ -30,6 +30,7 @@ namespace Life_Balance.WebApp.Controllers.API
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetAll()
         {
             var events = await _eventService.GetAll();
@@ -45,6 +46,7 @@ namespace Life_Balance.WebApp.Controllers.API
         /// <param name="id">event id.</param>
         /// <returns></returns>
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<IActionResult> GetById(int id)
         {
             var events = await _eventService.GetById(id);
@@ -60,6 +62,7 @@ namespace Life_Balance.WebApp.Controllers.API
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> DeleteById(int id)
         {
             await _eventService.DeleteEvent(id);
@@ -75,6 +78,7 @@ namespace Life_Balance.WebApp.Controllers.API
         /// <param name="eventDto">model</param>
         /// <returns></returns>
         [HttpPut]
+        [Authorize]
         public async Task<IActionResult> Update([FromBody]EventDTO eventDto)
         {
             if (!ModelState.IsValid)
@@ -93,6 +97,7 @@ namespace Life_Balance.WebApp.Controllers.API
         /// <param name="eventDto">model</param>
         /// <returns></returns>
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create([FromBody]EventDTO eventDto)
         {
             if (!ModelState.IsValid)

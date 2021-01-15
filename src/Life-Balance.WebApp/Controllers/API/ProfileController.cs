@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Life_Balance.BLL.Interfaces;
 using Life_Balance.BLL.ModelsDTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -29,6 +30,7 @@ namespace Life_Balance.WebApp.Controllers.API
         /// </summary>
         /// <returns></returns>
         [HttpGet("profile")]
+        [Authorize]
         public async Task<Dictionary<int, object>> GetProfile()
         {
             var userId = await _identityService.GetUserIdByNameAsync(User.Identity.Name);
@@ -51,6 +53,7 @@ namespace Life_Balance.WebApp.Controllers.API
         /// </summary>
         /// <returns>json</returns>
         [HttpGet("diaries")]
+        [Authorize]
         public async Task<IActionResult> GetAllDiary()
         {
             var userId = await _identityService.GetUserIdByNameAsync(User.Identity.Name);
@@ -67,6 +70,7 @@ namespace Life_Balance.WebApp.Controllers.API
         /// </summary>
         /// <returns>json</returns>
         [HttpGet("events")]
+        [Authorize]
         public async Task<IActionResult> GetAllEvents()
         {
             var userId = await _identityService.GetUserIdByNameAsync(User.Identity.Name);
@@ -83,6 +87,7 @@ namespace Life_Balance.WebApp.Controllers.API
         /// </summary>
         /// <returns>json</returns>
         [HttpGet("tasks")]
+        [Authorize]
         public async Task<IActionResult> GetAllTask()
         {
             var userId = await _identityService.GetUserIdByNameAsync(User.Identity.Name);

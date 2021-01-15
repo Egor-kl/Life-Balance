@@ -40,6 +40,7 @@ namespace Life_Balance.WebApp.Controllers.API
         /// <param name="id">diary id.</param>
         /// <returns>json result</returns>
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<IActionResult> GetById(int id)
         {
             var diary = await _diaryService.GetEntryById(id);
@@ -54,6 +55,7 @@ namespace Life_Balance.WebApp.Controllers.API
         /// </summary>
         /// <returns>json result</returns>
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetAll()
         {
             var diaries = await _diaryService.GetAll();
@@ -69,6 +71,7 @@ namespace Life_Balance.WebApp.Controllers.API
         /// <param name="id">Diary id.</param>
         /// <returns></returns>
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> DeleteById(int id)
         {
             await _diaryService.DeleteEntry(id);
@@ -82,6 +85,7 @@ namespace Life_Balance.WebApp.Controllers.API
         /// <param name="diaryDto">model</param>
         /// <returns></returns>
         [HttpPut]
+        [Authorize]
         public async Task<IActionResult> Update([FromBody]DiaryDTO diaryDto)
         {
             if (!ModelState.IsValid)
@@ -100,6 +104,7 @@ namespace Life_Balance.WebApp.Controllers.API
         /// <param name="diaryDto">model</param>
         /// <returns></returns>
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create([FromBody]DiaryDTO diaryDto)
         {
             if (!ModelState.IsValid)

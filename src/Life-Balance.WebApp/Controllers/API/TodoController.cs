@@ -34,6 +34,7 @@ namespace Life_Balance.WebApp.Controllers.API
         /// <param name="id">diary id.</param>
         /// <returns>json result</returns>
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<IActionResult> GetById(int id)
         {
             var task = await _toDoService.GetById(id);
@@ -48,6 +49,7 @@ namespace Life_Balance.WebApp.Controllers.API
         /// </summary>
         /// <returns>json result</returns>
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetAll()
         {
            var todo = await _toDoService.GetAllTask();
@@ -62,6 +64,7 @@ namespace Life_Balance.WebApp.Controllers.API
         /// </summary>
         /// <returns></returns>
         [HttpGet("Completed")]
+        [Authorize]
         public async Task<IActionResult> GetCompleteTask()
         {
             var task = await _toDoService.GetCompleteTask();
@@ -76,6 +79,7 @@ namespace Life_Balance.WebApp.Controllers.API
         /// </summary>
         /// <returns></returns>
         [HttpGet("Uncompleted")]
+        [Authorize]
         public async Task<IActionResult> GetUnCompleteTask()
         {
             var task = await _toDoService.GetUncompletedTask();
@@ -91,6 +95,7 @@ namespace Life_Balance.WebApp.Controllers.API
         /// <param name="id">Task id.</param>
         /// <returns></returns>
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> DeleteById(int id)
         {
             await _toDoService.DeleteTask(id);
@@ -104,6 +109,7 @@ namespace Life_Balance.WebApp.Controllers.API
         /// <param name="toDoDto">model</param>
         /// <returns></returns>
         [HttpPut]
+        [Authorize]
         public async Task<IActionResult> Update([FromBody]ToDoDTO toDoDto)
         {
             if (!ModelState.IsValid)
@@ -122,6 +128,7 @@ namespace Life_Balance.WebApp.Controllers.API
         /// <param name="toDoDto">model</param>
         /// <returns></returns>
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create([FromBody]ToDoDTO toDoDto)
         {
             if (!ModelState.IsValid)
