@@ -1,8 +1,10 @@
-﻿using Life_Balance.BLL.Interfaces;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace Life_Balance.BLL.Models
+namespace Life_Balance.BLL.Interfaces
 {
-    public class MailSettings : IMailSettings
+    public interface IMailSettings
     {
         /// <summary>
         /// Server.
